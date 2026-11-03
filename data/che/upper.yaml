@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Council of States
+name_local: Conseil des États
+seats: 46
+source: parlament-ch-odata
+updated: 2026-09-15
+groups:
+  - id: centre
+    name: Groupe du Centre (Conseil des États)
+    abbreviation: Centre
+    color: "#F29206"
+    seats: 15
+    parties: [centre]
+
+  - id: plr
+    name: Groupe libéral-radical (Conseil des États)
+    abbreviation: PLR
+    color: "#0E52A0"
+    seats: 12
+    parties: [plr]
+
+  - id: udc
+    name: Groupe de l'Union démocratique du centre (Conseil des États)
+    abbreviation: UDC
+    color: "#335915"
+    seats: 7
+    parties: [udc]
+
+  - id: ps
+    name: Groupe socialiste (Conseil des États)
+    abbreviation: PS
+    color: "#E52839"
+    seats: 7
+    parties: [pss]
+
+  - id: verts
+    name: Groupe des Vert-e-s (Conseil des États)
+    abbreviation: Verts
+    color: "#43780E"
+    seats: 3
+    parties: [verts]
+
+  - id: pvl
+    name: Groupe vert'libéral (Conseil des États)
+    abbreviation: PVL
+    color: "#97D040"
+    seats: 1
+    parties: [pvl]
+
+  - id: ni
+    name: Non inscrit (Conseil des États)
+    abbreviation: NI
+    color: "#6B7280"
+    seats: 1
+    parties: []

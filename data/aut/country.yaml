@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/country.schema.json
+name: Austria
+parties:
+  - id: fpoe
+    name: Freiheitliche Partei Österreichs
+    abbreviation: FPÖ
+    partyfacts_id: 463
+    ches_id: 1303
+
+  - id: gruene
+    name: Die Grünen – Die Grüne Alternative
+    abbreviation: GRÜNE
+    partyfacts_id: 1659
+    ches_id: 1304
+
+  - id: neos
+    name: NEOS – Das Neue Österreich und Liberales Forum
+    abbreviation: NEOS
+    partyfacts_id: 605
+    ches_id: 1306
+
+  - id: oevp
+    name: Österreichische Volkspartei
+    abbreviation: ÖVP
+    partyfacts_id: 1329
+    ches_id: 1302
+
+  - id: spoe
+    name: Sozialdemokratische Partei Österreichs
+    abbreviation: SPÖ
+    partyfacts_id: 1384
+    ches_id: 1301

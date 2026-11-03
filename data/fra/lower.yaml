@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: National Assembly
+name_local: Assemblée Nationale
+seats: 577
+source: datan
+updated: 2026-09-28
+groups:
+  - id: rn
+    name: Rassemblement National
+    abbreviation: RN
+    color: "#313567"
+    seats: 122
+    parties: [rn]
+
+  - id: epr
+    name: Ensemble pour la République
+    abbreviation: EPR
+    color: "#7B4591"
+    seats: 90
+    parties: [re]
+
+  - id: lfi-nfp
+    name: La France insoumise - Nouveau Front Populaire
+    abbreviation: LFI-NFP
+    color: "#C00D0D"
+    seats: 71
+    parties: [lfi]
+
+  - id: soc
+    name: Socialistes et apparentés
+    abbreviation: SOC
+    color: "#F5B4CE"
+    seats: 67
+    parties: [ps, pp]
+
+  - id: dr
+    name: Droite Républicaine
+    abbreviation: DR
+    color: "#8CB0DC"
+    seats: 48
+    parties: [lr]
+
+  - id: ecos
+    name: Écologiste et Social
+    abbreviation: EcoS
+    color: "#77AA79"
+    seats: 38
+    parties: [eelv]
+
+  - id: dem
+    name: Les Démocrates
+    abbreviation: Dem
+    color: "#F07E26"
+    seats: 37
+    parties: [modem, udi]
+
+  - id: hor
+    name: Horizons & Indépendants
+    abbreviation: HOR
+    color: "#B5E2F9"
+    seats: 36
+    parties: [hz]
+
+  - id: liot
+    name: Libertés, Indépendants, Outre-mer et Territoires
+    abbreviation: LIOT
+    color: "#FFD96F"
+    seats: 23
+    parties: []
+
+  - id: gdr
+    name: Gauche Démocrate et Républicaine
+    abbreviation: GDR
+    color: "#830E21"
+    seats: 17
+    parties: [pcf, grs]
+
+  - id: uddplr
+    name: Union des droites pour la République
+    abbreviation: UDDPLR
+    color: "#3367A7"
+    seats: 17
+    parties: [dlf]
+
+  - id: ni
+    name: Non inscrit
+    abbreviation: NI
+    color: "#8D949A"
+    seats: 11
+    parties: []

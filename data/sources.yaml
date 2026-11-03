@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../schema/sources.schema.json
+sources:
+  - id: congreso-opendata
+    name: Congreso de los Diputados - Datos Abiertos
+    url: https://www.congreso.es/es/opendata/diputados
+    citation: >-
+      Open data portal of the Spanish Congress of Deputies. Seat counts are
+      aggregated from the "DiputadosActivos" export, grouped by its
+      GRUPOPARLAMENTARIO field.
+    license: Congreso reuse conditions
+    license_url: https://www.congreso.es/es/cem/aviso-legal
+
+  - id: datan
+    name: Datan
+    url: https://www.data.gouv.fr/datasets/groupes-politiques-actifs-de-lassemblee-nationale-informations-et-statistiques
+    citation: >-
+      Datan's "Groupes politiques actifs de l'Assemblée nationale" dataset,
+      published on data.gouv.fr, listing every active political group of the
+      French National Assembly with its current membership.
+    license: Licence Ouverte 1.0
+    license_url: https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf
+
+  - id: parlament-at-opendata
+    name: Parlament Österreich
+    url: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
+    citation: >-
+      Open data of the Austrian Parliament, "Parlamentarier:innen ab 1918"
+      dataset. Seat counts are aggregated from the members holding an active
+      mandate in each chamber, grouped by the club (Klub) or Fraktion of that
+      mandate.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+
+  - id: parlament-ch-odata
+    # The Parliamentary Services' terms prescribe this credit verbatim.
+    name: Services du Parlement de l'Assemblée fédérale, Berne
+    url: https://ws.parlament.ch/odata.svc/
+    citation: >-
+      Official OData API of the Swiss Federal Assembly, published by the
+      Parliamentary Services. Seat counts come from the MemberCouncil entity:
+      the active members of each council, grouped by parliamentary group.
+    license: Parliamentary Services terms of use
+    license_url: https://www.parlament.ch/fr/%C3%BCber-das-parlament/faits-donnees-chifrees/open-data-web-services
+
+  - id: senat-api
+    name: Sénat - API Open Data
+    url: https://www.senat.fr/api-senat/senateurs.json
+    citation: >-
+      Public API of the French Senate listing every sitting senator with their
+      political group (groupe.code / groupe.libelle). Seat counts are
+      aggregated per group.
+    license: Licence Ouverte 2.0
+    license_url: https://data.senat.fr/licence/

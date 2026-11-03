@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: National Council
+name_local: Nationalrat
+seats: 183
+source: parlament-at-opendata
+updated: 2026-08-14
+groups:
+  - id: fpoe
+    name: Freiheitliche Partei Österreichs
+    abbreviation: FPÖ
+    color: "#0056A2"
+    seats: 57
+    parties: [fpoe]
+
+  - id: oevp
+    name: Österreichische Volkspartei
+    abbreviation: ÖVP
+    color: "#63C3D0"
+    seats: 51
+    parties: [oevp]
+
+  - id: spoe
+    name: Sozialdemokratische Partei Österreichs
+    abbreviation: SPÖ
+    color: "#CE000C"
+    seats: 41
+    parties: [spoe]
+
+  - id: neos
+    name: NEOS – Das Neue Österreich und Liberales Forum
+    abbreviation: NEOS
+    color: "#E84188"
+    seats: 17
+    parties: [neos]
+
+  - id: gruene
+    name: Die Grünen – Die Grüne Alternative
+    abbreviation: GRÜNE
+    color: "#88B626"
+    seats: 16
+    parties: [gruene]
+
+  - id: ok
+    name: Ohne Klubzugehörigkeit
+    abbreviation: OK
+    color: "#8D949A"
+    seats: 1
+    parties: []

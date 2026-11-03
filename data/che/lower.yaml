@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: National Council
+name_local: Conseil national
+seats: 200
+source: parlament-ch-odata
+updated: 2026-08-11
+groups:
+  - id: udc
+    name: Groupe de l'Union démocratique du centre
+    abbreviation: UDC
+    color: "#335915"
+    seats: 67
+    parties: [udc, udf, lega, mcg]
+
+  - id: ps
+    name: Groupe socialiste
+    abbreviation: PS
+    color: "#E52839"
+    seats: 41
+    parties: [pss]
+
+  - id: centre
+    name: Groupe du Centre
+    abbreviation: Centre
+    color: "#F29206"
+    seats: 31
+    parties: [centre, pev]
+
+  - id: plr
+    name: Groupe libéral-radical
+    abbreviation: PLR
+    color: "#0E52A0"
+    seats: 27
+    parties: [plr]
+
+  - id: verts
+    name: Groupe des Vert-e-s
+    abbreviation: Verts
+    color: "#43780E"
+    seats: 23
+    parties: [verts]
+
+  - id: pvl
+    name: Groupe vert'libéral
+    abbreviation: PVL
+    color: "#97D040"
+    seats: 11
+    parties: [pvl]

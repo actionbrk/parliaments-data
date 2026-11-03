@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Senate
+name_local: Sénat
+seats: 348
+source: senat-api
+updated: 2026-10-09
+groups:
+  - id: lr
+    name: Groupe Les Républicains
+    abbreviation: LR
+    color: "#0066CC"
+    seats: 124
+    parties: [lr]
+
+  - id: uci
+    name: Groupe Union Centriste et Indépendants
+    abbreviation: UCI
+    color: "#66CCFF"
+    seats: 63
+    parties: [udi]
+
+  - id: ser
+    name: Groupe Socialiste, Écologiste et Républicain
+    abbreviation: SER
+    color: "#FF8080"
+    seats: 62
+    parties: [ps]
+
+  - id: crce-k
+    name: Groupe Communiste Républicain Citoyen et Écologiste - Kanaky
+    abbreviation: CRCE-K
+    color: "#DD0000"
+    seats: 18
+    parties: [pcf]
+
+  - id: rdse
+    name: Groupe du Rassemblement Démocratique et Social Européen
+    abbreviation: RDSE
+    color: "#CC6600"
+    seats: 18
+    parties: [prg]
+
+  - id: rdpi
+    name: Groupe Rassemblement des démocrates, progressistes et indépendants
+    abbreviation: RDPI
+    color: "#FFD700"
+    seats: 16
+    parties: [re]
+
+  - id: gest
+    name: Groupe Écologiste - Solidarité et Territoires
+    abbreviation: GEST
+    color: "#00C000"
+    seats: 15
+    parties: [eelv]
+
+  - id: lirt
+    name: Groupe Les Indépendants - République et Territoires
+    abbreviation: LIRT
+    color: "#4A9C8B"
+    seats: 15
+    parties: []
+
+  - id: unt
+    name: Groupe Union Nationale pour les Territoires
+    abbreviation: UNT
+    color: "#313567"
+    seats: 15
+    parties: [rn]
+
+  - id: ni
+    name: Réunion administrative des Sénateurs ne figurant sur la liste d'aucun groupe
+    abbreviation: NI
+    color: "#6B7280"
+    seats: 2
+    parties: []
