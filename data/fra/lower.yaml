@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: National Assembly
-name_local: Assemblée Nationale
+name_local: Assemblée nationale
 seats: 577
 source: datan
 updated: 2026-09-28
@@ -80,7 +80,7 @@ groups:
     abbreviation: UDDPLR
     color: "#3367A7"
     seats: 17
-    parties: [dlf]
+    parties: [udr]
 
   - id: ni
     name: Non inscrit

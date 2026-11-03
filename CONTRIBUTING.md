@@ -8,6 +8,7 @@ Corrections and new chambers are welcome as pull requests. CI checks every pull 
 - **Record the source's terms.** Every entry in `data/sources.yaml` carries the licence or terms of use the data is published under. A source whose terms forbid reuse cannot be used.
 - **Never change an id.** Ids (`id` fields) are how the data is followed over time. A renamed group keeps its id; a new group gets a new one.
 - **Link your evidence.** Say in the pull request where you checked the numbers, with a link.
+- **Licensing.** By contributing, you agree that your contribution is published under this repository's licences: CC BY 4.0 for data (see [LICENSE-DATA.md](LICENSE-DATA.md)), MIT for code (see [LICENSE](LICENSE)).
 
 ## Updating a chamber
 

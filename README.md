@@ -21,7 +21,7 @@ A chamber file, abridged:
 
 ```yaml
 name: National Assembly
-name_local: Assemblée Nationale
+name_local: Assemblée nationale
 seats: 577
 source: datan # an id from data/sources.yaml
 updated: 2026-09-28 # when these seat counts last changed
@@ -65,7 +65,9 @@ Each data file starts with a `# yaml-language-server: $schema=…` comment: edit
 
 ## Licences
 
-Seat counts are reused under the terms of their source, recorded with each source in `data/sources.yaml` (`license`, `license_url`). Reusing them means following those terms, including the credit a source prescribes (`name`).
+- **Seat counts** stay under the terms of the source they come from, recorded with each source in `data/sources.yaml` (`license`, `license_url`). Reusing them means following those terms, including the credit a source prescribes (`name`).
+- **The rest of `data/`**, i.e. which parties each group is made of, the party list and its links to other datasets, colours and ids, is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): see [LICENSE-DATA.md](LICENSE-DATA.md).
+- **The code** (`scripts/`, `schema/`, `.github/`) is under the [MIT licence](LICENSE).
 
 ## Contributing
 
