@@ -19,6 +19,7 @@ parties:
   - id: hz
     name: Horizons
     abbreviation: HZ
+    partyfacts_id: 9134
     ches_id: 631
 
   - id: lfi
@@ -69,6 +70,7 @@ parties:
   - id: rec
     name: Reconquête
     abbreviation: REC
+    partyfacts_id: 9064
     ches_id: 630
 
   - id: rn
@@ -80,6 +82,7 @@ parties:
   - id: udi
     name: Union des Démocrates et Indépendants
     abbreviation: UDI
+    partyfacts_id: 3229
 
   # Éric Ciotti's party, founded in 2024. Not the 1967-1976 Union des
   # Démocrates pour la République, which Party Facts lists as UDR (8041).
