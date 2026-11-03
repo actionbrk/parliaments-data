@@ -11,7 +11,7 @@ Each chamber file names, in its `source` field, where its seat counts come from.
 CC BY 4.0 covers the rest of `data/`, to the extent it is ours to license:
 
 - which parties each parliamentary group is made of;
-- the list of parties and their links to Party Facts and the Chapel Hill Expert Survey;
+- the list of parties and their links to Party Facts;
 - the colours given to groups;
 - the identifiers of chambers, groups, parties and sources.
 

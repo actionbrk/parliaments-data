@@ -34,12 +34,10 @@ Corrections and new chambers are welcome as pull requests. CI checks every pull 
        name: Partido Popular
        abbreviation: PP
        partyfacts_id: 441
-       ches_id: 502
    ```
 
    - `id`: the abbreviation in lowercase ASCII, words joined by hyphens (`EH Bildu` → `eh-bildu`, `ÖVP` → `oevp`);
-   - `partyfacts_id`: look the party up on [Party Facts](https://partyfacts.herokuapp.com/). Leave it out if the party is not there;
-   - `ches_id`: the party's `party_id` in the [Chapel Hill Expert Survey](https://www.chesdata.eu/), if it is covered.
+   - `partyfacts_id`: look the party up on [Party Facts](https://partyfacts.herokuapp.com/). Leave it out if the party is not there. It is the party's only link to other datasets (expert surveys and the like): Party Facts maps it to their ids, so do not add those ids here.
 3. **The chamber.** Create `lower.yaml` and `upper.yaml`, or `unicameral.yaml` for a single-chamber parliament:
 
    ```yaml

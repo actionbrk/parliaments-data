@@ -10,7 +10,6 @@ parties:
     name: Les Écologistes
     abbreviation: EELV
     partyfacts_id: 1108
-    ches_id: 605
 
   - id: grs
     name: Gauche Républicaine et Socialiste
@@ -20,31 +19,26 @@ parties:
     name: Horizons
     abbreviation: HZ
     partyfacts_id: 9134
-    ches_id: 631
 
   - id: lfi
     name: La France Insoumise
     abbreviation: LFI
     partyfacts_id: 5858
-    ches_id: 627
 
   - id: lr
     name: Les Républicains
     abbreviation: LR
     partyfacts_id: 1595
-    ches_id: 609
 
   - id: modem
     name: Mouvement Démocrate
     abbreviation: MoDem
     partyfacts_id: 496
-    ches_id: 613
 
   - id: pcf
     name: Parti Communiste Français
     abbreviation: PCF
     partyfacts_id: 1251
-    ches_id: 601
 
   - id: pp
     name: Place Publique
@@ -59,25 +53,21 @@ parties:
     name: Parti Socialiste
     abbreviation: PS
     partyfacts_id: 1478
-    ches_id: 602
 
   - id: re
     name: Renaissance
     abbreviation: RE
     partyfacts_id: 5857
-    ches_id: 626
 
   - id: rec
     name: Reconquête
     abbreviation: REC
     partyfacts_id: 9064
-    ches_id: 630
 
   - id: rn
     name: Rassemblement National
     abbreviation: RN
     partyfacts_id: 433
-    ches_id: 610
 
   - id: udi
     name: Union des Démocrates et Indépendants

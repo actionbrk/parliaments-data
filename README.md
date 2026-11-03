@@ -15,6 +15,7 @@ data/
     upper.yaml        the upper chamber  ┘ or unicameral.yaml for a single-chamber parliament
 schema/               JSON Schemas for those three kinds of file
 scripts/validate.ts   the checks CI runs on every change
+scripts/build.ts      builds the published JSON document and its landing page
 ```
 
 A chamber file, abridged:
@@ -42,10 +43,44 @@ groups:
 
 A few rules hold everywhere:
 
-- **Seats belong to parliamentary groups, not to parties.** A group lists the parties it is made of: several (the Swiss UDC group gathers four), one, or none (non-attached members). Parties are linked to other datasets through their [Party Facts](https://partyfacts.herokuapp.com/) id, and through their Chapel Hill Expert Survey id when they have one.
+- **Seats belong to parliamentary groups, not to parties.** A group lists the parties it is made of: several (the Swiss UDC group gathers four), one, or none (non-attached members). Parties are linked to other datasets through their [Party Facts](https://partyfacts.herokuapp.com/) id alone: Party Facts maps it to the ids of expert surveys, election datasets and the like.
 - **Ids never change once published.** A renamed group keeps its id; a new group gets a new one. Downstream users rely on them to follow a group over time.
 - **A chamber adds up.** Its groups' seats plus `vacant` equal `seats`.
 - **Every chamber names its source**, and every source records its licence or terms of use.
+
+## Using the data
+
+Every change merged into `main` is validated, then published as a single JSON document:
+
+**https://actionbrk.github.io/parliaments-data/v1/parliaments.json**
+
+```
+{
+  "version": 1,                         format version, also in the URL
+  "commit": "4f7cb2e…",                 the commit of this repository it was built from
+  "generated_at": "2026-11-03T14:32:00.000Z",
+  "sources": [ … ],                     as in data/sources.yaml
+  "countries": [
+    {
+      "code": "fra",                    the country's directory
+      "name": "France",
+      "parties": [ … ],                 as in its country.yaml
+      "chambers": [
+        {
+          "type": "lower",              the chamber's file name
+          "name": "National Assembly",
+          "seats": 577,
+          "vacant": 0,                  always present, 0 when the file leaves it out
+          "groups": [ … ],              as in the chamber file
+          …
+        }
+      ]
+    }
+  ]
+}
+```
+
+Fields are named as in the YAML files. Within `/v1/`, fields are only ever added: removing one or changing its meaning publishes a `/v2/` next to it. To know whether anything changed since you last read it, compare `commit`. GitHub Pages may take about ten minutes to serve a new version after a merge.
 
 ## Status
 
@@ -57,7 +92,8 @@ CI validates every pull request and reports problems as annotations on the offen
 
 ```sh
 deno task validate   # the data
-deno task test       # the validator's own tests
+deno task build      # dist/: the JSON document and its landing page, as published
+deno task test       # the scripts' own tests
 deno task check      # formatting, lint and types of the scripts
 ```
 

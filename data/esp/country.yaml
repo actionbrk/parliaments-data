@@ -5,45 +5,37 @@ parties:
     name: Euzko Alderdi Jeltzalea - Partido Nacionalista Vasco
     abbreviation: EAJ-PNV
     partyfacts_id: 1637
-    ches_id: 506
 
   - id: eh-bildu
     name: Euskal Herria Bildu
     abbreviation: EH Bildu
     partyfacts_id: 1671
-    ches_id: 524
 
   - id: erc
     name: Esquerra Republicana de Catalunya
     abbreviation: ERC
     partyfacts_id: 848
-    ches_id: 511
 
   - id: junts
     name: Junts per Catalunya
     abbreviation: Junts
     partyfacts_id: 4795
-    ches_id: 550
 
   - id: pp
     name: Partido Popular
     abbreviation: PP
     partyfacts_id: 441
-    ches_id: 502
 
   - id: psoe
     name: Partido Socialista Obrero Español
     abbreviation: PSOE
     partyfacts_id: 1338
-    ches_id: 501
 
   - id: sumar
     name: Sumar
     abbreviation: Sumar
-    ches_id: 551
 
   - id: vox
     name: VOX
     abbreviation: VOX
     partyfacts_id: 3218
-    ches_id: 527

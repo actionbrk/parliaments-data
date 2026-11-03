@@ -37,7 +37,6 @@ export interface Party {
   name: string;
   abbreviation: string;
   partyfacts_id?: number;
-  ches_id?: number;
 }
 
 export interface Country {
@@ -72,18 +71,33 @@ export interface Problem {
   message: string;
 }
 
+export const CHAMBER_TYPES = ["lower", "upper", "unicameral"] as const;
+export type ChamberType = (typeof CHAMBER_TYPES)[number];
+
+/** Everything under data/ that passed its schema, as loaded. */
+export interface Dataset {
+  sources: Source[];
+  /** Ordered by code. */
+  countries: {
+    /** Lowercase ISO 3166-1 alpha-3 code: the directory's name. */
+    code: string;
+    country: Country;
+    /** In CHAMBER_TYPES order. */
+    chambers: { type: ChamberType; chamber: Chamber }[];
+  }[];
+}
+
 export interface Report {
   problems: Problem[];
-  countries: number;
-  chambers: number;
-  sources: number;
+  /** Complete only when there are no problems. */
+  dataset: Dataset;
 }
 
 type Path = readonly (string | number)[];
 
 const SOURCES_FILE = "data/sources.yaml";
 const COUNTRY_FILE = "country.yaml";
-const CHAMBER_FILES = ["lower.yaml", "upper.yaml", "unicameral.yaml"];
+const CHAMBER_FILES = CHAMBER_TYPES.map((type) => `${type}.yaml`);
 const COUNTRY_DIR = /^[a-z]{3}$/;
 
 const ID_PATTERN = "^[a-z0-9]+(-[a-z0-9]+)*$";
@@ -322,7 +336,7 @@ export async function validateRepository(
   now = new Date(),
 ): Promise<Report> {
   const problems: Problem[] = [];
-  const report: Report = { problems, countries: 0, chambers: 0, sources: 0 };
+  const dataset: Dataset = { sources: [], countries: [] };
 
   const sourcesFile = await load<SourcesFile>(
     root,
@@ -341,11 +355,11 @@ export async function validateRepository(
       "source",
       problems,
     );
-    report.sources = sourceIds.size;
+    dataset.sources = sourcesFile.value.sources;
   }
 
-  // A Party Facts or CHES id names one party, wherever it is listed.
-  const externalIds = new Map<string, string>();
+  // A Party Facts id names one party, wherever it is listed.
+  const partyfactsIds = new Map<number, string>();
   const maxDate = latestDate(now);
 
   for (const entry of await listDir(root, "data")) {
@@ -361,12 +375,13 @@ export async function validateRepository(
 
     const dir = `data/${entry.name}`;
     const files = await listDir(root, dir);
-    const chamberFiles: string[] = [];
+    const chamberFiles: ChamberType[] = [];
 
     for (const file of files) {
       if (file.isFile && file.name === COUNTRY_FILE) continue;
-      if (file.isFile && CHAMBER_FILES.includes(file.name)) {
-        chamberFiles.push(file.name);
+      const type = CHAMBER_TYPES[CHAMBER_FILES.indexOf(file.name)];
+      if (file.isFile && type) {
+        chamberFiles.push(type);
         continue;
       }
       problems.push({
@@ -376,7 +391,10 @@ export async function validateRepository(
       });
     }
 
-    if (chamberFiles.includes("unicameral.yaml") && chamberFiles.length > 1) {
+    chamberFiles.sort((a, b) =>
+      CHAMBER_TYPES.indexOf(a) - CHAMBER_TYPES.indexOf(b)
+    );
+    if (chamberFiles.includes("unicameral") && chamberFiles.length > 1) {
       problems.push({
         file: `${dir}/unicameral.yaml`,
         message:
@@ -390,8 +408,13 @@ export async function validateRepository(
       validators.country,
       problems,
     );
-    if (countryFile) {
-      report.countries++;
+    const loaded = countryFile && {
+      code: entry.name,
+      country: countryFile.value,
+      chambers: [] as Dataset["countries"][number]["chambers"],
+    };
+    if (countryFile && loaded) {
+      dataset.countries.push(loaded);
       if (chamberFiles.length === 0) {
         problems.push({
           file: countryFile.file,
@@ -403,22 +426,18 @@ export async function validateRepository(
       checkUniqueIds(countryFile, parties, ["parties"], "party", problems);
 
       parties.forEach((party, index) => {
-        for (const field of ["partyfacts_id", "ches_id"] as const) {
-          const id = party[field];
-          if (id === undefined) continue;
-          const key = `${field} ${id}`;
-          const owner = `${dir}: ${party.id}`;
-          const previous = externalIds.get(key);
-          if (previous) {
-            problems.push(
-              countryFile.problem(
-                ["parties", index, field],
-                `${field} ${id} is already given to ${previous}`,
-              ),
-            );
-          } else {
-            externalIds.set(key, owner);
-          }
+        const id = party.partyfacts_id;
+        if (id === undefined) return;
+        const previous = partyfactsIds.get(id);
+        if (previous) {
+          problems.push(
+            countryFile.problem(
+              ["parties", index, "partyfacts_id"],
+              `partyfacts_id ${id} is already given to ${previous}`,
+            ),
+          );
+        } else {
+          partyfactsIds.set(id, `${dir}: ${party.id}`);
         }
       });
     }
@@ -426,17 +445,17 @@ export async function validateRepository(
       countryFile?.value.parties.map((party) => party.id),
     );
 
-    for (const name of chamberFiles) {
+    for (const type of chamberFiles) {
       const chamberFile = await load<Chamber>(
         root,
-        `${dir}/${name}`,
+        `${dir}/${type}.yaml`,
         validators.chamber,
         problems,
       );
       if (!chamberFile) continue;
-      report.chambers++;
 
       const chamber = chamberFile.value;
+      loaded?.chambers.push({ type, chamber });
       checkUniqueIds(
         chamberFile,
         chamber.groups,
@@ -514,7 +533,15 @@ export async function validateRepository(
   problems.sort((a, b) =>
     a.file.localeCompare(b.file) || (a.line ?? 0) - (b.line ?? 0)
   );
-  return report;
+  return { problems, dataset };
+}
+
+export function summarize(dataset: Dataset): string {
+  const chambers = dataset.countries.reduce(
+    (sum, entry) => sum + entry.chambers.length,
+    0,
+  );
+  return `${dataset.countries.length} countries, ${chambers} chambers, ${dataset.sources.length} sources`;
 }
 
 /** https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands */
@@ -554,7 +581,5 @@ if (import.meta.main) {
     Deno.exit(1);
   }
 
-  console.log(
-    `data/ is valid: ${report.countries} countries, ${report.chambers} chambers, ${report.sources} sources.`,
-  );
+  console.log(`data/ is valid: ${summarize(report.dataset)}.`);
 }

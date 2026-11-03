@@ -21,7 +21,10 @@ jobs:
       - name: Validate the data
         run: deno task validate
 
-      - name: Test the validator
+      - name: Build the site
+        run: deno task build
+
+      - name: Test the scripts
         run: deno task test
 
       - name: Check formatting, lint and types

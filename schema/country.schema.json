@@ -37,12 +37,7 @@
           "minLength": 1
         },
         "partyfacts_id": {
-          "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. This is what links the party to expert surveys and other datasets.",
-          "type": "integer",
-          "minimum": 1
-        },
-        "ches_id": {
-          "description": "The party's `party_id` in the Chapel Hill Expert Survey, when it is covered.",
+          "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. It is the only link this repository keeps to other datasets: Party Facts maps it to their own ids (expert surveys, election datasets...).",
           "type": "integer",
           "minimum": 1
         }

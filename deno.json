@@ -1,6 +1,7 @@
 {
   "tasks": {
     "validate": "deno run --allow-read=. --allow-env=GITHUB_ACTIONS,LOG_STREAM,LOG_TOKENS scripts/validate.ts",
+    "build": "deno run --allow-read=. --allow-write=dist --allow-env=GITHUB_ACTIONS,GITHUB_SHA,GITHUB_SERVER_URL,GITHUB_REPOSITORY,LOG_STREAM,LOG_TOKENS scripts/build.ts",
     "test": "deno test --allow-read --allow-write --allow-env=LOG_STREAM,LOG_TOKENS scripts/",
     "check": "deno fmt --check && deno lint && deno check scripts/"
   },
@@ -11,6 +12,7 @@
     "ajv-formats": "npm:ajv-formats@^3.0.1",
     "yaml": "npm:yaml@^2.9.1"
   },
+  "exclude": ["dist/"],
   "fmt": {
     "proseWrap": "preserve",
     "exclude": ["data/"]
