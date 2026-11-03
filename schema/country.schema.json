@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Country",
+  "description": "data/<iso3>/country.yaml: a country and the parties its parliamentary groups can be made of.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "parties"],
+  "properties": {
+    "name": {
+      "description": "English name of the country.",
+      "type": "string",
+      "minLength": 1
+    },
+    "parties": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/party" }
+    }
+  },
+  "definitions": {
+    "party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "abbreviation"],
+      "properties": {
+        "id": {
+          "description": "Identifier that groups reference in their `parties` list, unique within the country. Never change it once published.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "name": {
+          "description": "Full name of the party, in its own language.",
+          "type": "string",
+          "minLength": 1
+        },
+        "abbreviation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "partyfacts_id": {
+          "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. It is the only link this repository keeps to other datasets: Party Facts maps it to their own ids (expert surveys, election datasets...).",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

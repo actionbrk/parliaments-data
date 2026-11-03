@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chamber",
+  "description": "data/<iso3>/{lower,upper,unicameral}.yaml: the composition of one chamber, by parliamentary group.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "seats", "source", "updated", "groups"],
+  "properties": {
+    "name": {
+      "description": "English name of the chamber.",
+      "type": "string",
+      "minLength": 1
+    },
+    "name_local": {
+      "description": "Name of the chamber in the country's language.",
+      "type": "string",
+      "minLength": 1
+    },
+    "seats": {
+      "description": "Total number of seats in the chamber, vacant ones included.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "vacant": {
+      "description": "Seats currently vacant. The groups' seats plus this must equal `seats`.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "source": {
+      "description": "Id of the entry in data/sources.yaml the seat counts come from.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "updated": {
+      "description": "Date (YYYY-MM-DD) the seat counts in this file were last changed.",
+      "type": "string",
+      "format": "date"
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/group" }
+    }
+  },
+  "definitions": {
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "color", "seats", "parties"],
+      "properties": {
+        "id": {
+          "description": "Identifier of the group, unique within the chamber. It survives renames: never change it once published, and give a new group a new id.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "name": {
+          "description": "Official name of the group, in the chamber's language.",
+          "type": "string",
+          "minLength": 1
+        },
+        "abbreviation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "color": {
+          "description": "Hex colour used to draw the group's seats.",
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "seats": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "parties": {
+          "description": "Ids of the parties (from the country's country.yaml) the group is made of. Empty for groups that are not tied to any party, such as non-attached members.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          }
+        }
+      }
+    }
+  }
+}

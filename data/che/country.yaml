@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/country.schema.json
+name: Switzerland
+parties:
+  - id: centre
+    name: Le Centre
+    abbreviation: Centre
+    partyfacts_id: 1808
+
+  - id: lega
+    name: Lega dei Ticinesi
+    abbreviation: Lega
+    partyfacts_id: 1661
+
+  - id: mcg
+    name: Mouvement Citoyens Genevois
+    abbreviation: MCG
+    partyfacts_id: 8176
+
+  - id: pev
+    name: Parti évangélique suisse
+    abbreviation: PEV
+    partyfacts_id: 1123
+
+  - id: plr
+    name: PLR.Les Libéraux-Radicaux
+    abbreviation: PLR
+    partyfacts_id: 1231
+
+  - id: pss
+    name: Parti socialiste suisse
+    abbreviation: PSS
+    partyfacts_id: 29
+
+  - id: pvl
+    name: Parti vert'libéral
+    abbreviation: PVL
+    partyfacts_id: 1759
+
+  - id: udc
+    name: Union Démocratique du Centre
+    abbreviation: UDC
+    partyfacts_id: 308
+
+  - id: udf
+    name: Union Démocratique Fédérale
+    abbreviation: UDF
+    partyfacts_id: 631
+
+  - id: verts
+    name: Les VERT-E-S suisses
+    abbreviation: Verts
+    partyfacts_id: 1006
