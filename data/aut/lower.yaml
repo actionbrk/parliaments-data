@@ -2,14 +2,15 @@
 name: National Council
 name_local: Nationalrat
 seats: 183
+vacant: 1
 source: parlament-at-opendata
-updated: 2026-08-14
+updated: 2026-11-04
 groups:
   - id: fpoe
     name: Freiheitliche Partei Österreichs
     abbreviation: FPÖ
     color: "#0056A2"
-    seats: 57
+    seats: 56
     parties: [fpoe]
 
   - id: oevp
