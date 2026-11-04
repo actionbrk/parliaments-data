@@ -1,0 +1,106 @@
+name: Fetch
+
+# Every day, reads each chamber's seat counts from its source (scripts/fetch.ts
+# and scripts/fetchers/) and proposes any change as that chamber's pull
+# request; scripts/propose.sh says when one is opened, updated or closed.
+#
+# A pull request changing the fetchers runs them as well, to show they still
+# read their sources, without proposing anything.
+
+on:
+  schedule:
+    # After the sources' overnight exports (the Congreso's is generated at
+    # 05:00 UTC), and off the hour, when GitHub delays scheduled runs most.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      chamber:
+        description: "Only this chamber, e.g. fra/upper (every chamber when empty)"
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - "scripts/fetch.ts"
+      - "scripts/fetchers/**"
+      - "scripts/propose.sh"
+      - ".github/workflows/fetch.yml"
+
+permissions:
+  contents: read
+
+# One proposing run at a time, so two never push a chamber's branch at once.
+# Runs for a pull request only read, and go their own way.
+concurrency:
+  group: fetch-${{ github.event_name == 'pull_request' && github.ref || 'propose' }}
+  cancel-in-progress: false
+
+jobs:
+  chambers:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: List the chambers
+        id: list
+        env:
+          ONLY: ${{ inputs.chamber }}
+        run: |
+          if [ -n "$ONLY" ]; then
+            list=$(jq --compact-output --null-input --arg chamber "$ONLY" '[$chamber]')
+          else
+            list=$(deno task --quiet fetch --list)
+          fi
+          echo "list=$list" >> "$GITHUB_OUTPUT"
+
+  fetch:
+    needs: chambers
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      # A source that is down or changed its format stops its own chamber only.
+      fail-fast: false
+      matrix:
+        chamber: ${{ fromJSON(needs.chambers.outputs.list) }}
+    permissions:
+      contents: write # push the chamber's branch
+      pull-requests: write # open, update or close its pull request
+      actions: write # dispatch Validate on that branch
+    env:
+      CHAMBER: ${{ matrix.chamber }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Read the seat counts
+        run: deno task --quiet fetch "$CHAMBER" > "$RUNNER_TEMP/report.md"
+
+      - name: Validate the data
+        run: deno task validate
+
+      - name: Summarize
+        run: |
+          if git diff --quiet -- data/; then
+            echo "No change in \`data/$CHAMBER.yaml\`." >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              tail -n +3 "$RUNNER_TEMP/report.md"
+              printf '\n```diff\n'
+              git diff -- data/
+              printf '```\n'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Propose the change
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/propose.sh "$CHAMBER" "$RUNNER_TEMP/report.md"

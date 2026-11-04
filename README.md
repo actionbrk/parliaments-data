@@ -16,6 +16,9 @@ data/
 schema/               JSON Schemas for those three kinds of file
 scripts/validate.ts   the checks CI runs on every change
 scripts/build.ts      builds the published JSON document and its landing page
+scripts/fetch.ts      reads the chambers' seat counts from their sources, through
+scripts/fetchers/     one module per source
+scripts/propose.sh    proposes what the daily fetch changed as a pull request
 ```
 
 A chamber file, abridged:
@@ -82,9 +85,13 @@ Every change merged into `main` is validated, then published as a single JSON do
 
 Fields are named as in the YAML files. Within `/v1/`, fields are only ever added: removing one or changing its meaning publishes a `/v2/` next to it. To know whether anything changed since you last read it, compare `commit`. GitHub Pages may take about ten minutes to serve a new version after a merge.
 
-## Status
+## Updates
 
-The files were exported on 2026-11-03 from the database they used to live in. Nothing updates them automatically yet: fetchers reading each parliament's open data come next.
+Every day, the [Fetch](.github/workflows/fetch.yml) workflow reads each chamber's seat counts from its source, the parliament's open data, and proposes any change as a pull request: one per chamber, titled after it, from the branch `fetch/<country>-<chamber>`, for a maintainer to check against the source and merge. Until then, the pull request follows the source: a later change replaces its commit, a source back to the counts on `main` closes it, and counts turned down by closing a pull request without merging are not proposed again. A pull request someone else pushed to is left alone.
+
+Only seats change that way: each group's `seats`, `vacant`, and `updated`, set to the day the new counts were read. A group the source reports but the chamber file doesn't list stops that chamber's run, as does a reading leaving more than a tenth of the chamber vacant (a truncated export, a dissolved chamber): both need a person, to add the group with its id, colour and parties, or to judge the reading. The run fails and says why; the other chambers carry on.
+
+The workflow opens pull requests with its own token, which the repository has to allow: Settings → Actions → General → Workflow permissions → "Allow GitHub Actions to create and approve pull requests".
 
 ## Checking the data
 
@@ -95,6 +102,7 @@ deno task validate   # the data
 deno task build      # dist/: the JSON document and its landing page, as published
 deno task test       # the scripts' own tests
 deno task check      # formatting, lint and types of the scripts
+deno task fetch      # rewrite data/ with the sources' current seat counts (or: deno task fetch fra/upper)
 ```
 
 Each data file starts with a `# yaml-language-server: $schema=…` comment: editors with YAML language support (such as the YAML extension for VS Code) use it for completion, inline documentation and errors as you type.
