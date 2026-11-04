@@ -20,7 +20,7 @@
     "party": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "name", "abbreviation"],
+      "required": ["id", "name", "abbreviation", "color"],
       "properties": {
         "id": {
           "description": "Identifier that groups reference in their `parties` list, unique within the country. Never change it once published.",
@@ -35,6 +35,11 @@
         "abbreviation": {
           "type": "string",
           "minLength": 1
+        },
+        "color": {
+          "description": "Hex colour the party is usually shown in: the sRGB colour (P465) of its Wikidata item, the preferred one when there are several. A party Wikidata gives no colour takes that of the group it alone makes up.",
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
         },
         "partyfacts_id": {
           "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. It is the only link this repository keeps to other datasets: Party Facts maps it to their own ids (expert surveys, election datasets...).",

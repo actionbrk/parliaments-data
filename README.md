@@ -47,6 +47,7 @@ groups:
 A few rules hold everywhere:
 
 - **Seats belong to parliamentary groups, not to parties.** A group lists the parties it is made of: several (the Swiss UDC group gathers four), one, or none (non-attached members). Parties are linked to other datasets through their [Party Facts](https://partyfacts.herokuapp.com/) id alone: Party Facts maps it to the ids of expert surveys, election datasets and the like.
+- **Groups and parties each have a colour.** A group's colour draws its seats; a party's, taken from [Wikidata](https://www.wikidata.org/wiki/Property:P465), shows the party on its own: on a chart of party positions, say, or within a group that gathers several.
 - **Ids never change once published.** A renamed group keeps its id; a new group gets a new one. Downstream users rely on them to follow a group over time.
 - **A chamber adds up.** Its groups' seats plus `vacant` equal `seats`.
 - **Every chamber names its source**, and every source records its licence or terms of use.

@@ -4,24 +4,29 @@ parties:
   - id: fpoe
     name: Freiheitliche Partei Österreichs
     abbreviation: FPÖ
+    color: "#0056A2"
     partyfacts_id: 463
 
   - id: gruene
     name: Die Grünen – Die Grüne Alternative
     abbreviation: GRÜNE
+    color: "#88B626"
     partyfacts_id: 1659
 
   - id: neos
     name: NEOS – Das Neue Österreich und Liberales Forum
     abbreviation: NEOS
+    color: "#CB1667"
     partyfacts_id: 605
 
   - id: oevp
     name: Österreichische Volkspartei
     abbreviation: ÖVP
+    color: "#63C3D0"
     partyfacts_id: 1329
 
   - id: spoe
     name: Sozialdemokratische Partei Österreichs
     abbreviation: SPÖ
+    color: "#CE000C"
     partyfacts_id: 1384

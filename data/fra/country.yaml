@@ -4,74 +4,89 @@ parties:
   - id: dlf
     name: Debout la France
     abbreviation: DLF
+    color: "#0087CD"
     partyfacts_id: 3207
 
   - id: eelv
     name: Les Écologistes
     abbreviation: EELV
+    color: "#4BB166"
     partyfacts_id: 1108
 
   - id: grs
     name: Gauche Républicaine et Socialiste
     abbreviation: GRS
+    color: "#D53150"
 
   - id: hz
     name: Horizons
     abbreviation: HZ
+    color: "#0000BA"
     partyfacts_id: 9134
 
   - id: lfi
     name: La France Insoumise
     abbreviation: LFI
+    color: "#56277E"
     partyfacts_id: 5858
 
   - id: lr
     name: Les Républicains
     abbreviation: LR
+    color: "#034EA2"
     partyfacts_id: 1595
 
   - id: modem
     name: Mouvement Démocrate
     abbreviation: MoDem
+    color: "#EF5327"
     partyfacts_id: 496
 
   - id: pcf
     name: Parti Communiste Français
     abbreviation: PCF
+    color: "#E4002A"
     partyfacts_id: 1251
 
   - id: pp
     name: Place Publique
     abbreviation: PP
+    color: "#FFF100"
 
   - id: prg
     name: Parti radical de gauche
     abbreviation: PRG
+    color: "#F0C200"
     partyfacts_id: 1783
 
   - id: ps
     name: Parti Socialiste
     abbreviation: PS
+    color: "#E3265B"
     partyfacts_id: 1478
 
   - id: re
     name: Renaissance
     abbreviation: RE
+    color: "#FFD600"
     partyfacts_id: 5857
 
   - id: rec
     name: Reconquête
     abbreviation: REC
+    color: "#0B0B66"
     partyfacts_id: 9064
 
   - id: rn
     name: Rassemblement National
     abbreviation: RN
+    color: "#104E8B"
     partyfacts_id: 433
 
   - id: udi
     name: Union des Démocrates et Indépendants
     abbreviation: UDI
+    color: "#35A2EF"
     partyfacts_id: 3229
 
   # Éric Ciotti's party, founded in 2024. Not the 1967-1976 Union des
@@ -79,3 +94,4 @@ parties:
   - id: udr
     name: Union des droites pour la République
     abbreviation: UDR
+    color: "#004B8F"

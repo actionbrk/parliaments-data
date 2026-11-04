@@ -35,10 +35,12 @@ Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their 
      - id: pp
        name: Partido Popular
        abbreviation: PP
+       color: "#1D84CE"
        partyfacts_id: 441
    ```
 
    - `id`: the abbreviation in lowercase ASCII, words joined by hyphens (`EH Bildu` → `eh-bildu`, `ÖVP` → `oevp`);
+   - `color`: the party's colour, as `#RRGGBB`, taken from its [Wikidata](https://www.wikidata.org/) item's "sRGB colour hex triplet" ([P465](https://www.wikidata.org/wiki/Property:P465)), the preferred one when there are several. Wikidata is CC0, so its colours can be reused here. If it gives the party none, use the colour of the group the party alone makes up and say so in a comment above the party;
    - `partyfacts_id`: look the party up on [Party Facts](https://partyfacts.herokuapp.com/). Leave it out if the party is not there. It is the party's only link to other datasets (expert surveys and the like): Party Facts maps it to their ids, so do not add those ids here.
 3. **The chamber.** Create `lower.yaml` and `upper.yaml`, or `unicameral.yaml` for a single-chamber parliament:
 

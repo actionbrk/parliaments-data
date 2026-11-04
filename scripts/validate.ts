@@ -36,6 +36,7 @@ export interface Party {
   id: string;
   name: string;
   abbreviation: string;
+  color: string;
   partyfacts_id?: number;
 }
 

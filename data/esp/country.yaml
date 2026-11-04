@@ -4,38 +4,46 @@ parties:
   - id: eaj-pnv
     name: Euzko Alderdi Jeltzalea - Partido Nacionalista Vasco
     abbreviation: EAJ-PNV
+    color: "#4AAE4A"
     partyfacts_id: 1637
 
   - id: eh-bildu
     name: Euskal Herria Bildu
     abbreviation: EH Bildu
+    color: "#00AC8E"
     partyfacts_id: 1671
 
   - id: erc
     name: Esquerra Republicana de Catalunya
     abbreviation: ERC
+    color: "#FFB232"
     partyfacts_id: 848
 
   - id: junts
     name: Junts per Catalunya
     abbreviation: Junts
+    color: "#00C4B2"
     partyfacts_id: 4795
 
   - id: pp
     name: Partido Popular
     abbreviation: PP
+    color: "#1D84CE"
     partyfacts_id: 441
 
   - id: psoe
     name: Partido Socialista Obrero Español
     abbreviation: PSOE
+    color: "#EF1C27"
     partyfacts_id: 1338
 
   - id: sumar
     name: Sumar
     abbreviation: Sumar
+    color: "#E61455"
 
   - id: vox
     name: VOX
     abbreviation: VOX
+    color: "#63BE21"
     partyfacts_id: 3218
