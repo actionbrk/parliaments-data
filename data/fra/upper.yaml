@@ -3,7 +3,7 @@ name: Senate
 name_local: Sénat
 seats: 348
 source: senat-api
-updated: 2026-10-09
+updated: 2026-11-04
 groups:
   - id: lr
     name: Groupe Les Républicains
@@ -58,7 +58,7 @@ groups:
     name: Groupe Les Indépendants - République et Territoires
     abbreviation: LIRT
     color: "#4A9C8B"
-    seats: 15
+    seats: 14
     parties: []
 
   - id: unt
@@ -72,5 +72,5 @@ groups:
     name: Réunion administrative des Sénateurs ne figurant sur la liste d'aucun groupe
     abbreviation: NI
     color: "#6B7280"
-    seats: 2
+    seats: 3
     parties: []
