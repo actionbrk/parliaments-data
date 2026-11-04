@@ -112,7 +112,8 @@ const DEFINITIONS = "definitions.schema.json";
  * schema/definitions.schema.json. A value that fails one is explained with
  * this rather than with the pattern it didn't match.
  */
-const DEFINITION_MESSAGES: Record<string, string> = {
+type Definition = keyof typeof definitionsSchema.definitions;
+const DEFINITION_MESSAGES: Record<Definition, string> = {
   id:
     'ids use lowercase ASCII letters, digits and single hyphens (e.g. "lfi-nfp")',
   color: 'must be a hex colour such as "#1D84CE"',
@@ -202,36 +203,23 @@ function pointerToPath(pointer: string): Path {
 }
 
 /** The shared definition `error` comes from ("id" for definitions.schema.json#/definitions/id/pattern). */
-function definitionOf(error: ErrorObject): string | undefined {
+function definitionOf(error: ErrorObject): Definition | undefined {
   const prefix = `${DEFINITIONS}#/definitions/`;
   if (!error.schemaPath.startsWith(prefix)) return undefined;
-  return error.schemaPath.slice(prefix.length).split("/")[0];
+  const name = error.schemaPath.slice(prefix.length).split("/")[0];
+  return Object.hasOwn(DEFINITION_MESSAGES, name)
+    ? name as Definition
+    : undefined;
 }
 
-type SchemaProblem = { path: Path; key: boolean; message: string };
-
-/**
- * Ajv's errors, each said once: a value failing a shared definition twice (a
- * URL that is neither a URI nor http(s)) gets its one explanation.
- */
-function describeSchemaErrors(
-  errors: readonly ErrorObject[],
-): SchemaProblem[] {
-  const said = new Set<string>();
-  return errors.map(describeSchemaError).filter((problem) => {
-    const text = JSON.stringify(problem);
-    if (said.has(text)) return false;
-    said.add(text);
-    return true;
-  });
-}
-
-function describeSchemaError(error: ErrorObject): SchemaProblem {
+function describeSchemaError(
+  error: ErrorObject,
+): { path: Path; key: boolean; message: string } {
   const path = pointerToPath(error.instancePath);
   const where = path.length ? `${displayPath(path)}: ` : "";
 
   const definition = definitionOf(error);
-  if (definition && Object.hasOwn(DEFINITION_MESSAGES, definition)) {
+  if (definition) {
     return {
       path,
       key: false,
@@ -317,9 +305,16 @@ async function load<T>(
   const value = doc.toJS();
   const dataFile = new DataFile<T>(file, value as T, doc, lines);
   if (!validate(value)) {
-    const described = describeSchemaErrors(validate.errors ?? []);
-    for (const { path, key, message } of described) {
-      problems.push(dataFile.problem(path, message, key));
+    // Each said once: a value failing a shared definition twice (a URL that
+    // is neither a URI nor http(s)) gets its one explanation.
+    const said = new Set<string>();
+    for (const error of validate.errors ?? []) {
+      const { path, key, message } = describeSchemaError(error);
+      const problem = dataFile.problem(path, message, key);
+      const text = JSON.stringify(problem);
+      if (said.has(text)) continue;
+      said.add(text);
+      problems.push(problem);
     }
     return undefined;
   }

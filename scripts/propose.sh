@@ -28,10 +28,10 @@
 #
 # Only this repository's pull requests count: gh matches a branch by its name
 # alone, so a fork's branch of the same name is set aside. The open pull
-# request is this workflow's while its branch holds a commit the workflow
-# pushed, which it records in the pull request's body; any other push (a
-# maintainer's fix, an amended commit) makes it someone else's. Anything gh
-# fails to answer stops the run before it changes anything it relied on.
+# request is this workflow's while the commit its branch ends with is one the
+# workflow committed; any other push (a maintainer's fix, an amended or
+# rebased commit, an edit on GitHub) makes it someone else's. Anything gh
+# fails to answer stops the run before it changes anything.
 #
 # Pushes made with the workflow's GITHUB_TOKEN don't trigger other workflows,
 # so Validate is dispatched on the branch: its checks then show on the pull
@@ -52,9 +52,6 @@ withdrawn="fetch: withdrawn"
 # The seat counts of the chamber file on stdin, as one line to compare.
 counts() { deno task --quiet --config "$scripts/../deno.json" fetch --counts; }
 
-# Records, in a pull request's body, that this workflow pushed commit $1.
-pushed_marker() { echo "<!-- fetch: pushed $1 -->"; }
-
 # This repository's pull requests from the branch, newest first.
 prs=$(gh pr list --head "$branch" --base "$base" --state all --limit 1000 \
   --json number,state,isCrossRepository,labels)
@@ -65,15 +62,26 @@ turned_down=$(jq --raw-output --arg withdrawn "$withdrawn" \
   '.[] | select(.state == "CLOSED" and all(.labels[]; .name != $withdrawn))
        | .number' <<<"$prs")
 
+# What the open and the turned-down pull requests proposed, as
+# refs/proposals/<number>. The open one is read from its branch, which a push
+# moves at once, unlike refs/pull/<number>/head.
+refspecs=()
+for number in $turned_down; do
+  refspecs+=("+refs/pull/$number/head:refs/proposals/$number")
+done
+if [ -n "$open" ]; then refspecs+=("+refs/heads/$branch:refs/proposals/$open"); fi
+if [ ${#refspecs[@]} -gt 0 ]; then
+  git fetch --quiet --no-tags --depth=1 origin "${refspecs[@]}"
+fi
+
 # Whether the open pull request is still this workflow's, and the commit its
-# branch holds.
+# branch ends with.
 owned=false
 head=""
 if [ -n "$open" ]; then
-  view=$(gh pr view "$open" --json headRefOid,body)
-  head=$(jq --raw-output .headRefOid <<<"$view")
-  owned=$(jq --arg marker "$(pushed_marker "$head")" \
-    '.body | contains($marker)' <<<"$view")
+  head=$(git rev-parse "refs/proposals/$open")
+  committer=$(git log -1 --format=%ce "$head")
+  if [ "$committer" = "$bot_email" ]; then owned=true; fi
 fi
 
 if git diff --quiet -- "$file"; then
@@ -92,15 +100,6 @@ if git diff --quiet -- "$file"; then
 fi
 
 reading=$(counts <"$file")
-
-# What the open and the turned-down pull requests proposed.
-refspecs=()
-for number in $open $turned_down; do
-  refspecs+=("+refs/pull/$number/head:refs/proposals/$number")
-done
-if [ ${#refspecs[@]} -gt 0 ]; then
-  git fetch --quiet --no-tags origin "${refspecs[@]}"
-fi
 proposed() {
   # A pull request someone made from the branch may not hold the file.
   if git cat-file -e "refs/proposals/$1:$file" 2>/dev/null; then
@@ -136,23 +135,16 @@ git config user.name "$bot_name"
 git config user.email "$bot_email"
 git switch --quiet --force-create "$branch"
 git commit --quiet --message "$title" -- "$file"
-commit=$(git rev-parse HEAD)
-
-# The open pull request's current commit stays recorded: should the push
-# below fail, the pull request is still this workflow's on the next run.
-markers=$(pushed_marker "$commit")
-if [ -n "$open" ]; then markers="$(pushed_marker "$head")
-$markers"; fi
 
 body="$(tail -n +3 "$report")
 
 ---
 
-Read by the [daily fetch]($run_url) on $(date -u +%Y-%m-%d). Check the counts against the source before merging. Until then, later readings update this pull request, unless someone else pushes to it; closing it without merging keeps these counts from being proposed again.
-
-$markers"
+Read by the [daily fetch]($run_url) on $(date -u +%Y-%m-%d). Check the counts against the source before merging. Until then, later readings update this pull request, unless someone else pushes to it; closing it without merging keeps these counts from being proposed again."
 
 if [ -n "$open" ]; then
+  # The description first: should the push fail, the branch still ends with
+  # this workflow's commit, and the next run tries again.
   gh pr edit "$open" --title "$title" --body "$body"
   # Only over the commit read above: a push since then makes it someone else's.
   git push --quiet --force-with-lease="refs/heads/$branch:$head" \

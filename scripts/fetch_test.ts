@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertMatch, assertThrows } from "@std/assert";
-import { dirname, join } from "@std/path";
+import { join } from "@std/path";
 import { parse } from "yaml";
 
 import {
@@ -11,6 +11,7 @@ import {
   updateChamber,
 } from "./fetch.ts";
 import { type Fetcher, FETCHERS } from "./fetchers/mod.ts";
+import { SOURCES, writeFiles } from "./testing.ts";
 import type { Chamber } from "./validate.ts";
 
 const TODAY = "2026-11-03";
@@ -209,21 +210,11 @@ groups:
 /** A repository holding one chamber, data/xyz/unicameral.yaml, as `chamber`. */
 async function repository(chamber: string): Promise<string> {
   const root = await Deno.makeTempDir();
-  const files = {
-    "data/sources.yaml": `sources:
-  - id: official
-    name: Official open data
-    url: https://example.org/open-data
-    license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/
-`,
+  await writeFiles(root, {
+    "data/sources.yaml": SOURCES,
     "data/xyz/country.yaml": "name: Xyzland\nparties: []\n",
     "data/xyz/unicameral.yaml": chamber,
-  };
-  for (const [path, content] of Object.entries(files)) {
-    await Deno.mkdir(dirname(join(root, path)), { recursive: true });
-    await Deno.writeTextFile(join(root, path), content);
-  }
+  });
   return root;
 }
 

@@ -1,29 +1,31 @@
 // scripts/propose.sh against a throwaway repository: a clone of a local
 // origin, and a stand-in for gh that answers from a list of pull requests and
-// records every call.
+// records every call that changes something.
 import { assert, assertEquals, assertMatch } from "@std/assert";
 import { dirname, fromFileUrl, join } from "@std/path";
+
+import { writeFiles } from "./testing.ts";
 
 const PROPOSE = fromFileUrl(new URL("./propose.sh", import.meta.url));
 const CHAMBER = "xyz/unicameral";
 const FILE = `data/${CHAMBER}.yaml`;
 const BRANCH = "fetch/xyz-unicameral";
 const WITHDRAWN = "fetch: withdrawn";
+const BOT_EMAIL = "41898282+github-actions[bot]@users.noreply.github.com";
 
-/** A stand-in for gh: pr list and pr view answer from $FAKE_GH/prs.json. */
+/** A stand-in for gh: pr list answers from $FAKE_GH/prs.json. */
 const FAKE_GH = `#!/usr/bin/env bash
 set -euo pipefail
-args=()
-for arg in "$@"; do args+=("$(printf '%s' "$arg" | jq --raw-input --slurp .)"); done
-(IFS=,; echo "[\${args[*]}]") >>"$FAKE_GH/calls"
 case "$1 $2" in
   "pr list")
-    jq '[.[] | {number, state, isCrossRepository, labels}]' "$FAKE_GH/prs.json" ;;
-  "pr view")
-    if [ -e "$FAKE_GH/view-fails" ]; then echo "HTTP 502" >&2; exit 1; fi
-    jq --argjson number "$3" '.[] | select(.number == $number) | {headRefOid, body}' "$FAKE_GH/prs.json" ;;
+    if [ -e "$FAKE_GH/fails" ]; then echo "HTTP 502" >&2; exit 1; fi
+    cat "$FAKE_GH/prs.json" ;;
+  *) jq --null-input --compact-output '$ARGS.positional' --args -- "$@" >>"$FAKE_GH/calls" ;;
 esac
 `;
+
+/** Keeps the tests' git from the developer's own configuration (signing...). */
+const GIT_ENV = { GIT_CONFIG_GLOBAL: "/dev/null", GIT_CONFIG_NOSYSTEM: "1" };
 
 interface Counts {
   a: number;
@@ -62,7 +64,7 @@ interface PullRequest {
   labels?: string[];
   /** Pushed as the pull request's head; none for a fork's. */
   counts?: Counts;
-  /** Whether its body records its head as pushed by the workflow. */
+  /** Whether the workflow committed its head, rather than someone else. */
   owned?: boolean;
 }
 
@@ -73,7 +75,8 @@ async function run(
 ) {
   const output = await new Deno.Command(command, {
     args,
-    ...options,
+    cwd: options.cwd,
+    env: { ...GIT_ENV, ...options.env },
     stdout: "piped",
     stderr: "piped",
   }).output();
@@ -86,17 +89,37 @@ async function run(
 }
 
 async function git(cwd: string, ...args: string[]): Promise<string> {
-  const result = await run("git", [
-    "-c",
-    "user.name=Test",
-    "-c",
-    "user.email=test@example.org",
-    ...args,
-  ], { cwd });
+  const result = await run("git", args, { cwd });
   if (result.code !== 0) {
     throw new Error(`git ${args.join(" ")}: ${result.stderr}`);
   }
   return result.stdout.trim();
+}
+
+/** Commits the work tree's chamber file as `email`. */
+function commit(work: string, email: string, message: string) {
+  return git(
+    work,
+    "-c",
+    "user.name=Committer",
+    "-c",
+    `user.email=${email}`,
+    "commit",
+    "--quiet",
+    "-am",
+    message,
+  );
+}
+
+/** The commit the branch ends with in `origin`, if it exists. */
+async function branchHead(origin: string): Promise<string | undefined> {
+  const head = await git(
+    origin,
+    "for-each-ref",
+    "--format=%(objectname)",
+    `refs/heads/${BRANCH}`,
+  );
+  return head || undefined;
 }
 
 /**
@@ -106,7 +129,7 @@ async function git(cwd: string, ...args: string[]): Promise<string> {
 async function propose(
   reading: Counts,
   pullRequests: PullRequest[],
-  options: { viewFails?: boolean } = {},
+  options: { ghFails?: boolean } = {},
 ) {
   const root = await Deno.makeTempDir();
   try {
@@ -116,62 +139,40 @@ async function propose(
     await git(root, "init", "--quiet", "--bare", "-b", "main", origin);
     await git(root, "init", "--quiet", "-b", "main", work);
     await git(work, "remote", "add", "origin", origin);
-    await Deno.mkdir(join(work, dirname(FILE)), { recursive: true });
-    await Deno.writeTextFile(join(work, FILE), chamber(MAIN));
+    await writeFiles(work, { [FILE]: chamber(MAIN) });
     await git(work, "add", FILE);
-    await git(work, "commit", "--quiet", "-m", "main");
-    await git(work, "push", "--quiet", "origin", "main");
+    await commit(work, "maintainer@example.org", "main");
 
-    const answers = [];
+    // Each pull request's head, pushed with main in one go.
+    const refspecs = ["main"];
     for (const pr of pullRequests) {
-      let head = "0".repeat(40);
-      if (pr.counts) {
-        await git(work, "switch", "--quiet", "--detach", "main");
-        await Deno.writeTextFile(join(work, FILE), chamber(pr.counts));
-        await git(work, "commit", "--quiet", "-am", `#${pr.number}`);
-        head = await git(work, "rev-parse", "HEAD");
-        await git(
-          work,
-          "push",
-          "--quiet",
-          "origin",
-          `HEAD:refs/pull/${pr.number}/head`,
-        );
-        if (pr.state === "OPEN") {
-          await git(
-            work,
-            "push",
-            "--quiet",
-            "--force",
-            "origin",
-            `HEAD:refs/heads/${BRANCH}`,
-          );
-        }
-        await git(work, "switch", "--quiet", "main");
-      }
-      const pushed = pr.owned ? head : "f".repeat(40);
-      answers.push({
+      if (!pr.counts) continue;
+      await git(work, "switch", "--quiet", "--detach", "main");
+      await writeFiles(work, { [FILE]: chamber(pr.counts) });
+      const email = pr.owned ? BOT_EMAIL : "maintainer@example.org";
+      await commit(work, email, `#${pr.number}`);
+      const head = await git(work, "rev-parse", "HEAD");
+      refspecs.push(`${head}:refs/pull/${pr.number}/head`);
+      if (pr.state === "OPEN") refspecs.push(`${head}:refs/heads/${BRANCH}`);
+      await git(work, "switch", "--quiet", "main");
+    }
+    await git(work, "push", "--quiet", "--force", "origin", ...refspecs);
+    const headBefore = await branchHead(origin);
+
+    await Deno.mkdir(gh);
+    await Deno.writeTextFile(join(gh, "gh"), FAKE_GH, { mode: 0o755 });
+    await writeFiles(gh, {
+      "prs.json": JSON.stringify(pullRequests.map((pr) => ({
         number: pr.number,
         state: pr.state,
         isCrossRepository: pr.isCrossRepository ?? false,
         labels: (pr.labels ?? []).map((name) => ({ name })),
-        headRefOid: head,
-        body: `Proposed counts.\n\n<!-- fetch: pushed ${pushed} -->`,
-      });
-    }
-    const branchBefore = await git(
-      origin,
-      "for-each-ref",
-      `refs/heads/${BRANCH}`,
-    );
+      }))),
+      "calls": "",
+      ...(options.ghFails ? { fails: "" } : {}),
+    });
 
-    await Deno.mkdir(gh);
-    await Deno.writeTextFile(join(gh, "gh"), FAKE_GH, { mode: 0o755 });
-    await Deno.writeTextFile(join(gh, "prs.json"), JSON.stringify(answers));
-    await Deno.writeTextFile(join(gh, "calls"), "");
-    if (options.viewFails) await Deno.writeTextFile(join(gh, "view-fails"), "");
-
-    await Deno.writeTextFile(join(work, FILE), chamber(reading));
+    await writeFiles(work, { [FILE]: chamber(reading) });
     const report = join(root, "report.md");
     await Deno.writeTextFile(report, "Update the seat counts\n\n| table |\n");
 
@@ -190,36 +191,22 @@ async function propose(
     const calls = (await Deno.readTextFile(join(gh, "calls")))
       .split("\n")
       .filter(Boolean)
-      .map((line) => JSON.parse(line) as string[])
-      // Reading pull requests changes nothing.
-      .filter(([group, command]) =>
-        !(group === "pr" && (command === "list" || command === "view"))
-      );
-    const branchAfter = await git(
-      origin,
-      "for-each-ref",
-      `refs/heads/${BRANCH}`,
-    );
-    const head = branchAfter
-      ? await git(origin, "rev-parse", `refs/heads/${BRANCH}`)
-      : undefined;
-    const proposed = head
-      ? (await run("git", ["show", `${head}:${FILE}`], { cwd: origin })).stdout
-      : undefined;
+      .map((line) => JSON.parse(line) as string[]);
+    const head = await branchHead(origin);
     return {
       ...result,
       calls,
-      branchMoved: branchAfter !== branchBefore,
-      head,
-      proposed,
+      branchMoved: head !== headBefore,
+      /** The chamber file the branch ends with, and who committed it. */
+      proposed: head && (await run("git", ["show", `${head}:${FILE}`], {
+        cwd: origin,
+      })).stdout,
+      committer: head &&
+        await git(origin, "log", "-1", "--format=%ce", head),
     };
   } finally {
     await Deno.remove(root, { recursive: true });
   }
-}
-
-function bodyOf(call: string[]): string {
-  return call[call.indexOf("--body") + 1];
 }
 
 const READING: Counts = { a: 8, ni: 1 };
@@ -233,11 +220,8 @@ Deno.test("a reading nobody proposed yet opens a pull request", async () => {
     ["workflow", "run"],
   ]);
   assertEquals(result.proposed, chamber(READING));
-  // The body records the commit the workflow pushed: the pull request is its.
-  assertEquals(
-    bodyOf(result.calls[0]).match(/<!-- fetch: pushed [0-9a-f]+ -->/g),
-    [`<!-- fetch: pushed ${result.head} -->`],
-  );
+  // Committed by the workflow: the pull request is its own.
+  assertEquals(result.committer, BOT_EMAIL);
 });
 
 Deno.test("a source back to main's counts closes the pull request, as withdrawn", async () => {
@@ -288,11 +272,7 @@ Deno.test("the open pull request follows the source", async () => {
     ["workflow", "run", "validate.yml"],
   ]);
   assertEquals(result.proposed, chamber(READING));
-  // The commit it held stays recorded next to the new one, should the push
-  // fail.
-  const markers = bodyOf(result.calls[0]).match(/<!-- fetch: pushed \w+ -->/g);
-  assertEquals(markers?.length, 2);
-  assertEquals(markers?.[1], `<!-- fetch: pushed ${result.head} -->`);
+  assertEquals(result.committer, BOT_EMAIL);
 
   const same = await propose(READING, [
     {
@@ -327,7 +307,7 @@ Deno.test("gh failing stops the run before it changes anything", async () => {
     const result = await propose(
       reading,
       [{ number: 7, state: "OPEN", counts: OTHER, owned: true }],
-      { viewFails: true },
+      { ghFails: true },
     );
     assert(result.code !== 0);
     assertEquals(result.calls, []);

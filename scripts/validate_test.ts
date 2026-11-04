@@ -1,17 +1,9 @@
 import { assertEquals, assertMatch } from "@std/assert";
-import { dirname, join } from "@std/path";
 
+import { SOURCES, writeFiles } from "./testing.ts";
 import { formatProblem, type Problem, validateRepository } from "./validate.ts";
 
 const NOW = new Date("2026-11-03T12:00:00Z");
-
-const SOURCES = `sources:
-  - id: official
-    name: Official open data
-    url: https://example.org/open-data
-    license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/
-`;
 
 const COUNTRY = `name: Xyzland
 parties:
@@ -49,10 +41,7 @@ const VALID: Record<string, string> = {
 async function validate(files: Record<string, string>): Promise<Problem[]> {
   const root = await Deno.makeTempDir();
   try {
-    for (const [path, content] of Object.entries(files)) {
-      await Deno.mkdir(dirname(join(root, path)), { recursive: true });
-      await Deno.writeTextFile(join(root, path), content);
-    }
+    await writeFiles(root, files);
     return (await validateRepository(root, NOW)).problems;
   } finally {
     await Deno.remove(root, { recursive: true });

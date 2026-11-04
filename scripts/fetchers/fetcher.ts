@@ -61,7 +61,6 @@ function unreadable(url: string, error: unknown): Error {
       } s)`,
     );
   }
-  // Deno's own message ("fetch failed") names neither the URL nor the cause.
   const cause = error instanceof Error && error.cause instanceof Error
     ? `: ${error.cause.message}`
     : "";

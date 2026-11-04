@@ -288,8 +288,6 @@ export async function fetchChamber(
 
   const seats = assignSeats(await fetcher.read(), fetcher.groups);
   const update = updateChamber(text, seats, today);
-  // Not the text: a file the YAML library would lay out differently is no
-  // change of counts, and nothing to propose.
   if (!update.changed) return undefined;
 
   const [country, sources] = await Promise.all([
