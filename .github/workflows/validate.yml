@@ -4,6 +4,9 @@ on:
   pull_request:
   push:
     branches: [main]
+  # The fetch workflow's pull requests are pushed with its GITHUB_TOKEN, which
+  # triggers no other workflow: it dispatches this one on their branch instead.
+  workflow_dispatch:
 
 permissions:
   contents: read

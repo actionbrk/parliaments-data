@@ -12,6 +12,8 @@ Corrections and new chambers are welcome as pull requests. CI checks every pull 
 
 ## Updating a chamber
 
+Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their own whenever their source changes: see [Updates](README.md#updates). By hand:
+
 1. Edit the groups' `seats` in `data/<iso3>/<chamber>.yaml`. Add a group that appeared, remove one that was dissolved.
 2. Keep the total right: the groups' seats plus `vacant` (seats nobody holds right now) must equal `seats`.
 3. Set `updated` to the date the composition changed.
@@ -59,6 +61,7 @@ Corrections and new chambers are welcome as pull requests. CI checks every pull 
    - group `id`: built like party ids, from the group's abbreviation;
    - `color`: the colour the group is usually shown in, as `#RRGGBB`;
    - `parties`: the ids, from `country.yaml`, of the parties the group is made of. Use `[]` for a group tied to no party, such as non-attached members.
+4. **Its fetcher** (optional), when the source can be read by a program: a module in `scripts/fetchers/`, named after the source's id, that reads the seat counts and maps each of the source's group keys (a code, or the group's name) to the group's id, registered in `scripts/fetchers/mod.ts`. The tests check that it reaches every group of the chamber file. The daily fetch then keeps the chamber up to date.
 
 ## Checking locally
 
