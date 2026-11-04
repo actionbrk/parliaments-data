@@ -23,6 +23,10 @@ on:
       - "scripts/fetch.ts"
       - "scripts/fetchers/**"
       - "scripts/propose.sh"
+      # What the fetch imports, and the versions of its parsers (yaml, @std/csv).
+      - "scripts/validate.ts"
+      - "deno.json"
+      - "deno.lock"
       - ".github/workflows/fetch.yml"
 
 permissions:
@@ -69,7 +73,7 @@ jobs:
         chamber: ${{ fromJSON(needs.chambers.outputs.list) }}
     permissions:
       contents: write # push the chamber's branch
-      pull-requests: write # open, update or close its pull request
+      pull-requests: write # open, update, label or close its pull request
       actions: write # dispatch Validate on that branch
     env:
       CHAMBER: ${{ matrix.chamber }}

@@ -3,7 +3,7 @@
     "validate": "deno run --allow-read=. --allow-env=GITHUB_ACTIONS,LOG_STREAM,LOG_TOKENS scripts/validate.ts",
     "build": "deno run --allow-read=. --allow-write=dist --allow-env=GITHUB_ACTIONS,GITHUB_SHA,GITHUB_SERVER_URL,GITHUB_REPOSITORY,LOG_STREAM,LOG_TOKENS scripts/build.ts",
     "fetch": "deno run --allow-read=. --allow-write=data --allow-net --allow-env=GITHUB_ACTIONS,LOG_STREAM,LOG_TOKENS scripts/fetch.ts",
-    "test": "deno test --allow-read --allow-write --allow-env=LOG_STREAM,LOG_TOKENS scripts/",
+    "test": "deno test --allow-read --allow-write --allow-env=LOG_STREAM,LOG_TOKENS,PATH --allow-run=git,bash scripts/",
     "check": "deno fmt --check && deno lint && deno check scripts/"
   },
   "imports": {

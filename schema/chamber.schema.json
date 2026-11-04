@@ -28,8 +28,7 @@
     },
     "source": {
       "description": "Id of the entry in data/sources.yaml the seat counts come from.",
-      "type": "string",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      "allOf": [{ "$ref": "definitions.schema.json#/definitions/id" }]
     },
     "updated": {
       "description": "Date (YYYY-MM-DD) the seat counts in this file were last changed.",
@@ -50,8 +49,7 @@
       "properties": {
         "id": {
           "description": "Identifier of the group, unique within the chamber. It survives renames: never change it once published, and give a new group a new id.",
-          "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/id" }]
         },
         "name": {
           "description": "Official name of the group, in the chamber's language.",
@@ -64,8 +62,7 @@
         },
         "color": {
           "description": "Hex colour used to draw the group's seats.",
-          "type": "string",
-          "pattern": "^#[0-9A-Fa-f]{6}$"
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/color" }]
         },
         "seats": {
           "type": "integer",
@@ -75,10 +72,7 @@
           "description": "Ids of the parties (from the country's country.yaml) the group is made of. Empty for groups that are not tied to any party, such as non-attached members.",
           "type": "array",
           "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
-          }
+          "items": { "$ref": "definitions.schema.json#/definitions/id" }
         }
       }
     }

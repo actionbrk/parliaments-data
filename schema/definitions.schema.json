@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shared definitions",
+  "description": "The formats the other schemas share, referenced from them as definitions.schema.json#/definitions/<name>. scripts/validate.ts explains a value that fails one of them by that name.",
+  "definitions": {
+    "id": {
+      "description": "Lowercase ASCII letters and digits, words joined by single hyphens.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "color": {
+      "description": "A hex colour, #RRGGBB.",
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "url": {
+      "description": "A web address, http:// or https://: it is published as a link.",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    }
+  }
+}

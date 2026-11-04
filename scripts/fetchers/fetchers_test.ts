@@ -1,9 +1,9 @@
 // The fetchers' parsing, on hand-made answers shaped like their sources'.
-import { assertEquals, assertThrows } from "@std/assert";
+import { assertEquals, assertRejects, assertThrows } from "@std/assert";
 
 import { countDeputies, findExportUrl } from "./congreso.ts";
 import { countGroups } from "./datan.ts";
-import type { SourceGroup } from "./fetcher.ts";
+import { requestJson, type SourceGroup } from "./fetcher.ts";
 import { countMandates } from "./parlament_at.ts";
 import { countMembers } from "./parlament_ch.ts";
 import { countSenators } from "./senat.ts";
@@ -12,6 +12,52 @@ import { countSenators } from "./senat.ts";
 function bySeats(groups: SourceGroup[]): Record<string, number> {
   return Object.fromEntries(groups.map((group) => [group.key, group.seats]));
 }
+
+Deno.test("every failure to read a source names its URL", async () => {
+  const url = "https://example.org/export.json";
+  const answer = (response: () => Response) => {
+    globalThis.fetch = () => Promise.resolve(response());
+  };
+  const realFetch = globalThis.fetch;
+  try {
+    answer(() => new Response('{"ok": true}'));
+    assertEquals(await requestJson(url), { ok: true });
+
+    // A bot-check page served with HTTP 200.
+    answer(() => new Response("<!DOCTYPE html><title>Checking</title>"));
+    await assertRejects(
+      () => requestJson(url),
+      Error,
+      `${url} did not answer JSON (Unexpected token`,
+    );
+
+    answer(() => new Response("Forbidden", { status: 403 }));
+    await assertRejects(
+      () => requestJson(url),
+      Error,
+      `${url} answered HTTP 403`,
+    );
+
+    // The connection drops while the body is read.
+    answer(() =>
+      new Response(
+        new ReadableStream({
+          start(controller) {
+            controller.enqueue(new TextEncoder().encode('{"rows": ['));
+            controller.error(new TypeError("connection reset"));
+          },
+        }),
+      )
+    );
+    await assertRejects(
+      () => requestJson(url),
+      Error,
+      `${url} could not be read (connection reset)`,
+    );
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
 
 Deno.test("parlament.gv.at: members with an open mandate in the chamber", () => {
   const person = (...mandates: object[]) => [

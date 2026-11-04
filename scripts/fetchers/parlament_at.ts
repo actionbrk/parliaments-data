@@ -9,7 +9,12 @@
  * the website's own member pages (FBEZ=WFW_002 / WFW_005) are not, and fall
  * under the site's general terms, which exclude any commercial use.
  */
-import { type Fetcher, request, type SourceGroup, tally } from "./fetcher.ts";
+import {
+  type Fetcher,
+  requestJson,
+  type SourceGroup,
+  tally,
+} from "./fetcher.ts";
 
 const API_URL =
   "https://www.parlament.gv.at/Filter/api/filter/data/409?1=1&showAll=true&export=true";
@@ -94,14 +99,14 @@ export function parlamentAt(chamber: AustrianChamber): Fetcher {
     source: "parlament-at-opendata",
     groups,
     async read() {
-      const response = await request(API_URL, {
+      const data = await requestJson(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           "ATTR_JSON.mandate_detail.gremium_name": [gremium],
         }),
       });
-      return countMandates(await response.json(), chamber);
+      return countMandates(data as ApiResponse, chamber);
     },
   };
 }

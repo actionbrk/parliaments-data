@@ -3,7 +3,12 @@
  * Assembly's OData service (source parlament-ch-odata): its sitting members,
  * each with their parliamentary group.
  */
-import { type Fetcher, request, type SourceGroup, tally } from "./fetcher.ts";
+import {
+  type Fetcher,
+  requestJson,
+  type SourceGroup,
+  tally,
+} from "./fetcher.ts";
 
 /** The service sources.yaml cites; the queries below are built on it. */
 const SERVICE_URL = "https://ws.parlament.ch/odata.svc/";
@@ -74,8 +79,9 @@ export function parlamentCh(council: Council): Fetcher {
     source: "parlament-ch-odata",
     groups: GROUPS[council],
     async read() {
-      const response = await request(membersUrl(council));
-      return countMembers(await response.json());
+      return countMembers(
+        await requestJson(membersUrl(council)) as ODataResponse,
+      );
     },
   };
 }

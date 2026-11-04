@@ -13,7 +13,7 @@ data/
     country.yaml      the country and the parties its groups are made of
     lower.yaml        the lower chamber  ┐
     upper.yaml        the upper chamber  ┘ or unicameral.yaml for a single-chamber parliament
-schema/               JSON Schemas for those three kinds of file
+schema/               JSON Schemas for those three kinds of file, and the formats they share
 scripts/validate.ts   the checks CI runs on every change
 scripts/build.ts      builds the published JSON document and its landing page
 scripts/fetch.ts      reads the chambers' seat counts from their sources, through
@@ -88,9 +88,9 @@ Fields are named as in the YAML files. Within `/v1/`, fields are only ever added
 
 ## Updates
 
-Every day, the [Fetch](.github/workflows/fetch.yml) workflow reads each chamber's seat counts from its source, the parliament's open data, and proposes any change as a pull request: one per chamber, titled after it, from the branch `fetch/<country>-<chamber>`, for a maintainer to check against the source and merge. Until then, the pull request follows the source: a later change replaces its commit, a source back to the counts on `main` closes it, and counts turned down by closing a pull request without merging are not proposed again. A pull request someone else pushed to is left alone.
+Every day, the [Fetch](.github/workflows/fetch.yml) workflow reads each chamber's seat counts from its source, the parliament's open data, and proposes any change as a pull request: one per chamber, titled after it, from the branch `fetch/<country>-<chamber>`, for a maintainer to check against the source and merge. Until then, the pull request follows the source: a later change replaces its commit, and a source back to the counts on `main` closes it, labelled `fetch: withdrawn`. Counts turned down by closing a pull request without merging are not proposed again, whatever else changes in the file; labelling that pull request `fetch: withdrawn` lets them be proposed again. A pull request someone else pushed to is left alone.
 
-Only seats change that way: each group's `seats`, `vacant`, and `updated`, set to the day the new counts were read. A group the source reports but the chamber file doesn't list stops that chamber's run, as does a reading leaving more than a tenth of the chamber vacant (a truncated export, a dissolved chamber): both need a person, to add the group with its id, colour and parties, or to judge the reading. The run fails and says why; the other chambers carry on.
+Only seats change that way: each group's `seats`, `vacant`, and `updated`, set to the day the new counts were read. A group left with no member is removed from the file; its key stays in the fetcher, so that if the source reports members for it again, the run stops until a person adds the group back. A group the source reports but the chamber file doesn't list stops that chamber's run too, as does a reading leaving more than a tenth of the chamber vacant, more than the file records (a truncated export, a dissolved chamber): both need a person, to add the group with its id, colour and parties, or to judge the reading. If it is right, write its counts into the file by hand, `vacant` included: later readings with no more vacancies then go through. The run fails and says why; the other chambers carry on.
 
 The workflow opens pull requests with its own token, which the repository has to allow: Settings → Actions → General → Workflow permissions → "Allow GitHub Actions to create and approve pull requests".
 

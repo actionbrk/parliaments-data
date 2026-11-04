@@ -46,31 +46,69 @@ export function tally<T>(
   return [...groups.values()];
 }
 
-/** Long enough for the Austrian export (about 3 MB), short of a hung run. */
+/**
+ * For the whole answer, body included. Long enough for the Austrian export
+ * (about 3 MB), short of a hung run.
+ */
 const TIMEOUT_MS = 90_000;
 
-/** fetch(), failing on any answer but a 2xx and on a source that hangs. */
-export async function request(
+/** Why reading `url` failed, with the URL: fetch's own errors name neither. */
+function unreadable(url: string, error: unknown): Error {
+  if (error instanceof DOMException && error.name === "TimeoutError") {
+    return new Error(
+      `${url} could not be read (no complete answer within ${
+        TIMEOUT_MS / 1000
+      } s)`,
+    );
+  }
+  // Deno's own message ("fetch failed") names neither the URL nor the cause.
+  const cause = error instanceof Error && error.cause instanceof Error
+    ? `: ${error.cause.message}`
+    : "";
+  const message = error instanceof Error ? error.message : String(error);
+  return new Error(`${url} could not be read (${message}${cause})`);
+}
+
+/**
+ * The body of `url` as text, failing on any answer but a 2xx and on a source
+ * that hangs. Every failure, the body's included, names the URL.
+ */
+export async function requestText(
   url: string,
   init: RequestInit = {},
-): Promise<Response> {
+): Promise<string> {
+  const signal = AbortSignal.timeout(TIMEOUT_MS);
   let response: Response;
   try {
-    response = await fetch(url, {
-      ...init,
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    response = await fetch(url, { ...init, signal });
   } catch (error) {
-    // Deno's own message ("fetch failed") names neither the URL nor the cause.
-    const cause = error instanceof Error && error.cause instanceof Error
-      ? `: ${error.cause.message}`
-      : "";
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`${url} could not be read (${message}${cause})`);
+    throw unreadable(url, error);
   }
   if (!response.ok) {
     await response.body?.cancel();
     throw new Error(`${url} answered HTTP ${response.status}`);
   }
-  return response;
+  try {
+    return await response.text();
+  } catch (error) {
+    throw unreadable(url, error);
+  }
+}
+
+/**
+ * The body of `url` parsed as JSON, failing as requestText does, and on an
+ * answer that is not JSON (an error or bot-check page served with HTTP 200).
+ * Its shape is the caller's to check.
+ */
+export async function requestJson(
+  url: string,
+  init: RequestInit = {},
+): Promise<unknown> {
+  const text = await requestText(url, init);
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`${url} did not answer JSON (${message})`);
+  }
 }

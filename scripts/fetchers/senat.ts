@@ -2,7 +2,12 @@
  * France's Senate, from the Sénat's public API (source senat-api): a JSON
  * array of every sitting senator, each with their group.
  */
-import { type Fetcher, request, type SourceGroup, tally } from "./fetcher.ts";
+import {
+  type Fetcher,
+  requestJson,
+  type SourceGroup,
+  tally,
+} from "./fetcher.ts";
 
 const API_URL = "https://www.senat.fr/api-senat/senateurs.json";
 
@@ -45,7 +50,6 @@ export const senat: Fetcher = {
     NI: "ni",
   },
   async read() {
-    const response = await request(API_URL);
-    return countSenators(await response.json());
+    return countSenators(await requestJson(API_URL) as Senateur[]);
   },
 };

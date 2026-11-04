@@ -23,7 +23,7 @@ Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their 
 1. **The source.** If it is not in `data/sources.yaml` yet, add it:
    - `id`: a short lowercase name, e.g. `senado-opendata`;
    - `name`: shown as the credit next to the seats. If the source prescribes how to credit it, use that wording verbatim;
-   - `url`: the dataset or page the numbers are read from;
+   - `url`: the dataset or page the numbers are read from, as an `https://` (or `http://`) address;
    - `citation` (optional): what the source is and how the seat counts are derived from it;
    - `license` and `license_url`: the terms the data is published under.
 2. **The country.** If `data/<iso3>/` does not exist yet, create it, named after the country's lowercase [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) code, with a `country.yaml`:
