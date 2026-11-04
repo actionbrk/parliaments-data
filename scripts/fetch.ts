@@ -1,12 +1,16 @@
 /**
  * Reads chambers' current seat counts from their sources (scripts/fetchers/)
  * and writes them into their files under data/: each group's seats, the
- * vacant seats, and `updated` when anything changed. The rest of the file,
- * ids, names, colours, parties, comments and layout, is left as it is.
+ * vacant seats, and `updated` when anything changed. A group left with no
+ * member is removed. The rest of the file, ids, names, colours, parties,
+ * comments and layout, is left as it is, and a file whose counts didn't
+ * change is not written at all.
  *
  *   deno task fetch                  every chamber that has a fetcher
  *   deno task fetch fra/upper ...    only these
  *   deno task fetch --list           the chambers, as a JSON array
+ *   deno task fetch --counts         the seat counts of the chamber file on
+ *                                    stdin, in a form to compare (seatCounts)
  *
  * For each chamber whose file changed, it prints a pull request's title (one
  * line) and, after a blank line, its body in Markdown. Progress and problems
@@ -17,8 +21,8 @@
  * It refuses to write what a reviewer would only have to undo: a group the
  * chamber file doesn't list (a new group needs an id, a colour and parties,
  * which only a person can give), more members than seats, or a reading that
- * leaves more than a tenth of the chamber vacant (a dissolved chamber, a
- * truncated export).
+ * leaves more than a tenth of the chamber vacant, more than the file records
+ * (a dissolved chamber, a truncated export).
  */
 import { join } from "@std/path";
 import { isScalar, isSeq, parse, parseDocument, type YAMLMap } from "yaml";
@@ -34,7 +38,9 @@ const YAML_OPTIONS = { lineWidth: 0, flowCollectionPadding: false } as const;
  * The largest share of a chamber a reading may leave vacant. A few seats
  * awaiting a by-election are routine; more points at a source that lost
  * members (a truncated export) or at a dissolved chamber, where only a few
- * members keep their seat until the election. Both need a person.
+ * members keep their seat until the election. Both need a person, who can
+ * record those vacancies by hand when the reading is right: only a reading
+ * leaving more seats vacant than the file records is held to this share.
  */
 export const MAX_VACANT_SHARE = 0.1;
 
@@ -48,8 +54,14 @@ export interface SeatChange {
 }
 
 export interface ChamberUpdate {
-  /** The chamber file with the new counts; the same text when nothing changed. */
+  /**
+   * The chamber file with the new counts, written out again by the YAML
+   * library: a file it lays out otherwise comes back laid out its way, even
+   * when no count changed. `changed` says whether one did.
+   */
   text: string;
+  /** Whether any count changed: a group's seats or the vacant seats. */
+  changed: boolean;
   /** The groups whose seats changed, in the file's order. */
   changes: SeatChange[];
   vacant: { before: number; after: number };
@@ -128,9 +140,10 @@ export function updateChamber(
     );
   }
   const vacant = chamber.seats - filled;
-  if (vacant > chamber.seats * MAX_VACANT_SHARE) {
+  const before = chamber.vacant ?? 0;
+  if (vacant > before && vacant > chamber.seats * MAX_VACANT_SHARE) {
     throw new Error(
-      `the source reports only ${filled} of ${chamber.seats} seats filled. That many vacancies point at an incomplete source or a dissolved chamber: check the source, and update the file by hand if the reading is right`,
+      `the source reports only ${filled} of ${chamber.seats} seats filled, ${vacant} vacant where the file records ${before}. That many vacancies point at an incomplete source or a dissolved chamber: check the source, and if the reading is right, write its counts into the file by hand, "vacant" included. Readings with no more vacancies than the file records then go through`,
     );
   }
 
@@ -161,7 +174,6 @@ export function updateChamber(
     }
   }
 
-  const before = chamber.vacant ?? 0;
   if (vacant !== before) {
     const root = doc.contents as YAMLMap;
     if (vacant === 0) {
@@ -176,13 +188,34 @@ export function updateChamber(
     }
   }
 
-  if (changes.length > 0 || vacant !== before) doc.set("updated", today);
+  const changed = changes.length > 0 || vacant !== before;
+  if (changed) doc.set("updated", today);
 
   return {
     text: doc.toString(YAML_OPTIONS),
+    changed,
     changes,
     vacant: { before, after: vacant },
   };
+}
+
+/**
+ * A chamber file's seat counts alone, as one line of JSON: the seats, the
+ * vacant seats, and each group's seats by id, in id order. Two files with the
+ * same counts give the same line, whatever else differs (dates, names,
+ * colours, comments, the groups' order). scripts/propose.sh compares
+ * proposals with it.
+ */
+export function seatCounts(text: string): string {
+  const chamber = parse(text) as Chamber;
+  const groups = chamber.groups
+    .map((group) => [group.id, group.seats] as const)
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+  return JSON.stringify({
+    seats: chamber.seats,
+    vacant: chamber.vacant ?? 0,
+    groups,
+  });
 }
 
 /** A group as the pull request names it: its name, and its abbreviation if any. */
@@ -255,7 +288,7 @@ export async function fetchChamber(
 
   const seats = assignSeats(await fetcher.read(), fetcher.groups);
   const update = updateChamber(text, seats, today);
-  if (update.text === text) return undefined;
+  if (!update.changed) return undefined;
 
   const [country, sources] = await Promise.all([
     readYaml<Country>(root, `data/${chamber.split("/")[0]}/country.yaml`),
@@ -280,6 +313,11 @@ if (import.meta.main) {
 
   if (Deno.args.includes("--list")) {
     console.log(JSON.stringify(known));
+    Deno.exit(0);
+  }
+
+  if (Deno.args.includes("--counts")) {
+    console.log(seatCounts(await new Response(Deno.stdin.readable).text()));
     Deno.exit(0);
   }
 

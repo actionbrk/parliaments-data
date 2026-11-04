@@ -15,6 +15,7 @@ import {
   type ChamberType,
   type Dataset,
   formatProblem,
+  type Group,
   type Party,
   type Source,
   summarize,
@@ -28,14 +29,8 @@ import {
  */
 export const FORMAT_VERSION = 1;
 
-export interface PublicGroup {
-  id: string;
-  name: string;
-  abbreviation?: string;
-  color: string;
-  seats: number;
-  parties: string[];
-}
+/** A group as in its chamber file; toPublicDataset sets its keys' order. */
+export type PublicGroup = Group;
 
 export interface PublicChamber {
   type: ChamberType;

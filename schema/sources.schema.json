@@ -20,8 +20,7 @@
       "properties": {
         "id": {
           "description": "Stable identifier that chamber files reference in their `source` field. Never change it once published.",
-          "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/id" }]
         },
         "name": {
           "description": "Shown as the credit next to the seats. When the source prescribes the wording of its credit, use it verbatim.",
@@ -30,8 +29,7 @@
         },
         "url": {
           "description": "The documented open-data endpoint or dataset page the seat counts are read from.",
-          "type": "string",
-          "format": "uri"
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/url" }]
         },
         "citation": {
           "description": "What the source is and how seat counts are derived from it.",
@@ -45,8 +43,7 @@
         },
         "license_url": {
           "description": "Where that licence or those terms can be read.",
-          "type": "string",
-          "format": "uri"
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/url" }]
         }
       }
     }

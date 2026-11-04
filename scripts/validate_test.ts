@@ -1,17 +1,9 @@
 import { assertEquals, assertMatch } from "@std/assert";
-import { dirname, join } from "@std/path";
 
+import { SOURCES, writeFiles } from "./testing.ts";
 import { formatProblem, type Problem, validateRepository } from "./validate.ts";
 
 const NOW = new Date("2026-11-03T12:00:00Z");
-
-const SOURCES = `sources:
-  - id: official
-    name: Official open data
-    url: https://example.org/open-data
-    license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/
-`;
 
 const COUNTRY = `name: Xyzland
 parties:
@@ -49,10 +41,7 @@ const VALID: Record<string, string> = {
 async function validate(files: Record<string, string>): Promise<Problem[]> {
   const root = await Deno.makeTempDir();
   try {
-    for (const [path, content] of Object.entries(files)) {
-      await Deno.mkdir(dirname(join(root, path)), { recursive: true });
-      await Deno.writeTextFile(join(root, path), content);
-    }
+    await writeFiles(root, files);
     return (await validateRepository(root, NOW)).problems;
   } finally {
     await Deno.remove(root, { recursive: true });
@@ -191,6 +180,30 @@ Deno.test("ids, colours and dates have a fixed format", async () => {
   ]);
 });
 
+Deno.test("source links are web addresses", async () => {
+  const [script, ...rest] = await validate(
+    edit(
+      "data/sources.yaml",
+      "license_url: https://creativecommons.org/licenses/by/4.0/",
+      "license_url: javascript:alert(1)",
+    ),
+  );
+  assertEquals(rest, []);
+  assertEquals(script.line, 6);
+  assertEquals(
+    script.message,
+    "sources[0].license_url: must be a web address starting with https:// (or http://)",
+  );
+
+  // Not even a URI: explained once.
+  const messages = (await validate(
+    edit("data/sources.yaml", "url: https://example.org/open-data", "url: x"),
+  )).map((problem) => problem.message);
+  assertEquals(messages, [
+    "sources[0].url: must be a web address starting with https:// (or http://)",
+  ]);
+});
+
 Deno.test("updated cannot be in the future", async () => {
   const [problem] = await validate(
     edit("data/xyz/unicameral.yaml", "2026-11-01", "2026-12-01"),
@@ -233,5 +246,11 @@ Deno.test("GitHub Actions output is an annotation on the offending line", () => 
   assertEquals(
     formatProblem(problem, false),
     "data/fra/lower.yaml:12: 50% off\nnext line",
+  );
+
+  // A file name can't end the property or add one of its own.
+  assertEquals(
+    formatProblem({ file: "data/a,line=1:b%", line: 3, message: "m" }, true),
+    "::error file=data/a%2Cline=1%3Ab%25,line=3::m",
   );
 });

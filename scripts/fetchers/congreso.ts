@@ -3,7 +3,13 @@
  * congreso-opendata): its export of the active deputies, each with their
  * parliamentary group.
  */
-import { type Fetcher, request, type SourceGroup, tally } from "./fetcher.ts";
+import {
+  type Fetcher,
+  requestJson,
+  requestText,
+  type SourceGroup,
+  tally,
+} from "./fetcher.ts";
 
 /**
  * The export's file name embeds the time it was generated
@@ -62,9 +68,10 @@ export const congreso: Fetcher = {
     "Grupo Parlamentario Vasco (EAJ-PNV)": "pnv",
   },
   async read() {
-    const listing = await request(LISTING_URL, { headers: HEADERS });
-    const url = findExportUrl(await listing.text());
-    const response = await request(url, { headers: HEADERS });
-    return countDeputies(await response.json());
+    const listing = await requestText(LISTING_URL, { headers: HEADERS });
+    const url = findExportUrl(listing);
+    return countDeputies(
+      await requestJson(url, { headers: HEADERS }) as Diputado[],
+    );
   },
 };

@@ -5,7 +5,7 @@
  */
 import { parse } from "@std/csv";
 
-import { type Fetcher, request, type SourceGroup } from "./fetcher.ts";
+import { type Fetcher, requestText, type SourceGroup } from "./fetcher.ts";
 
 /** The CSV resource itself; sources.yaml cites the dataset's page. */
 const CSV_URL =
@@ -59,7 +59,6 @@ export const datan: Fetcher = {
     NI: "ni",
   },
   async read() {
-    const response = await request(CSV_URL);
-    return countGroups(await response.text());
+    return countGroups(await requestText(CSV_URL));
   },
 };

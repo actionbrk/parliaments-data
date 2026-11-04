@@ -15,6 +15,9 @@ import { join } from "@std/path";
 
 import chamberSchema from "../schema/chamber.schema.json" with { type: "json" };
 import countrySchema from "../schema/country.schema.json" with { type: "json" };
+import definitionsSchema from "../schema/definitions.schema.json" with {
+  type: "json",
+};
 import sourcesSchema from "../schema/sources.schema.json" with { type: "json" };
 
 // The shapes the schemas describe, for the checks that run once a file has
@@ -101,12 +104,26 @@ const COUNTRY_FILE = "country.yaml";
 const CHAMBER_FILES = CHAMBER_TYPES.map((type) => `${type}.yaml`);
 const COUNTRY_DIR = /^[a-z]{3}$/;
 
-const ID_PATTERN = "^[a-z0-9]+(-[a-z0-9]+)*$";
-const COLOR_PATTERN = "^#[0-9A-Fa-f]{6}$";
+/** The other schemas reference the formats they share under this name. */
+const DEFINITIONS = "definitions.schema.json";
+
+/**
+ * What each shared format asks for, in words, by its name in
+ * schema/definitions.schema.json. A value that fails one is explained with
+ * this rather than with the pattern it didn't match.
+ */
+type Definition = keyof typeof definitionsSchema.definitions;
+const DEFINITION_MESSAGES: Record<Definition, string> = {
+  id:
+    'ids use lowercase ASCII letters, digits and single hyphens (e.g. "lfi-nfp")',
+  color: 'must be a hex colour such as "#1D84CE"',
+  url: "must be a web address starting with https:// (or http://)",
+};
 
 const ajv = new Ajv({ allErrors: true });
 // ajv-formats is CommonJS: its plugin is the module's `default` export.
 ajvFormats.default(ajv);
+ajv.addSchema(definitionsSchema, DEFINITIONS);
 
 const validators = {
   sources: ajv.compile(sourcesSchema),
@@ -185,11 +202,30 @@ function pointerToPath(pointer: string): Path {
     .map((segment) => (/^\d+$/.test(segment) ? Number(segment) : segment));
 }
 
+/** The shared definition `error` comes from ("id" for definitions.schema.json#/definitions/id/pattern). */
+function definitionOf(error: ErrorObject): Definition | undefined {
+  const prefix = `${DEFINITIONS}#/definitions/`;
+  if (!error.schemaPath.startsWith(prefix)) return undefined;
+  const name = error.schemaPath.slice(prefix.length).split("/")[0];
+  return Object.hasOwn(DEFINITION_MESSAGES, name)
+    ? name as Definition
+    : undefined;
+}
+
 function describeSchemaError(
   error: ErrorObject,
 ): { path: Path; key: boolean; message: string } {
   const path = pointerToPath(error.instancePath);
   const where = path.length ? `${displayPath(path)}: ` : "";
+
+  const definition = definitionOf(error);
+  if (definition) {
+    return {
+      path,
+      key: false,
+      message: `${where}${DEFINITION_MESSAGES[definition]}`,
+    };
+  }
 
   switch (error.keyword) {
     case "required":
@@ -206,23 +242,6 @@ function describeSchemaError(
         message: `${where}unknown property "${property}"`,
       };
     }
-    case "pattern":
-      if (error.params.pattern === ID_PATTERN) {
-        return {
-          path,
-          key: false,
-          message:
-            `${where}ids use lowercase ASCII letters, digits and single hyphens (e.g. "lfi-nfp")`,
-        };
-      }
-      if (error.params.pattern === COLOR_PATTERN) {
-        return {
-          path,
-          key: false,
-          message: `${where}must be a hex colour such as "#1D84CE"`,
-        };
-      }
-      break;
     case "format":
       if (error.params.format === "date") {
         return {
@@ -286,9 +305,16 @@ async function load<T>(
   const value = doc.toJS();
   const dataFile = new DataFile<T>(file, value as T, doc, lines);
   if (!validate(value)) {
+    // Each said once: a value failing a shared definition twice (a URL that
+    // is neither a URI nor http(s)) gets its one explanation.
+    const said = new Set<string>();
     for (const error of validate.errors ?? []) {
       const { path, key, message } = describeSchemaError(error);
-      problems.push(dataFile.problem(path, message, key));
+      const problem = dataFile.problem(path, message, key);
+      const text = JSON.stringify(problem);
+      if (said.has(text)) continue;
+      said.add(text);
+      problems.push(problem);
     }
     return undefined;
   }
@@ -409,13 +435,7 @@ export async function validateRepository(
       validators.country,
       problems,
     );
-    const loaded = countryFile && {
-      code: entry.name,
-      country: countryFile.value,
-      chambers: [] as Dataset["countries"][number]["chambers"],
-    };
-    if (countryFile && loaded) {
-      dataset.countries.push(loaded);
+    if (countryFile) {
       if (chamberFiles.length === 0) {
         problems.push({
           file: countryFile.file,
@@ -446,6 +466,9 @@ export async function validateRepository(
       countryFile?.value.parties.map((party) => party.id),
     );
 
+    // The chambers that pass their schema. They join the dataset with their
+    // country, which only does if its country.yaml passes too.
+    const chambers: Dataset["countries"][number]["chambers"] = [];
     for (const type of chamberFiles) {
       const chamberFile = await load<Chamber>(
         root,
@@ -456,7 +479,7 @@ export async function validateRepository(
       if (!chamberFile) continue;
 
       const chamber = chamberFile.value;
-      loaded?.chambers.push({ type, chamber });
+      chambers.push({ type, chamber });
       checkUniqueIds(
         chamberFile,
         chamber.groups,
@@ -529,6 +552,14 @@ export async function validateRepository(
         );
       }
     }
+
+    if (countryFile) {
+      dataset.countries.push({
+        code: entry.name,
+        country: countryFile.value,
+        chambers,
+      });
+    }
   }
 
   problems.sort((a, b) =>
@@ -545,11 +576,22 @@ export function summarize(dataset: Dataset): string {
   return `${dataset.countries.length} countries, ${chambers} chambers, ${dataset.sources.length} sources`;
 }
 
-/** https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands */
+/**
+ * A workflow command's message.
+ * https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands
+ */
 function escapeWorkflowData(value: string): string {
   return value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll(
     "\n",
     "%0A",
+  );
+}
+
+/** A workflow command's property value, where "," and ":" end the value. */
+function escapeWorkflowProperty(value: string): string {
+  return escapeWorkflowData(value).replaceAll(":", "%3A").replaceAll(
+    ",",
+    "%2C",
   );
 }
 
@@ -558,9 +600,8 @@ export function formatProblem(
   githubActions: boolean,
 ): string {
   if (githubActions) {
-    const location = problem.line
-      ? `file=${problem.file},line=${problem.line}`
-      : `file=${problem.file}`;
+    const file = `file=${escapeWorkflowProperty(problem.file)}`;
+    const location = problem.line ? `${file},line=${problem.line}` : file;
     return `::error ${location}::${escapeWorkflowData(problem.message)}`;
   }
   return `${problem.file}${
