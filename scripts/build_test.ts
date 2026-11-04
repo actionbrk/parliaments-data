@@ -19,6 +19,7 @@ const DATASET: Dataset = {
         id: "a",
         name: "Party A",
         abbreviation: "A",
+        color: "#000000",
         partyfacts_id: 1,
       }],
     },
@@ -59,6 +60,12 @@ Deno.test("vacant is always present in the JSON document", () => {
   const chamber = toPublicDataset(DATASET, META).countries[0].chambers[0];
   assertEquals(chamber.type, "lower");
   assertEquals(chamber.vacant, 0);
+});
+
+Deno.test("parties carry their colour, as groups do", () => {
+  const country = toPublicDataset(DATASET, META).countries[0];
+  assertEquals(country.parties[0].color, "#000000");
+  assertEquals(country.chambers[0].groups[0].color, "#000000");
 });
 
 Deno.test("absent optional fields stay out of the JSON", () => {

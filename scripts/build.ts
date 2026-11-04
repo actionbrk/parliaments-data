@@ -93,6 +93,7 @@ export function toPublicDataset(
         id: party.id,
         name: party.name,
         abbreviation: party.abbreviation,
+        color: party.color,
         partyfacts_id: party.partyfacts_id,
       })),
       chambers: chambers.map(({ type, chamber }) => ({

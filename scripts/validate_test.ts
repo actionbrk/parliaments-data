@@ -18,6 +18,7 @@ parties:
   - id: a
     name: Party A
     abbreviation: A
+    color: "#000000"
     partyfacts_id: 1
 `;
 
@@ -123,6 +124,7 @@ Deno.test("a Party Facts id belongs to a single party", async () => {
     "data/xyz/country.yaml": `${COUNTRY}  - id: b
     name: Party B
     abbreviation: B
+    color: "#FFFFFF"
     partyfacts_id: 1
 `,
   });
@@ -130,6 +132,24 @@ Deno.test("a Party Facts id belongs to a single party", async () => {
   assertMatch(
     problems[0].message,
     /partyfacts_id 1 is already given to data\/xyz: a/,
+  );
+});
+
+Deno.test("a party has a hex colour", async () => {
+  const [missing, ...rest] = await validate(
+    edit("data/xyz/country.yaml", '    color: "#000000"\n', ""),
+  );
+  assertEquals(rest, []);
+  assertEquals(missing.line, 3);
+  assertEquals(missing.message, 'parties[0]: missing "color"');
+
+  const [invalid] = await validate(
+    edit("data/xyz/country.yaml", '"#000000"', "black"),
+  );
+  assertEquals(invalid.line, 6);
+  assertEquals(
+    invalid.message,
+    'parties[0].color: must be a hex colour such as "#1D84CE"',
   );
 });
 

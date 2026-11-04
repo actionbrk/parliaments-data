@@ -4,49 +4,61 @@ parties:
   - id: centre
     name: Le Centre
     abbreviation: Centre
+    color: "#F1A039"
     partyfacts_id: 1808
 
   - id: lega
     name: Lega dei Ticinesi
     abbreviation: Lega
+    color: "#6495ED"
     partyfacts_id: 1661
 
   - id: mcg
     name: Mouvement Citoyens Genevois
     abbreviation: MCG
+    color: "#FEE801"
     partyfacts_id: 8176
 
   - id: pev
     name: Parti évangélique suisse
     abbreviation: PEV
+    color: "#EFDA18"
     partyfacts_id: 1123
 
   - id: plr
     name: PLR.Les Libéraux-Radicaux
     abbreviation: PLR
+    color: "#0E52A0"
     partyfacts_id: 1231
 
   - id: pss
     name: Parti socialiste suisse
     abbreviation: PSS
+    color: "#E53136"
     partyfacts_id: 29
 
+  # Wikidata gives the party no colour (P465): it takes that of the Groupe
+  # vert'libéral, which it alone makes up.
   - id: pvl
     name: Parti vert'libéral
     abbreviation: PVL
+    color: "#97D040"
     partyfacts_id: 1759
 
   - id: udc
     name: Union Démocratique du Centre
     abbreviation: UDC
+    color: "#009F4F"
     partyfacts_id: 308
 
   - id: udf
     name: Union Démocratique Fédérale
     abbreviation: UDF
+    color: "#C71585"
     partyfacts_id: 631
 
   - id: verts
     name: Les VERT-E-S suisses
     abbreviation: Verts
+    color: "#84B414"
     partyfacts_id: 1006
