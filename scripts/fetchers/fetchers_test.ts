@@ -10,7 +10,12 @@ import { countDeputies as countItalianDeputies } from "./camera.ts";
 import { countDeputies, findExportUrl } from "./congreso.ts";
 import { countGroups } from "./datan.ts";
 import { parseFactions } from "./eerstekamer.ts";
-import { requestJson, requestSparql, type SourceGroup } from "./fetcher.ts";
+import {
+  requestJson,
+  requestSparql,
+  RETRY,
+  type SourceGroup,
+} from "./fetcher.ts";
 import { countMandates } from "./parlament_at.ts";
 import { countMembers } from "./parlament_ch.ts";
 import {
@@ -33,6 +38,8 @@ Deno.test("every failure to read a source names its URL", async () => {
     globalThis.fetch = () => Promise.resolve(response());
   };
   const realFetch = globalThis.fetch;
+  const realPauses = RETRY.delaysMs;
+  RETRY.delaysMs = [0, 0];
   try {
     answer(() => new Response('{"ok": true}'));
     assertEquals(await requestJson(url), { ok: true });
@@ -70,6 +77,74 @@ Deno.test("every failure to read a source names its URL", async () => {
     );
   } finally {
     globalThis.fetch = realFetch;
+    RETRY.delaysMs = realPauses;
+  }
+});
+
+Deno.test("a dropped connection is tried again, an answer or a timeout is not", async () => {
+  const url = "https://example.org/export.json";
+  const realFetch = globalThis.fetch;
+  const realPauses = RETRY.delaysMs;
+  RETRY.delaysMs = [0, 0];
+  let calls = 0;
+  const answerWith = (answer: () => Promise<Response>) => {
+    calls = 0;
+    globalThis.fetch = () => {
+      calls++;
+      return answer();
+    };
+  };
+  const reset = () =>
+    new Response(
+      new ReadableStream({
+        start: (controller) => controller.error(new TypeError("reset")),
+      }),
+    );
+
+  try {
+    // Cut twice, whole the third time: the last attempt allowed.
+    answerWith(() =>
+      calls < 3
+        ? Promise.reject(new TypeError("fetch failed"))
+        : Promise.resolve(new Response('{"ok": true}'))
+    );
+    assertEquals(await requestJson(url), { ok: true });
+    assertEquals(calls, 3);
+
+    // The body cut while it is read, then whole.
+    answerWith(() =>
+      Promise.resolve(calls === 1 ? reset() : new Response('{"ok": 1}'))
+    );
+    assertEquals(await requestJson(url), { ok: 1 });
+    assertEquals(calls, 2);
+
+    // Cut every time: out of attempts, and the error names the URL.
+    answerWith(() => Promise.reject(new TypeError("fetch failed")));
+    await assertRejects(
+      () => requestJson(url),
+      Error,
+      `${url} could not be read (fetch failed)`,
+    );
+    assertEquals(calls, 3);
+
+    // A refusal is the source's answer: asked once.
+    answerWith(() => Promise.resolve(new Response("", { status: 403 })));
+    await assertRejects(() => requestJson(url), Error, "answered HTTP 403");
+    assertEquals(calls, 1);
+
+    // A timeout is final too: trying again would only multiply the wait.
+    answerWith(() =>
+      Promise.reject(new DOMException("timed out", "TimeoutError"))
+    );
+    await assertRejects(
+      () => requestJson(url),
+      Error,
+      `${url} could not be read (no complete answer within 90 s)`,
+    );
+    assertEquals(calls, 1);
+  } finally {
+    globalThis.fetch = realFetch;
+    RETRY.delaysMs = realPauses;
   }
 });
 
