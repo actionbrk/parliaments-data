@@ -1,6 +1,12 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: France
 parties:
+  - id: ac
+    name: Alliance centriste
+    abbreviation: AC
+    color: "#473B84"
+    partyfacts_id: 1177
+
   - id: dlf
     name: Debout la France
     abbreviation: DLF
