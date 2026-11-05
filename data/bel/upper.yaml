@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Senate
+name_local: Sénat / Senaat
+seats: 60
+source: senate-be
+updated: 2026-11-05
+groups:
+  - id: n-va
+    name: Nieuw-Vlaamse Alliantie
+    abbreviation: N-VA
+    color: "#F9CE19"
+    seats: 10
+    parties: [n-va]
+
+  - id: mr
+    name: Mouvement Réformateur
+    abbreviation: MR
+    color: "#002EFF"
+    seats: 9
+    parties: [mr]
+
+  - id: vb
+    name: Vlaams Belang
+    abbreviation: VB
+    color: "#FFE500"
+    seats: 8
+    parties: [vb]
+
+  - id: ps
+    name: Parti Socialiste
+    abbreviation: PS
+    color: "#FF0000"
+    seats: 6
+    parties: [ps]
+
+  - id: pvda-ptb
+    name: PVDA-PTB
+    abbreviation: PVDA-PTB
+    color: "#8B0000"
+    seats: 6
+    parties: [pvda-ptb]
+
+  - id: cd-v
+    name: Christen-democratisch & vlaams
+    abbreviation: cd&v
+    color: "#FF6200"
+    seats: 5
+    parties: [cd-v]
+
+  - id: les-engages
+    name: Les Engagés
+    abbreviation: Les Engagés
+    color: "#F4761A"
+    seats: 5
+    parties: [les-engages]
+
+  - id: vooruit
+    name: Vooruit
+    abbreviation: Vooruit
+    color: "#FF2900"
+    seats: 5
+    parties: [vooruit]
+
+  - id: anders
+    name: Anders.
+    abbreviation: Anders.
+    color: "#3D35FF"
+    seats: 3
+    parties: [anders]
+
+  - id: ecolo-groen
+    name: Ecolo-Groen
+    abbreviation: Ecolo-Groen
+    color: "#5AAD39"
+    seats: 3
+    parties: [ecolo, groen]

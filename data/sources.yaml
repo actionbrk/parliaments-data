@@ -1,5 +1,43 @@
 # yaml-language-server: $schema=../schema/sources.schema.json
 sources:
+  - id: bundestag-opendata
+    name: Deutscher Bundestag - Open Data
+    url: https://www.bundestag.de/services/opendata
+    citation: >-
+      "Stammdaten aller Abgeordneten seit 1949" (MdB-Stammdaten), the master
+      data of every member of the Bundestag, published as open data in a ZIP
+      archive of XML. Seat counts are the members of the latest legislature
+      whose mandate has no end date, grouped by the Fraktion or Gruppe they
+      belong to without an end date. The Bundestag publishes a new version
+      from time to time, not daily. The Bundestag states no licence for these
+      data; its general terms of use (private use only, unless regulated
+      otherwise) cover the rest of its website.
+    license: Bundestag open data (no licence stated)
+    license_url: https://www.bundestag.de/services/opendata
+
+  - id: camera-opendata
+    name: Camera dei deputati - Portale dati aperti
+    url: https://dati.camera.it/sparql
+    citation: >-
+      Linked open data of the Italian Chamber of Deputies, read through its
+      SPARQL endpoint. Seat counts are the deputies whose mandate (mandatoCamera)
+      has no end date, grouped by the parliamentary group they belong to
+      without an end date. The portal shows the licence in its footer.
+    license: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+
+  - id: chambre-be
+    name: Chambre des représentants de Belgique / Kamer van Volksvertegenwoordigers
+    url: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
+    citation: >-
+      The Chamber's list of its political composition (a parliamentary
+      document, "DOC 56 0003"), a PDF the Chamber replaces whenever it
+      changes: the number of members of each political group, and the
+      members belonging to none. The Chamber has no open data service.
+      Its site states no terms of reuse beyond a disclaimer.
+    license: No terms of reuse stated (disclaimer only)
+    license_url: https://www.lachambre.be/kvvcr/showpage.cfm?section=/searchlist&language=fr&cfm=/site/wwwcfm/searchlist/faq.cfm?goto=infojuri
+
   - id: congreso-opendata
     name: Congreso de los Diputados - Datos Abiertos
     url: https://www.congreso.es/es/opendata/diputados
@@ -19,6 +57,19 @@ sources:
       French National Assembly with its current membership.
     license: Licence Ouverte 1.0
     license_url: https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf
+
+  - id: eerstekamer-website
+    name: Eerste Kamer der Staten-Generaal
+    url: https://www.eerstekamer.nl/fracties
+    citation: >-
+      The Eerste Kamer's page of its factions, which gives the number of seats
+      of each. The Eerste Kamer has no open data service. Its colophon allows
+      anyone to copy and republish the site's content, commercially too, if
+      the address read and the date of extraction are given (here the
+      source's url, and the chamber file's "updated"), along with an
+      annotation that the colophon announces but does not print.
+    license: Eerste Kamer website terms (Colofon, Auteursrecht)
+    license_url: https://www.eerstekamer.nl/begrip/colofon
 
   - id: parlament-at-opendata
     name: Parlament Österreich
@@ -42,6 +93,19 @@ sources:
     license: Parliamentary Services terms of use
     license_url: https://www.parlament.ch/fr/%C3%BCber-das-parlament/faits-donnees-chifrees/open-data-web-services
 
+  - id: parlamento-pt-opendata
+    # The Assembly asks to be credited as the source, by this name.
+    name: Assembleia da República
+    url: https://www.parlamento.pt/Cidadania/Paginas/DadosAbertos.aspx
+    citation: >-
+      Open data of the Assembly of the Republic, "Informação Base" of the
+      current legislature (JSON). Seat counts are the deputies who sit now
+      (situation Efetivo, Efetivo Temporário or Efetivo Definitivo, with no
+      end date), grouped by the parliamentary group they joined last;
+      substitutes and suspended deputies do not count.
+    license: Free reuse, crediting the Assembleia da República
+    license_url: https://www.parlamento.pt/Cidadania/Paginas/DadosAbertos.aspx
+
   - id: senat-api
     name: Sénat - API Open Data
     url: https://www.senat.fr/api-senat/senateurs.json
@@ -51,3 +115,35 @@ sources:
       aggregated per group.
     license: Licence Ouverte 2.0
     license_url: https://data.senat.fr/licence/
+
+  - id: senate-be
+    name: Sénat de Belgique / Belgische Senaat
+    url: https://www.senate.be/www/?MIval=/WieIsWie/Samenstelling&LANG=fr
+    citation: >-
+      The Senate's page on its composition, which gives the number of
+      senators of each political group as things stand ("situation actuelle").
+      The Senate has no open data service. Its site states no terms of reuse
+      beyond a disclaimer.
+    license: No terms of reuse stated (disclaimer only)
+    license_url: https://www.senate.be/contact/copyright_fr.html
+
+  - id: senato-opendata
+    name: Senato della Repubblica - Dati aperti
+    url: https://dati.senato.it/sparql
+    citation: >-
+      Linked open data of the Italian Senate, read through its SPARQL
+      endpoint. Seat counts are the senators, those for life included, whose
+      mandate has no end date, grouped by the parliamentary group they belong
+      to without an end date.
+    license: Creative Commons Attribution 3.0 (CC BY 3.0)
+    license_url: https://creativecommons.org/licenses/by/3.0/
+
+  - id: tweedekamer-opendata
+    name: Tweede Kamer der Staten-Generaal - Open Data Portaal
+    url: https://opendata.tweedekamer.nl/
+    citation: >-
+      Open Data Portaal of the Tweede Kamer, its OData API. Seat counts are
+      the holders of a faction seat (FractieZetelPersoon) whose term has no
+      end date, grouped by the active faction (Fractie) of the seat.
+    license: CC0 1.0 Universal (Public Domain Dedication)
+    license_url: https://creativecommons.org/publicdomain/zero/1.0/

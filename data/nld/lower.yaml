@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: House of Representatives
+name_local: Tweede Kamer der Staten-Generaal
+seats: 150
+source: tweedekamer-opendata
+updated: 2026-11-05
+groups:
+  - id: d66
+    name: Democraten 66
+    abbreviation: D66
+    color: "#00AE41"
+    seats: 26
+    parties: [d66]
+
+  - id: vvd
+    name: Volkspartij voor Vrijheid en Democratie
+    abbreviation: VVD
+    color: "#0328CB"
+    seats: 22
+    parties: [vvd]
+
+  - id: pro
+    name: Progressief Nederland
+    abbreviation: PRO
+    color: "#00AD00"
+    seats: 20
+    parties: [pro]
+
+  - id: pvv
+    name: Partij voor de Vrijheid
+    abbreviation: PVV
+    color: "#244674"
+    seats: 19
+    parties: [pvv]
+
+  - id: cda
+    name: Christen-Democratisch Appèl
+    abbreviation: CDA
+    color: "#1F9359"
+    seats: 18
+    parties: [cda]
+
+  - id: ja21
+    name: JA21
+    abbreviation: JA21
+    color: "#242B57"
+    seats: 9
+    parties: [ja21]
+
+  - id: fvd
+    name: Forum voor Democratie
+    abbreviation: FVD
+    color: "#A71C20"
+    seats: 7
+    parties: [fvd]
+
+  # Members who left the PVV: a group of its own, tied to no party.
+  - id: markuszower
+    name: Groep Markuszower
+    abbreviation: Groep Markuszower
+    color: "#8D949A"
+    seats: 7
+    parties: []
+
+  - id: bbb
+    name: BoerBurgerBeweging
+    abbreviation: BBB
+    color: "#95C11F"
+    seats: 3
+    parties: [bbb]
+
+  - id: cu
+    name: ChristenUnie
+    abbreviation: ChristenUnie
+    color: "#00A7EB"
+    seats: 3
+    parties: [cu]
+
+  - id: denk
+    name: DENK
+    abbreviation: DENK
+    color: "#00B7B2"
+    seats: 3
+    parties: [denk]
+
+  - id: pvdd
+    name: Partij voor de Dieren
+    abbreviation: PvdD
+    color: "#00743C"
+    seats: 3
+    parties: [pvdd]
+
+  - id: sgp
+    name: Staatkundig Gereformeerde Partij
+    abbreviation: SGP
+    color: "#EA5D06"
+    seats: 3
+    parties: [sgp]
+
+  - id: sp
+    name: Socialistische Partij
+    abbreviation: SP
+    color: "#FF0000"
+    seats: 3
+    parties: [sp]
+
+  - id: 50plus
+    name: 50PLUS
+    abbreviation: 50PLUS
+    color: "#92107D"
+    seats: 2
+    parties: [50plus]
+
+  # A single member, sitting on their own.
+  - id: keijzer
+    name: Lid Keijzer
+    abbreviation: Lid Keijzer
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: volt
+    name: Volt
+    abbreviation: Volt
+    color: "#582C83"
+    seats: 1
+    parties: [volt]

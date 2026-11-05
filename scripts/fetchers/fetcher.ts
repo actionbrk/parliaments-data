@@ -69,13 +69,14 @@ function unreadable(url: string, error: unknown): Error {
 }
 
 /**
- * The body of `url` as text, failing on any answer but a 2xx and on a source
- * that hangs. Every failure, the body's included, names the URL.
+ * The body of `url`, read with `read`, failing on any answer but a 2xx and on
+ * a source that hangs. Every failure, the body's included, names the URL.
  */
-export async function requestText(
+async function request<T>(
   url: string,
-  init: RequestInit = {},
-): Promise<string> {
+  init: RequestInit,
+  read: (response: Response) => Promise<T>,
+): Promise<T> {
   const signal = AbortSignal.timeout(TIMEOUT_MS);
   let response: Response;
   try {
@@ -88,10 +89,30 @@ export async function requestText(
     throw new Error(`${url} answered HTTP ${response.status}`);
   }
   try {
-    return await response.text();
+    return await read(response);
   } catch (error) {
     throw unreadable(url, error);
   }
+}
+
+/** The body of `url` as text: see `request`. */
+export function requestText(
+  url: string,
+  init: RequestInit = {},
+): Promise<string> {
+  return request(url, init, (response) => response.text());
+}
+
+/** The body of `url` as bytes: see `request`. */
+export function requestBytes(
+  url: string,
+  init: RequestInit = {},
+): Promise<Uint8Array> {
+  return request(
+    url,
+    init,
+    async (response) => new Uint8Array(await response.arrayBuffer()),
+  );
 }
 
 /**
@@ -110,4 +131,29 @@ export async function requestJson(
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(`${url} did not answer JSON (${message})`);
   }
+}
+
+/**
+ * The rows of a SPARQL SELECT on `endpoint`, each variable's value as a
+ * string. Fails as requestJson does, and on an answer that isn't SPARQL JSON
+ * results (a firewall's error page served with HTTP 200, say).
+ */
+export async function requestSparql(
+  endpoint: string,
+  query: string,
+): Promise<Record<string, string>[]> {
+  const url = `${endpoint}?${new URLSearchParams({ query })}`;
+  const answer = await requestJson(url, {
+    headers: { Accept: "application/sparql-results+json" },
+  }) as { results?: { bindings?: Record<string, { value?: string }>[] } };
+
+  const bindings = answer?.results?.bindings;
+  if (!Array.isArray(bindings)) {
+    throw new Error(`${endpoint} did not answer SPARQL results`);
+  }
+  return bindings.map((binding) =>
+    Object.fromEntries(
+      Object.entries(binding).map(([name, term]) => [name, term.value ?? ""]),
+    )
+  );
 }

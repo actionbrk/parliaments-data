@@ -1,0 +1,141 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Senate
+name_local: Eerste Kamer der Staten-Generaal
+seats: 75
+source: eerstekamer-website
+updated: 2026-11-05
+groups:
+  - id: pro
+    name: Progressief Nederland
+    abbreviation: PRO
+    color: "#00AD00"
+    seats: 14
+    parties: [pro]
+
+  - id: bbb
+    name: BoerBurgerBeweging
+    abbreviation: BBB
+    color: "#95C11F"
+    seats: 11
+    parties: [bbb]
+
+  - id: vvd
+    name: Volkspartij voor Vrijheid en Democratie
+    abbreviation: VVD
+    color: "#0328CB"
+    seats: 9
+    parties: [vvd]
+
+  - id: d66
+    name: Democraten 66
+    abbreviation: D66
+    color: "#00AE41"
+    seats: 7
+    parties: [d66]
+
+  - id: cda
+    name: Christen-Democratisch Appèl
+    abbreviation: CDA
+    color: "#1F9359"
+    seats: 6
+    parties: [cda]
+
+  - id: pvv
+    name: Partij voor de Vrijheid
+    abbreviation: PVV
+    color: "#244674"
+    seats: 4
+    parties: [pvv]
+
+  - id: cu
+    name: ChristenUnie
+    abbreviation: ChristenUnie
+    color: "#00A7EB"
+    seats: 3
+    parties: [cu]
+
+  - id: fvd
+    name: Forum voor Democratie
+    abbreviation: FVD
+    color: "#A71C20"
+    seats: 3
+    parties: [fvd]
+
+  - id: sp
+    name: Socialistische Partij
+    abbreviation: SP
+    color: "#FF0000"
+    seats: 3
+    parties: [sp]
+
+  - id: ja21
+    name: JA21
+    abbreviation: JA21
+    color: "#242B57"
+    seats: 2
+    parties: [ja21]
+
+  - id: pvdd
+    name: Partij voor de Dieren
+    abbreviation: PvdD
+    color: "#00743C"
+    seats: 2
+    parties: [pvdd]
+
+  - id: sgp
+    name: Staatkundig Gereformeerde Partij
+    abbreviation: SGP
+    color: "#EA5D06"
+    seats: 2
+    parties: [sgp]
+
+  - id: volt
+    name: Volt
+    abbreviation: Volt
+    color: "#582C83"
+    seats: 2
+    parties: [volt]
+
+  - id: 50plus
+    name: 50PLUS
+    abbreviation: 50PLUS
+    color: "#92107D"
+    seats: 1
+    parties: [50plus]
+
+  - id: beukering
+    name: Fractie-Beukering
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: opnl
+    name: Onafhankelijke Politiek Nederland
+    abbreviation: OPNL
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: van-de-sanden
+    name: Fractie-Van de Sanden
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: van-gasteren
+    name: Fractie-Van Gasteren
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: visseren-hamakers
+    name: Fractie-Visseren-Hamakers
+    color: "#8D949A"
+    seats: 1
+    parties: []
+
+  - id: walenkamp
+    name: Fractie-Walenkamp
+    color: "#8D949A"
+    seats: 1
+    parties: []

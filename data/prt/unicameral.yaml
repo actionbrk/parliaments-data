@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Assembly of the Republic
+name_local: Assembleia da República
+seats: 230
+source: parlamento-pt-opendata
+updated: 2026-11-05
+groups:
+  - id: psd
+    name: Partido Social Democrata
+    abbreviation: PSD
+    color: "#FF9900"
+    seats: 89
+    parties: [psd]
+
+  - id: ch
+    name: Chega
+    abbreviation: CH
+    color: "#222256"
+    seats: 60
+    parties: [chega]
+
+  - id: ps
+    name: Partido Socialista
+    abbreviation: PS
+    color: "#FF66FF"
+    seats: 58
+    parties: [ps]
+
+  - id: il
+    name: Iniciativa Liberal
+    abbreviation: IL
+    color: "#00ADEF"
+    seats: 9
+    parties: [il]
+
+  - id: l
+    name: Livre
+    abbreviation: L
+    color: "#C2D216"
+    seats: 6
+    parties: [livre]
+
+  - id: pcp
+    name: Partido Comunista Português
+    abbreviation: PCP
+    color: "#FF0000"
+    seats: 3
+    parties: [pcp]
+
+  - id: cds-pp
+    name: Centro Democrático Social - Partido Popular
+    abbreviation: CDS-PP
+    color: "#0093DD"
+    seats: 2
+    parties: [cds-pp]
+
+  - id: be
+    name: Bloco de Esquerda
+    abbreviation: BE
+    color: "#8B0000"
+    seats: 1
+    parties: [be]
+
+  - id: jpp
+    name: Juntos Pelo Povo
+    abbreviation: JPP
+    color: "#00A28B"
+    seats: 1
+    parties: [jpp]
+
+  - id: pan
+    name: Pessoas-Animais-Natureza
+    abbreviation: PAN
+    color: "#036A84"
+    seats: 1
+    parties: [pan]
