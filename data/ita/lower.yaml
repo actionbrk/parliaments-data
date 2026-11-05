@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Chamber of Deputies
+name_local: Camera dei deputati
+seats: 400
+vacant: 2
+source: camera-opendata
+updated: 2026-11-05
+groups:
+  - id: fdi
+    name: Fratelli d'Italia
+    abbreviation: FdI
+    color: "#003366"
+    seats: 117
+    parties: [fdi]
+
+  - id: pd
+    name: Partito Democratico - Italia Democratica e Progressista
+    abbreviation: PD-IDP
+    color: "#EF1C27"
+    seats: 68
+    parties: [pd]
+
+  - id: lega
+    name: Lega - Salvini Premier
+    abbreviation: LEGA
+    color: "#00A651"
+    seats: 54
+    parties: [lega]
+
+  - id: fi
+    name: Forza Italia - Berlusconi Presidente - PPE
+    abbreviation: FI-PPE
+    color: "#00A2E8"
+    seats: 52
+    parties: [fi]
+
+  - id: m5s
+    name: Movimento 5 Stelle
+    abbreviation: M5S
+    color: "#FFEB3B"
+    seats: 48
+    parties: [m5s]
+
+  - id: misto
+    name: Misto
+    abbreviation: MISTO
+    color: "#8D949A"
+    seats: 24
+    parties: []
+
+  - id: avs
+    name: Alleanza Verdi e Sinistra
+    abbreviation: AVS
+    color: "#54C160"
+    seats: 10
+    parties: [si, ev]
+
+  - id: az
+    name: Azione - Popolari Europeisti Riformatori - Renew Europe
+    abbreviation: AZ-PER-RE
+    color: "#00309F"
+    seats: 10
+    parties: [azione]
+
+  - id: nm
+    name: Noi Moderati (Noi con l'Italia, Coraggio Italia, UDC e Italia al Centro) - MAIE - Centro Popolare
+    abbreviation: NM(N-C-U-I)M-CP
+    color: "#2149A7"
+    seats: 8
+    parties: [nm, udc, maie]
+
+  - id: iv
+    name: Italia Viva - Casa Riformista
+    abbreviation: IV-CR
+    color: "#D42894"
+    seats: 7
+    parties: [iv]

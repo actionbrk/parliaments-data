@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=../../schema/country.schema.json
+name: Belgium
+parties:
+  # Formerly Open Vlaamse Liberalen en Democraten (Open Vld).
+  - id: anders
+    name: Anders.
+    abbreviation: Anders.
+    color: "#3D35FF"
+    partyfacts_id: 49
+
+  - id: cd-v
+    name: Christen-Democratisch en Vlaams
+    abbreviation: cd&v
+    color: "#FF6200"
+    partyfacts_id: 604
+
+  - id: ecolo
+    name: Écologistes Confédérés pour l'organisation de luttes originales
+    abbreviation: Ecolo
+    color: "#5AAD39"
+    partyfacts_id: 1563
+
+  - id: groen
+    name: Groen
+    abbreviation: Groen
+    color: "#01796F"
+    partyfacts_id: 528
+
+  # Formerly Centre démocrate humaniste (cdH).
+  - id: les-engages
+    name: Les Engagés
+    abbreviation: Les Engagés
+    color: "#F4761A"
+    partyfacts_id: 633
+
+  - id: mr
+    name: Mouvement Réformateur
+    abbreviation: MR
+    color: "#002EFF"
+    partyfacts_id: 789
+
+  - id: n-va
+    name: Nieuw-Vlaamse Alliantie
+    abbreviation: N-VA
+    color: "#F9CE19"
+    partyfacts_id: 36
+
+  - id: ps
+    name: Parti Socialiste
+    abbreviation: PS
+    color: "#FF0000"
+    partyfacts_id: 500
+
+  - id: pvda-ptb
+    name: Partij van de Arbeid van België – Parti du Travail de Belgique
+    abbreviation: PVDA-PTB
+    color: "#8B0000"
+    partyfacts_id: 1753
+
+  - id: vb
+    name: Vlaams Belang
+    abbreviation: VB
+    color: "#FFE500"
+    partyfacts_id: 1968
+
+  - id: vooruit
+    name: Vooruit
+    abbreviation: Vooruit
+    color: "#FF2900"
+    partyfacts_id: 1680

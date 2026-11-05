@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Chamber of Representatives
+name_local: Chambre des représentants / Kamer van Volksvertegenwoordigers
+seats: 150
+source: chambre-be
+updated: 2026-10-20
+groups:
+  - id: n-va
+    name: Nieuw-Vlaamse Alliantie
+    abbreviation: N-VA
+    color: "#F9CE19"
+    seats: 23
+    parties: [n-va]
+
+  - id: vb
+    name: Vlaams Belang
+    abbreviation: VB
+    color: "#FFE500"
+    seats: 20
+    parties: [vb]
+
+  - id: mr
+    name: Mouvement Réformateur
+    abbreviation: MR
+    color: "#002EFF"
+    seats: 18
+    parties: [mr]
+
+  - id: ps
+    name: Parti Socialiste
+    abbreviation: PS
+    color: "#FF0000"
+    seats: 16
+    parties: [ps]
+
+  - id: les-engages
+    name: Les Engagés
+    abbreviation: Les Engagés
+    color: "#F4761A"
+    seats: 15
+    parties: [les-engages]
+
+  - id: pvda-ptb
+    name: PVDA-PTB
+    abbreviation: PVDA-PTB
+    color: "#8B0000"
+    seats: 15
+    parties: [pvda-ptb]
+
+  - id: vooruit
+    name: Vooruit
+    abbreviation: Vooruit
+    color: "#FF2900"
+    seats: 13
+    parties: [vooruit]
+
+  - id: cd-v
+    name: Christen-democratisch & vlaams
+    abbreviation: cd&v
+    color: "#FF6200"
+    seats: 11
+    parties: [cd-v]
+
+  - id: ecolo-groen
+    name: Ecolo-Groen
+    abbreviation: Ecolo-Groen
+    color: "#5AAD39"
+    seats: 9
+    parties: [ecolo, groen]
+
+  - id: anders
+    name: Anders.
+    abbreviation: Anders.
+    color: "#3D35FF"
+    seats: 8
+    parties: [anders]
+
+  # Members of no group: one DéFI and one independent.
+  - id: ni
+    name: Membres n'appartenant à aucun groupe politique
+    abbreviation: NI
+    color: "#8D949A"
+    seats: 2
+    parties: []

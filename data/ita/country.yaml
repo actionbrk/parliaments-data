@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=../../schema/country.schema.json
+name: Italy
+parties:
+  - id: azione
+    name: Azione
+    abbreviation: Azione
+    color: "#00309F"
+    partyfacts_id: 9082
+
+  - id: ev
+    name: Europa Verde
+    abbreviation: EV
+    color: "#54C160"
+    partyfacts_id: 9110
+
+  - id: fdi
+    name: Fratelli d'Italia
+    abbreviation: FdI
+    color: "#003366"
+    partyfacts_id: 2280
+
+  - id: fi
+    name: Forza Italia
+    abbreviation: FI
+    color: "#00A2E8"
+    partyfacts_id: 8058
+
+  - id: iv
+    name: Italia Viva
+    abbreviation: IV
+    color: "#D42894"
+    partyfacts_id: 8641
+
+  # Party Facts lists the Lega under its former name, Lega Nord.
+  - id: lega
+    name: Lega per Salvini Premier
+    abbreviation: Lega
+    color: "#00A651"
+    partyfacts_id: 1221
+
+  - id: m5s
+    name: MoVimento 5 Stelle
+    abbreviation: M5S
+    color: "#FFEB3B"
+    partyfacts_id: 2046
+
+  - id: maie
+    name: Movimento Associativo Italiani all'Estero
+    abbreviation: MAIE
+    color: "#333B8E"
+
+  - id: nm
+    name: Noi Moderati
+    abbreviation: NM
+    color: "#2149A7"
+    partyfacts_id: 9513
+
+  - id: patt
+    name: Partito Autonomista Trentino Tirolese
+    abbreviation: PATT
+    color: "#000000"
+
+  # Wikidata's preferred colour is orange; the groups are drawn in the red the party is also known by.
+  - id: pd
+    name: Partito Democratico
+    abbreviation: PD
+    color: "#FFA500"
+    partyfacts_id: 802
+
+  - id: psdaz
+    name: Partito Sardo d'Azione
+    abbreviation: PSd'Az
+    color: "#282828"
+    partyfacts_id: 877
+
+  - id: si
+    name: Sinistra Italiana
+    abbreviation: SI
+    color: "#EF3E3E"
+    partyfacts_id: 1212
+
+  - id: svp
+    name: Südtiroler Volkspartei
+    abbreviation: SVP
+    color: "#000000"
+    partyfacts_id: 1369
+
+  - id: udc
+    name: Unione di Centro
+    abbreviation: UDC
+    color: "#87CEFA"
+    partyfacts_id: 201

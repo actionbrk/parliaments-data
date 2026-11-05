@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Senate of the Republic
+name_local: Senato della Repubblica
+seats: 205 # 200 elected, and the 5 senators for life
+source: senato-opendata
+updated: 2026-11-05
+groups:
+  - id: fdi
+    name: Fratelli d'Italia
+    abbreviation: FdI
+    color: "#003366"
+    seats: 63
+    parties: [fdi]
+
+  - id: pd
+    name: Partito Democratico - Italia Democratica e Progressista
+    abbreviation: PD-IDP
+    color: "#EF1C27"
+    seats: 35
+    parties: [pd]
+
+  - id: lega
+    name: Lega Salvini Premier - Partito Sardo d'Azione
+    abbreviation: LSP-PSd'Az
+    color: "#00A651"
+    seats: 29
+    parties: [lega, psdaz]
+
+  - id: m5s
+    name: MoVimento 5 Stelle
+    abbreviation: M5S
+    color: "#FFEB3B"
+    seats: 25
+    parties: [m5s]
+
+  - id: fi
+    name: Forza Italia - Berlusconi Presidente - PPE
+    abbreviation: FI-BP-PPE
+    color: "#00A2E8"
+    seats: 20
+    parties: [fi]
+
+  - id: misto
+    name: Misto
+    abbreviation: Misto
+    color: "#8D949A"
+    seats: 11
+    parties: []
+
+  - id: iv
+    name: Italia Viva - Casa Riformista
+    abbreviation: IV-CR
+    color: "#D42894"
+    seats: 8
+    parties: [iv]
+
+  - id: aut
+    name: Per le Autonomie (SVP-PATT, Campobase)
+    abbreviation: Aut (SVP-PATT, Cb)
+    color: "#000000"
+    seats: 7
+    parties: [svp, patt]
+
+  - id: nm
+    name: Civici d'Italia-UDC-Noi Moderati (Noi con l'Italia, Coraggio Italia, Italia al Centro)-MAIE-Centro Popolare
+    abbreviation: Cd'I-UDC-NM (NcI, CI, IaC)-MAIE-CP
+    color: "#2149A7"
+    seats: 7
+    parties: [nm, udc, maie]

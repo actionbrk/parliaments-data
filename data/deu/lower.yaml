@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/chamber.schema.json
+name: Bundestag
+name_local: Deutscher Bundestag
+seats: 630
+source: bundestag-opendata
+updated: 2026-11-05
+groups:
+  - id: cducsu
+    name: Fraktion der Christlich Demokratischen Union/Christlich - Sozialen Union
+    abbreviation: CDU/CSU
+    color: "#000000"
+    seats: 208
+    parties: [cdu, csu]
+
+  - id: afd
+    name: Fraktion Alternative für Deutschland
+    abbreviation: AfD
+    color: "#009EE0"
+    seats: 150
+    parties: [afd]
+
+  - id: spd
+    name: Fraktion der Sozialdemokratischen Partei Deutschlands
+    abbreviation: SPD
+    color: "#E3000F"
+    seats: 120
+    parties: [spd]
+
+  - id: gruene
+    name: Fraktion BÜNDNIS 90/DIE GRÜNEN
+    abbreviation: GRÜNE
+    color: "#409A3C"
+    seats: 85
+    parties: [gruene]
+
+  - id: linke
+    name: Fraktion Die Linke
+    abbreviation: DIE LINKE
+    color: "#BE3075"
+    seats: 64
+    parties: [linke]
+
+  - id: fraktionslos
+    name: Fraktionslos
+    abbreviation: fraktionslos
+    color: "#8D949A"
+    seats: 3
+    parties: []
