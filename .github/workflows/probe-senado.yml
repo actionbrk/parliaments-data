@@ -1,0 +1,48 @@
+name: Probe senado.es (temporary)
+
+# Temporary: checks whether GitHub's runners can read the Senado's open data,
+# which answers HTTP 403 to some datacenter networks. Removed before merging.
+
+on:
+  push:
+    branches: [ccr-aa92ffa0-6gaz8l]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read the Senado's open data
+        run: |
+          ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+          for url in \
+            "https://www.senado.es/web/ficopendataservlet?tipoFich=4&legis=15" \
+            "https://www.senado.es/web/ficopendataservlet?tipoFich=4" \
+            "https://www.senado.es/web/ficopendataservlet?tipoFich=20"; do
+            for agent in "curl" "$ua"; do
+              echo "::group::$url ($agent)"
+              curl -sS -A "$agent" -D - "$url" | head -c 120000 || true
+              echo
+              echo "::endgroup::"
+            done
+          done
+      - name: Read the Senado's terms
+        run: |
+          for url in \
+            "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html" \
+            "https://www.senado.es/web/relacionesciudadanos/datosabiertos/index.html" \
+            "https://www.senado.es/web/avisojuridico/index.html"; do
+            echo "::group::$url"
+            curl -sS -L "$url" | python3 -c '
+          import html, re, sys
+          text = sys.stdin.read()
+          text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", text)
+          for href in re.findall(r"href=\"([^\"]*(?:ficopendata|licen|reutiliz|aviso|condicion)[^\"]*)\"", text, re.I):
+              print("LINK", href)
+          text = html.unescape(re.sub(r"<[^>]+>", " ", text))
+          print(re.sub(r"\s+", " ", text)[:20000])
+          ' || true
+            echo "::endgroup::"
+          done
