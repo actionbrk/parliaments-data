@@ -11,6 +11,7 @@ groups:
     color: "#000000"
     seats: 208
     parties: [cdu, csu]
+    parties_source: https://www.bundestag.de/services/opendata
 
   - id: afd
     name: Fraktion Alternative für Deutschland
@@ -18,6 +19,7 @@ groups:
     color: "#009EE0"
     seats: 150
     parties: [afd]
+    parties_source: https://www.bundestag.de/services/opendata
 
   - id: spd
     name: Fraktion der Sozialdemokratischen Partei Deutschlands
@@ -25,6 +27,7 @@ groups:
     color: "#E3000F"
     seats: 120
     parties: [spd]
+    parties_source: https://www.bundestag.de/services/opendata
 
   - id: gruene
     name: Fraktion BÜNDNIS 90/DIE GRÜNEN
@@ -32,6 +35,7 @@ groups:
     color: "#409A3C"
     seats: 85
     parties: [gruene]
+    parties_source: https://www.bundestag.de/services/opendata
 
   - id: linke
     name: Fraktion Die Linke
@@ -39,6 +43,7 @@ groups:
     color: "#BE3075"
     seats: 64
     parties: [linke]
+    parties_source: https://www.bundestag.de/services/opendata
 
   - id: fraktionslos
     name: Fraktionslos

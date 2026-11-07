@@ -11,6 +11,7 @@ groups:
     color: "#00AE41"
     seats: 26
     parties: [d66]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: vvd
     name: Volkspartij voor Vrijheid en Democratie
@@ -18,6 +19,7 @@ groups:
     color: "#0328CB"
     seats: 22
     parties: [vvd]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: pro
     name: Progressief Nederland
@@ -25,6 +27,7 @@ groups:
     color: "#00AD00"
     seats: 20
     parties: [pro]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: pvv
     name: Partij voor de Vrijheid
@@ -32,6 +35,7 @@ groups:
     color: "#244674"
     seats: 19
     parties: [pvv]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: cda
     name: Christen-Democratisch Appèl
@@ -39,6 +43,7 @@ groups:
     color: "#1F9359"
     seats: 18
     parties: [cda]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: ja21
     name: JA21
@@ -46,6 +51,7 @@ groups:
     color: "#242B57"
     seats: 9
     parties: [ja21]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: fvd
     name: Forum voor Democratie
@@ -53,6 +59,7 @@ groups:
     color: "#A71C20"
     seats: 7
     parties: [fvd]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   # Members who left the PVV: a group of its own, tied to no party.
   - id: markuszower
@@ -68,6 +75,7 @@ groups:
     color: "#95C11F"
     seats: 3
     parties: [bbb]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: cu
     name: ChristenUnie
@@ -75,6 +83,7 @@ groups:
     color: "#00A7EB"
     seats: 3
     parties: [cu]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: denk
     name: DENK
@@ -82,6 +91,7 @@ groups:
     color: "#00B7B2"
     seats: 3
     parties: [denk]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: pvdd
     name: Partij voor de Dieren
@@ -89,6 +99,7 @@ groups:
     color: "#00743C"
     seats: 3
     parties: [pvdd]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: sgp
     name: Staatkundig Gereformeerde Partij
@@ -96,6 +107,7 @@ groups:
     color: "#EA5D06"
     seats: 3
     parties: [sgp]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: sp
     name: Socialistische Partij
@@ -103,6 +115,7 @@ groups:
     color: "#FF0000"
     seats: 3
     parties: [sp]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   - id: 50plus
     name: 50PLUS
@@ -110,6 +123,7 @@ groups:
     color: "#92107D"
     seats: 2
     parties: [50plus]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
   # A single member, sitting on their own.
   - id: keijzer
@@ -125,3 +139,4 @@ groups:
     color: "#582C83"
     seats: 1
     parties: [volt]
+    parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties

@@ -11,6 +11,7 @@ groups:
     color: "#1D84CE"
     seats: 137
     parties: [pp]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: psoe
     name: Grupo Parlamentario Socialista
@@ -18,6 +19,7 @@ groups:
     color: "#EF1C27"
     seats: 121
     parties: [psoe]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: vox
     name: Grupo Parlamentario VOX
@@ -25,6 +27,7 @@ groups:
     color: "#63BE21"
     seats: 32
     parties: [vox]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: sumar
     name: Grupo Parlamentario Plurinacional SUMAR
@@ -32,7 +35,11 @@ groups:
     color: "#E61455"
     seats: 26
     parties: [sumar]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
+  # Podemos (four deputies elected on the Sumar list), Compromís, the BNG,
+  # Coalición Canaria, UPN and a deputy elected for VOX: none makes up the
+  # group.
   - id: mixto
     name: Grupo Parlamentario Mixto
     abbreviation: Mixto
@@ -46,6 +53,7 @@ groups:
     color: "#FFB232"
     seats: 7
     parties: [erc]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: junts
     name: Grupo Parlamentario Junts per Catalunya
@@ -53,6 +61,7 @@ groups:
     color: "#00C4B2"
     seats: 7
     parties: [junts]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: eh-bildu
     name: Grupo Parlamentario Euskal Herria Bildu
@@ -60,6 +69,7 @@ groups:
     color: "#00AC8E"
     seats: 6
     parties: [eh-bildu]
+    parties_source: https://www.congreso.es/es/opendata/diputados
 
   - id: pnv
     name: Grupo Parlamentario Vasco (EAJ-PNV)
@@ -67,3 +77,4 @@ groups:
     color: "#4AAE4A"
     seats: 5
     parties: [eaj-pnv]
+    parties_source: https://www.congreso.es/es/opendata/diputados

@@ -106,6 +106,7 @@ export function toPublicDataset(
           color: group.color,
           seats: group.seats,
           parties: group.parties,
+          parties_source: group.parties_source,
         })),
       })),
     })),

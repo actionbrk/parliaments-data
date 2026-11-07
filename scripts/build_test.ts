@@ -37,6 +37,7 @@ const DATASET: Dataset = {
             color: "#000000",
             seats: 10,
             parties: ["a"],
+            parties_source: "https://example.org/members",
           },
         ],
       },
@@ -66,6 +67,13 @@ Deno.test("parties carry their colour, as groups do", () => {
   const country = toPublicDataset(DATASET, META).countries[0];
   assertEquals(country.parties[0].color, "#000000");
   assertEquals(country.chambers[0].groups[0].color, "#000000");
+});
+
+Deno.test("a group carries the source of its link to its parties", () => {
+  const group = toPublicDataset(DATASET, META).countries[0].chambers[0]
+    .groups[0];
+  assertEquals(group.parties, ["a"]);
+  assertEquals(group.parties_source, "https://example.org/members");
 });
 
 Deno.test("absent optional fields stay out of the JSON", () => {
