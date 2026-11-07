@@ -12,6 +12,7 @@ groups:
     color: "#003366"
     seats: 117
     parties: [fdi]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: pd
     name: Partito Democratico - Italia Democratica e Progressista
@@ -19,6 +20,7 @@ groups:
     color: "#EF1C27"
     seats: 68
     parties: [pd]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: lega
     name: Lega - Salvini Premier
@@ -26,6 +28,7 @@ groups:
     color: "#00A651"
     seats: 54
     parties: [lega]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: fi
     name: Forza Italia - Berlusconi Presidente - PPE
@@ -33,6 +36,7 @@ groups:
     color: "#00A2E8"
     seats: 52
     parties: [fi]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: m5s
     name: Movimento 5 Stelle
@@ -40,6 +44,7 @@ groups:
     color: "#FFEB3B"
     seats: 48
     parties: [m5s]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: misto
     name: Misto
@@ -54,6 +59,7 @@ groups:
     color: "#54C160"
     seats: 10
     parties: [si, ev]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: az
     name: Azione - Popolari Europeisti Riformatori - Renew Europe
@@ -61,6 +67,7 @@ groups:
     color: "#00309F"
     seats: 10
     parties: [azione]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: nm
     name: Noi Moderati (Noi con l'Italia, Coraggio Italia, UDC e Italia al Centro) - MAIE - Centro Popolare
@@ -68,6 +75,7 @@ groups:
     color: "#2149A7"
     seats: 8
     parties: [nm, udc, maie]
+    parties_source: https://www.camera.it/leg19/46
 
   - id: iv
     name: Italia Viva - Casa Riformista
@@ -75,3 +83,4 @@ groups:
     color: "#D42894"
     seats: 7
     parties: [iv]
+    parties_source: https://www.camera.it/leg19/46

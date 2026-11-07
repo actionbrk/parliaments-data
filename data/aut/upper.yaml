@@ -11,6 +11,7 @@ groups:
     color: "#63C3D0"
     seats: 22
     parties: [oevp]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: spoe
     name: Bundesratsfraktion der SPÖ
@@ -18,6 +19,7 @@ groups:
     color: "#CE000C"
     seats: 18
     parties: [spoe]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: fpoe
     name: Freiheitliche Bundesratsfraktion
@@ -25,7 +27,10 @@ groups:
     color: "#0056A2"
     seats: 16
     parties: [fpoe]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
+  # Three Greens and one NEOS member: too few to form a Fraktion (five are
+  # required), they sit as non-attached members.
   - id: of
     name: Ohne Fraktionszugehörigkeit
     abbreviation: OF

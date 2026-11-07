@@ -55,6 +55,8 @@ export interface Group {
   color: string;
   seats: number;
   parties: string[];
+  /** Where the link to `parties` can be checked; required when it lists any. */
+  parties_source?: string;
 }
 
 export interface Chamber {
@@ -309,6 +311,10 @@ async function load<T>(
     // is neither a URI nor http(s)) gets its one explanation.
     const said = new Set<string>();
     for (const error of validate.errors ?? []) {
+      // An if/then rule fails twice: on what "then" asks for, which says
+      // what is missing, and on "if" itself, which only says that "then"
+      // failed.
+      if (error.keyword === "if") continue;
       const { path, key, message } = describeSchemaError(error);
       const problem = dataFile.problem(path, message, key);
       const text = JSON.stringify(problem);

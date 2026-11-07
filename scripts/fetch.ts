@@ -19,8 +19,8 @@
  * (scripts/propose.sh).
  *
  * It refuses to write what a reviewer would only have to undo: a group the
- * chamber file doesn't list (a new group needs an id, a colour and parties,
- * which only a person can give), more members than seats, or a reading that
+ * chamber file doesn't list (a new group needs an id, a colour, parties and
+ * their source, which only a person can give), more members than seats, or a reading that
  * leaves more than a tenth of the chamber vacant, more than the file records
  * (a dissolved chamber, a truncated export).
  */
@@ -90,7 +90,7 @@ export function assignSeats(
       )
       .join(", ");
     throw new Error(
-      `the source reports a group its fetcher doesn't know: ${listed}. Add the group to the chamber file, with its id, colour and parties, and map its key to that id in the fetcher's groups (scripts/fetchers/)`,
+      `the source reports a group its fetcher doesn't know: ${listed}. Add the group to the chamber file, with its id, colour, parties and their source (parties_source), and map its key to that id in the fetcher's groups (scripts/fetchers/)`,
     );
   }
 
