@@ -11,6 +11,7 @@ groups:
     color: "#003366"
     seats: 63
     parties: [fdi]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000085.htm
 
   - id: pd
     name: Partito Democratico - Italia Democratica e Progressista
@@ -18,13 +19,18 @@ groups:
     color: "#EF1C27"
     seats: 35
     parties: [pd]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000049.htm
 
+  # The group kept the Partito Sardo d'Azione in its name from the previous
+  # legislature: none of its senators belongs to the party, or was elected in
+  # Sardinia.
   - id: lega
     name: Lega Salvini Premier - Partito Sardo d'Azione
     abbreviation: LSP-PSd'Az
     color: "#00A651"
     seats: 29
-    parties: [lega, psdaz]
+    parties: [lega]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000033.htm
 
   - id: m5s
     name: MoVimento 5 Stelle
@@ -32,6 +38,7 @@ groups:
     color: "#FFEB3B"
     seats: 25
     parties: [m5s]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000071.htm
 
   - id: fi
     name: Forza Italia - Berlusconi Presidente - PPE
@@ -39,6 +46,7 @@ groups:
     color: "#00A2E8"
     seats: 20
     parties: [fi]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000056.htm
 
   - id: misto
     name: Misto
@@ -53,13 +61,18 @@ groups:
     color: "#D42894"
     seats: 8
     parties: [iv]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000091.htm
 
+  # Two senators of the SVP, one each of Campobase, the PD and the South
+  # Tyrolean Greens, and two senators for life. The PATT, still in the
+  # group's name, has none.
   - id: aut
     name: Per le Autonomie (SVP-PATT, Campobase)
     abbreviation: Aut (SVP-PATT, Cb)
     color: "#000000"
     seats: 7
-    parties: [svp, patt]
+    parties: [svp, campobase]
+    parties_source: https://it.wikipedia.org/wiki/Per_le_Autonomie
 
   - id: nm
     name: Civici d'Italia-UDC-Noi Moderati (Noi con l'Italia, Coraggio Italia, Italia al Centro)-MAIE-Centro Popolare
@@ -67,3 +80,4 @@ groups:
     color: "#2149A7"
     seats: 7
     parties: [nm, udc, maie]
+    parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000092.htm

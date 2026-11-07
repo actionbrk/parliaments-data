@@ -11,6 +11,7 @@ groups:
     color: "#F29206"
     seats: 15
     parties: [centre]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'M-E'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: plr
     name: Groupe libéral-radical (Conseil des États)
@@ -18,13 +19,15 @@ groups:
     color: "#0E52A0"
     seats: 12
     parties: [plr]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'RL'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: udc
     name: Groupe de l'Union démocratique du centre (Conseil des États)
     abbreviation: UDC
     color: "#335915"
     seats: 7
-    parties: [udc]
+    parties: [udc, mcg]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'V'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: ps
     name: Groupe socialiste (Conseil des États)
@@ -32,6 +35,7 @@ groups:
     color: "#E52839"
     seats: 7
     parties: [pss]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'S'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: verts
     name: Groupe des Vert-e-s (Conseil des États)
@@ -39,6 +43,7 @@ groups:
     color: "#43780E"
     seats: 3
     parties: [verts]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'G'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: pvl
     name: Groupe vert'libéral (Conseil des États)
@@ -46,6 +51,7 @@ groups:
     color: "#97D040"
     seats: 1
     parties: [pvl]
+    parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'GL'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
 
   - id: ni
     name: Non inscrit (Conseil des États)

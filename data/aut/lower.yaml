@@ -12,6 +12,7 @@ groups:
     color: "#0056A2"
     seats: 56
     parties: [fpoe]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: oevp
     name: Österreichische Volkspartei
@@ -19,6 +20,7 @@ groups:
     color: "#63C3D0"
     seats: 51
     parties: [oevp]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: spoe
     name: Sozialdemokratische Partei Österreichs
@@ -26,6 +28,7 @@ groups:
     color: "#CE000C"
     seats: 41
     parties: [spoe]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: neos
     name: NEOS – Das Neue Österreich und Liberales Forum
@@ -33,6 +36,7 @@ groups:
     color: "#E84188"
     seats: 17
     parties: [neos]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
   - id: gruene
     name: Die Grünen – Die Grüne Alternative
@@ -40,7 +44,9 @@ groups:
     color: "#88B626"
     seats: 16
     parties: [gruene]
+    parties_source: https://www.parlament.gv.at/recherchieren/open-data/daten-und-lizenz/parlamentarierinnen/
 
+  # Veit Dengler, elected for NEOS, who left its Klub.
   - id: ok
     name: Ohne Klubzugehörigkeit
     abbreviation: OK

@@ -1,4 +1,4 @@
-import { assertEquals, assertMatch } from "@std/assert";
+import { assert, assertEquals, assertMatch } from "@std/assert";
 
 import { SOURCES, writeFiles } from "./testing.ts";
 import { formatProblem, type Problem, validateRepository } from "./validate.ts";
@@ -24,6 +24,7 @@ groups:
     color: "#000000"
     seats: 9
     parties: [a]
+    parties_source: https://example.org/members
   - id: ni
     name: Non-attached
     color: "#999999"
@@ -88,6 +89,38 @@ Deno.test("a group can only list parties of its country", async () => {
     problem.message,
     /party "b" is not listed in data\/xyz\/country.yaml/,
   );
+});
+
+Deno.test("a group tied to parties says where the link comes from", async () => {
+  const [missing, ...rest] = await validate(
+    edit(
+      "data/xyz/unicameral.yaml",
+      "    parties_source: https://example.org/members\n",
+      "",
+    ),
+  );
+  assertEquals(rest, []);
+  assertEquals(missing.line, 6);
+  assertEquals(missing.message, 'groups[0]: missing "parties_source"');
+
+  const [invalid] = await validate(
+    edit("data/xyz/unicameral.yaml", "https://example.org/members", "members"),
+  );
+  assertEquals(invalid.line, 11);
+  assertEquals(
+    invalid.message,
+    "groups[0].parties_source: must be a web address starting with https:// (or http://)",
+  );
+});
+
+Deno.test("a group tied to no party needs no source for it", async () => {
+  // The fixture's non-attached group has none: still valid.
+  assert(
+    !VALID["data/xyz/unicameral.yaml"].split("id: ni")[1].includes(
+      "parties_source",
+    ),
+  );
+  assertEquals(await validate(VALID), []);
 });
 
 Deno.test("a chamber's source must be listed in sources.yaml", async () => {

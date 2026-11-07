@@ -11,6 +11,7 @@ groups:
     color: "#00AD00"
     seats: 14
     parties: [pro]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: bbb
     name: BoerBurgerBeweging
@@ -18,6 +19,7 @@ groups:
     color: "#95C11F"
     seats: 11
     parties: [bbb]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: vvd
     name: Volkspartij voor Vrijheid en Democratie
@@ -25,6 +27,7 @@ groups:
     color: "#0328CB"
     seats: 9
     parties: [vvd]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: d66
     name: Democraten 66
@@ -32,6 +35,7 @@ groups:
     color: "#00AE41"
     seats: 7
     parties: [d66]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: cda
     name: Christen-Democratisch Appèl
@@ -39,6 +43,7 @@ groups:
     color: "#1F9359"
     seats: 6
     parties: [cda]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: pvv
     name: Partij voor de Vrijheid
@@ -46,6 +51,7 @@ groups:
     color: "#244674"
     seats: 4
     parties: [pvv]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: cu
     name: ChristenUnie
@@ -53,6 +59,7 @@ groups:
     color: "#00A7EB"
     seats: 3
     parties: [cu]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: fvd
     name: Forum voor Democratie
@@ -60,6 +67,7 @@ groups:
     color: "#A71C20"
     seats: 3
     parties: [fvd]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: sp
     name: Socialistische Partij
@@ -67,6 +75,7 @@ groups:
     color: "#FF0000"
     seats: 3
     parties: [sp]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: ja21
     name: JA21
@@ -74,6 +83,7 @@ groups:
     color: "#242B57"
     seats: 2
     parties: [ja21]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: pvdd
     name: Partij voor de Dieren
@@ -81,6 +91,7 @@ groups:
     color: "#00743C"
     seats: 2
     parties: [pvdd]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: sgp
     name: Staatkundig Gereformeerde Partij
@@ -88,6 +99,7 @@ groups:
     color: "#EA5D06"
     seats: 2
     parties: [sgp]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: volt
     name: Volt
@@ -95,6 +107,7 @@ groups:
     color: "#582C83"
     seats: 2
     parties: [volt]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: 50plus
     name: 50PLUS
@@ -102,6 +115,7 @@ groups:
     color: "#92107D"
     seats: 1
     parties: [50plus]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: beukering
     name: Fractie-Beukering
@@ -113,9 +127,10 @@ groups:
   - id: opnl
     name: Onafhankelijke Politiek Nederland
     abbreviation: OPNL
-    color: "#8D949A"
+    color: "#CBBB9F"
     seats: 1
-    parties: []
+    parties: [opnl]
+    parties_source: https://www.eerstekamer.nl/fracties
 
   - id: van-de-sanden
     name: Fractie-Van de Sanden

@@ -11,6 +11,7 @@ groups:
     color: "#FF9900"
     seats: 89
     parties: [psd]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: ch
     name: Chega
@@ -18,6 +19,7 @@ groups:
     color: "#222256"
     seats: 60
     parties: [chega]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: ps
     name: Partido Socialista
@@ -25,6 +27,7 @@ groups:
     color: "#FF66FF"
     seats: 58
     parties: [ps]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: il
     name: Iniciativa Liberal
@@ -32,6 +35,7 @@ groups:
     color: "#00ADEF"
     seats: 9
     parties: [il]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: l
     name: Livre
@@ -39,6 +43,7 @@ groups:
     color: "#C2D216"
     seats: 6
     parties: [livre]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: pcp
     name: Partido Comunista Português
@@ -46,6 +51,7 @@ groups:
     color: "#FF0000"
     seats: 3
     parties: [pcp]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: cds-pp
     name: Centro Democrático Social - Partido Popular
@@ -53,6 +59,7 @@ groups:
     color: "#0093DD"
     seats: 2
     parties: [cds-pp]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: be
     name: Bloco de Esquerda
@@ -60,6 +67,7 @@ groups:
     color: "#8B0000"
     seats: 1
     parties: [be]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: jpp
     name: Juntos Pelo Povo
@@ -67,6 +75,7 @@ groups:
     color: "#00A28B"
     seats: 1
     parties: [jpp]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
   - id: pan
     name: Pessoas-Animais-Natureza
@@ -74,3 +83,4 @@ groups:
     color: "#036A84"
     seats: 1
     parties: [pan]
+    parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx

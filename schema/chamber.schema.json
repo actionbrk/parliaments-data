@@ -73,8 +73,17 @@
           "type": "array",
           "uniqueItems": true,
           "items": { "$ref": "definitions.schema.json#/definitions/id" }
+        },
+        "parties_source": {
+          "description": "Where the link between the group and its `parties` can be checked: preferably a record of the members' parties (the parliament's open data, the declarations of party attachment), else the group's or its parties' own page, else a secondary source such as Wikipedia. Required when `parties` lists any party.",
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/url" }]
         }
-      }
+      },
+      "if": {
+        "required": ["parties"],
+        "properties": { "parties": { "type": "array", "minItems": 1 } }
+      },
+      "then": { "required": ["parties_source"] }
     }
   }
 }
