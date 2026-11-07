@@ -6,18 +6,21 @@ parties:
     abbreviation: AC
     color: "#473B84"
     partyfacts_id: 1177
+    ches_id: 623
 
   - id: dlf
     name: Debout la France
     abbreviation: DLF
     color: "#0087CD"
     partyfacts_id: 3207
+    ches_id: 628
 
   - id: eelv
     name: Les Écologistes
     abbreviation: EELV
     color: "#4BB166"
     partyfacts_id: 1108
+    ches_id: 605
 
   - id: grs
     name: Gauche Républicaine et Socialiste
@@ -29,30 +32,35 @@ parties:
     abbreviation: HZ
     color: "#0000BA"
     partyfacts_id: 9134
+    ches_id: 631
 
   - id: lfi
     name: La France Insoumise
     abbreviation: LFI
     color: "#56277E"
     partyfacts_id: 5858
+    ches_id: 627
 
   - id: lr
     name: Les Républicains
     abbreviation: LR
     color: "#034EA2"
     partyfacts_id: 1595
+    ches_id: 609
 
   - id: modem
     name: Mouvement Démocrate
     abbreviation: MoDem
     color: "#EF5327"
     partyfacts_id: 496
+    ches_id: 613
 
   - id: pcf
     name: Parti Communiste Français
     abbreviation: PCF
     color: "#E4002A"
     partyfacts_id: 1251
+    ches_id: 601
 
   - id: pp
     name: Place Publique
@@ -70,24 +78,28 @@ parties:
     abbreviation: PS
     color: "#E3265B"
     partyfacts_id: 1478
+    ches_id: 602
 
   - id: re
     name: Renaissance
     abbreviation: RE
     color: "#FFD600"
     partyfacts_id: 5857
+    ches_id: 626
 
   - id: rec
     name: Reconquête
     abbreviation: REC
     color: "#0B0B66"
     partyfacts_id: 9064
+    ches_id: 630
 
   - id: rn
     name: Rassemblement National
     abbreviation: RN
     color: "#104E8B"
     partyfacts_id: 433
+    ches_id: 610
 
   - id: udi
     name: Union des Démocrates et Indépendants

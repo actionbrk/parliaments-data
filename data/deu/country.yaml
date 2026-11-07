@@ -6,33 +6,39 @@ parties:
     abbreviation: AfD
     color: "#009EE0"
     partyfacts_id: 1976
+    ches_id: 310
 
   - id: cdu
     name: Christlich Demokratische Union Deutschlands
     abbreviation: CDU
     color: "#000000"
     partyfacts_id: 1375
+    ches_id: 301
 
   - id: csu
     name: Christlich-Soziale Union in Bayern
     abbreviation: CSU
     color: "#008AC5"
     partyfacts_id: 1731
+    ches_id: 308
 
   - id: gruene
     name: Bündnis 90/Die Grünen
     abbreviation: GRÜNE
     color: "#409A3C"
     partyfacts_id: 1816
+    ches_id: 304
 
   - id: linke
     name: Die Linke
     abbreviation: DIE LINKE
     color: "#BE3075"
     partyfacts_id: 1545
+    ches_id: 306
 
   - id: spd
     name: Sozialdemokratische Partei Deutschlands
     abbreviation: SPD
     color: "#E3000F"
     partyfacts_id: 383
+    ches_id: 302

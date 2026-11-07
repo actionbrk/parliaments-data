@@ -6,42 +6,49 @@ parties:
     abbreviation: 50PLUS
     color: "#92107D"
     partyfacts_id: 714
+    ches_id: 1020
 
   - id: bbb
     name: BoerBurgerBeweging
     abbreviation: BBB
     color: "#95C11F"
     partyfacts_id: 9010
+    ches_id: 1054
 
   - id: cda
     name: Christen-Democratisch Appèl
     abbreviation: CDA
     color: "#1F9359"
     partyfacts_id: 1157
+    ches_id: 1001
 
   - id: cu
     name: ChristenUnie
     abbreviation: CU
     color: "#00A7EB"
     partyfacts_id: 1459
+    ches_id: 1016
 
   - id: d66
     name: Democraten 66
     abbreviation: D66
     color: "#00AE41"
     partyfacts_id: 45
+    ches_id: 1004
 
   - id: denk
     name: DENK
     abbreviation: DENK
     color: "#00B7B2"
     partyfacts_id: 5856
+    ches_id: 1050
 
   - id: fvd
     name: Forum voor Democratie
     abbreviation: FVD
     color: "#A71C20"
     partyfacts_id: 5855
+    ches_id: 1051
 
   - id: ja21
     name: JA21
@@ -59,33 +66,39 @@ parties:
     abbreviation: PvdD
     color: "#00743C"
     partyfacts_id: 1467
+    ches_id: 1018
 
   - id: pvv
     name: Partij voor de Vrijheid
     abbreviation: PVV
     color: "#244674"
     partyfacts_id: 298
+    ches_id: 1017
 
   - id: sgp
     name: Staatkundig Gereformeerde Partij
     abbreviation: SGP
     color: "#EA5D06"
     partyfacts_id: 1178
+    ches_id: 1006
 
   - id: sp
     name: Socialistische Partij
     abbreviation: SP
     color: "#FF0000"
     partyfacts_id: 1363
+    ches_id: 1014
 
   - id: volt
     name: Volt Nederland
     abbreviation: Volt
     color: "#582C83"
     partyfacts_id: 7355
+    ches_id: 1052
 
   - id: vvd
     name: Volkspartij voor Vrijheid en Democratie
     abbreviation: VVD
     color: "#0328CB"
     partyfacts_id: 828
+    ches_id: 1003

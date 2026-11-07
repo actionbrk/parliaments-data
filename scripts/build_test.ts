@@ -21,6 +21,7 @@ const DATASET: Dataset = {
         abbreviation: "A",
         color: "#000000",
         partyfacts_id: 1,
+        ches_id: 101,
       }],
     },
     chambers: [{
@@ -66,6 +67,12 @@ Deno.test("parties carry their colour, as groups do", () => {
   const country = toPublicDataset(DATASET, META).countries[0];
   assertEquals(country.parties[0].color, "#000000");
   assertEquals(country.chambers[0].groups[0].color, "#000000");
+});
+
+Deno.test("parties carry their links to Party Facts and CHES", () => {
+  const [party] = toPublicDataset(DATASET, META).countries[0].parties;
+  assertEquals(party.partyfacts_id, 1);
+  assertEquals(party.ches_id, 101);
 });
 
 Deno.test("absent optional fields stay out of the JSON", () => {

@@ -40,7 +40,12 @@
           "allOf": [{ "$ref": "definitions.schema.json#/definitions/color" }]
         },
         "partyfacts_id": {
-          "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. It is the only link this repository keeps to other datasets: Party Facts maps it to their own ids (expert surveys, election datasets...).",
+          "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one: Party Facts maps it to the ids other datasets give the party (expert surveys, election datasets...).",
+          "type": "integer",
+          "minimum": 1
+        },
+        "ches_id": {
+          "description": "The party's id (party_id) in the Chapel Hill Expert Survey (https://www.chesdata.eu/), when CHES has covered it. Given here because Party Facts has not linked the latest CHES wave (2024): Horizons, Reconquête and Sumar, among others, have no CHES link there.",
           "type": "integer",
           "minimum": 1
         }

@@ -12,6 +12,7 @@ parties:
     abbreviation: A
     color: "#000000"
     partyfacts_id: 1
+    ches_id: 101
 `;
 
 const CHAMBER = `name: Assembly
@@ -122,6 +123,34 @@ Deno.test("a Party Facts id belongs to a single party", async () => {
     problems[0].message,
     /partyfacts_id 1 is already given to data\/xyz: a/,
   );
+});
+
+Deno.test("a CHES id belongs to a single party, across countries", async () => {
+  const problems = await validate({
+    ...VALID,
+    "data/zzz/country.yaml": `name: Zzzland
+parties:
+  - id: b
+    name: Party B
+    abbreviation: B
+    color: "#FFFFFF"
+    ches_id: 101
+`,
+    "data/zzz/unicameral.yaml": CHAMBER.replace("parties: [a]", "parties: [b]"),
+  });
+  assertEquals(problems.length, 1);
+  assertMatch(
+    problems[0].message,
+    /ches_id 101 is already given to data\/xyz: a/,
+  );
+});
+
+Deno.test("a CHES id is a positive integer", async () => {
+  const [problem, ...rest] = await validate(
+    edit("data/xyz/country.yaml", "ches_id: 101", 'ches_id: "101"'),
+  );
+  assertEquals(rest, []);
+  assertMatch(problem.message, /integer/);
 });
 
 Deno.test("a party has a hex colour", async () => {

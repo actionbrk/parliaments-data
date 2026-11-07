@@ -7,24 +7,28 @@ parties:
     abbreviation: Anders.
     color: "#3D35FF"
     partyfacts_id: 49
+    ches_id: 107
 
   - id: cd-v
     name: Christen-Democratisch en Vlaams
     abbreviation: cd&v
     color: "#FF6200"
     partyfacts_id: 604
+    ches_id: 109
 
   - id: ecolo
     name: Écologistes Confédérés pour l'organisation de luttes originales
     abbreviation: Ecolo
     color: "#5AAD39"
     partyfacts_id: 1563
+    ches_id: 104
 
   - id: groen
     name: Groen
     abbreviation: Groen
     color: "#01796F"
     partyfacts_id: 528
+    ches_id: 105
 
   # Formerly Centre démocrate humaniste (cdH).
   - id: les-engages
@@ -32,39 +36,46 @@ parties:
     abbreviation: Les Engagés
     color: "#F4761A"
     partyfacts_id: 633
+    ches_id: 108
 
   - id: mr
     name: Mouvement Réformateur
     abbreviation: MR
     color: "#002EFF"
     partyfacts_id: 789
+    ches_id: 106
 
   - id: n-va
     name: Nieuw-Vlaamse Alliantie
     abbreviation: N-VA
     color: "#F9CE19"
     partyfacts_id: 36
+    ches_id: 110
 
   - id: ps
     name: Parti Socialiste
     abbreviation: PS
     color: "#FF0000"
     partyfacts_id: 500
+    ches_id: 102
 
   - id: pvda-ptb
     name: Partij van de Arbeid van België – Parti du Travail de Belgique
     abbreviation: PVDA-PTB
     color: "#8B0000"
     partyfacts_id: 1753
+    ches_id: 119
 
   - id: vb
     name: Vlaams Belang
     abbreviation: VB
     color: "#FFE500"
     partyfacts_id: 1968
+    ches_id: 112
 
   - id: vooruit
     name: Vooruit
     abbreviation: Vooruit
     color: "#FF2900"
     partyfacts_id: 1680
+    ches_id: 103

@@ -41,6 +41,7 @@ export interface Party {
   abbreviation: string;
   color: string;
   partyfacts_id?: number;
+  ches_id?: number;
 }
 
 export interface Country {
@@ -385,8 +386,12 @@ export async function validateRepository(
     dataset.sources = sourcesFile.value.sources;
   }
 
-  // A Party Facts id names one party, wherever it is listed.
-  const partyfactsIds = new Map<number, string>();
+  // A Party Facts or CHES id names one party, wherever it is listed: the
+  // party that holds each, as "<dir>: <party id>".
+  const externalIds = {
+    partyfacts_id: new Map<number, string>(),
+    ches_id: new Map<number, string>(),
+  };
   const maxDate = latestDate(now);
 
   for (const entry of await listDir(root, "data")) {
@@ -447,18 +452,20 @@ export async function validateRepository(
       checkUniqueIds(countryFile, parties, ["parties"], "party", problems);
 
       parties.forEach((party, index) => {
-        const id = party.partyfacts_id;
-        if (id === undefined) return;
-        const previous = partyfactsIds.get(id);
-        if (previous) {
-          problems.push(
-            countryFile.problem(
-              ["parties", index, "partyfacts_id"],
-              `partyfacts_id ${id} is already given to ${previous}`,
-            ),
-          );
-        } else {
-          partyfactsIds.set(id, `${dir}: ${party.id}`);
+        for (const [field, holders] of Object.entries(externalIds)) {
+          const id = party[field as keyof typeof externalIds];
+          if (id === undefined) continue;
+          const previous = holders.get(id);
+          if (previous) {
+            problems.push(
+              countryFile.problem(
+                ["parties", index, field],
+                `${field} ${id} is already given to ${previous}`,
+              ),
+            );
+          } else {
+            holders.set(id, `${dir}: ${party.id}`);
+          }
         }
       });
     }

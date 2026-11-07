@@ -6,24 +6,28 @@ parties:
     abbreviation: BE
     color: "#8B0000"
     partyfacts_id: 1310
+    ches_id: 1208
 
   - id: cds-pp
     name: Centro Democrático e Social – Partido Popular
     abbreviation: CDS-PP
     color: "#0093DD"
     partyfacts_id: 1308
+    ches_id: 1202
 
   - id: chega
     name: Chega
     abbreviation: CH
     color: "#222256"
     partyfacts_id: 8182
+    ches_id: 1253
 
   - id: il
     name: Iniciativa Liberal
     abbreviation: IL
     color: "#00ADEF"
     partyfacts_id: 8640
+    ches_id: 1252
 
   - id: jpp
     name: Juntos pelo Povo
@@ -35,27 +39,32 @@ parties:
     abbreviation: L
     color: "#C2D216"
     partyfacts_id: 3225
+    ches_id: 1251
 
   - id: pan
     name: Pessoas–Animais–Natureza
     abbreviation: PAN
     color: "#036A84"
     partyfacts_id: 97
+    ches_id: 1250
 
   - id: pcp
     name: Partido Comunista Português
     abbreviation: PCP
     color: "#FF0000"
     partyfacts_id: 310
+    ches_id: 1210
 
   - id: ps
     name: Partido Socialista
     abbreviation: PS
     color: "#FF66FF"
     partyfacts_id: 655
+    ches_id: 1205
 
   - id: psd
     name: Partido Social Democrata
     abbreviation: PSD
     color: "#FF9900"
     partyfacts_id: 1359
+    ches_id: 1206
