@@ -4,7 +4,7 @@ name_local: Camera dei deputati
 seats: 400
 vacant: 2
 source: camera-opendata
-updated: 2026-11-05
+updated: 2026-11-08
 groups:
   - id: fdi
     name: Fratelli d'Italia
@@ -45,14 +45,14 @@ groups:
     name: Misto
     abbreviation: MISTO
     color: "#8D949A"
-    seats: 24
+    seats: 25
     parties: []
 
   - id: avs
     name: Alleanza Verdi e Sinistra
     abbreviation: AVS
     color: "#54C160"
-    seats: 10
+    seats: 9
     parties: [si, ev]
 
   - id: az
