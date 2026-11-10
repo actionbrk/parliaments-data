@@ -24,6 +24,7 @@ groups:
     color: "#000000"
     seats: 9
     parties: [a]
+    parties_source: https://example.org/members
   - id: ni
     name: Non-attached
     color: "#999999"
@@ -87,6 +88,28 @@ Deno.test("a group can only list parties of its country", async () => {
   assertMatch(
     problem.message,
     /party "b" is not listed in data\/xyz\/country.yaml/,
+  );
+});
+
+Deno.test("a group tied to parties says where the link comes from", async () => {
+  const [missing, ...rest] = await validate(
+    edit(
+      "data/xyz/unicameral.yaml",
+      "    parties_source: https://example.org/members\n",
+      "",
+    ),
+  );
+  assertEquals(rest, []);
+  assertEquals(missing.line, 6);
+  assertEquals(missing.message, 'groups[0]: missing "parties_source"');
+
+  const [invalid] = await validate(
+    edit("data/xyz/unicameral.yaml", "https://example.org/members", "members"),
+  );
+  assertEquals(invalid.line, 11);
+  assertMatch(
+    invalid.message,
+    /^groups\[0\]\.parties_source: must be a web address/,
   );
 });
 

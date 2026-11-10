@@ -58,12 +58,25 @@ Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their 
        color: "#1D84CE"
        seats: 137
        parties: [pp]
+       parties_source: https://www.congreso.es/es/opendata/diputados
    ```
 
    - group `id`: built like party ids, from the group's abbreviation;
    - `color`: the colour the group is usually shown in, as `#RRGGBB`;
-   - `parties`: the ids, from `country.yaml`, of the parties the group is made of. Use `[]` for a group tied to no party, such as non-attached members.
+   - `parties`: the ids, from `country.yaml`, of the parties the group is made of. Use `[]` for a group tied to no party, such as non-attached members. See [Linking a group to its parties](#linking-a-group-to-its-parties);
+   - `parties_source`: where that link can be checked, required as soon as `parties` lists a party.
 4. **Its fetcher** (optional), when the source can be read by a program: a module in `scripts/fetchers/`, named after the source's id, that reads the seat counts and maps each of the source's group keys (a code, or the group's name) to the group's id, registered in `scripts/fetchers/mod.ts`. The tests check that it reaches every group of the chamber file. The daily fetch then keeps the chamber up to date.
+
+## Linking a group to its parties
+
+Seats are known per group only, so whoever uses the data counts a group's seats for the parties it lists, together. A party listed with no member in the group, or a large one left out, skews every chart built on them.
+
+- **Check the members, not the name.** Every party listed has members in the group, and no party that a sizeable share of the group belongs to is missing. A group's name records the alliance it was formed by and can outlive it: the Italian Senate's _Lega Salvini Premier - Partito Sardo d'Azione_ has no member of the Partito Sardo d'Azione.
+- **Small parties.** A party with a member or two may be listed when it sits in the group as such: the parliament records it among the group's members' parties (the Swiss Federal Assembly gives each member's), the group bears its name, or it is a national party whose members sit there by agreement. Leave out local parties sitting with a group through a member or two.
+- **Funding declarations.** Where members declare the party they attach to for public funding (France), some attach to an umbrella that does not tell its parties apart (_Ensemble !_) or to another party's vehicle for convenience. Read the declarations alongside what the group says of itself, and say in a comment how they were read.
+- **No party.** Non-attached members, and groups whose members come from parties none of which makes up the group (France's LIOT, mixed groups), list `[]`. A comment can say whose members they are, so that nobody adds them back.
+- **The source.** `parties_source` is, by preference: a record of the members' parties kept by the parliament (its open data, the declarations of party attachment); the group's or the parties' own page; a secondary source such as Wikipedia, when neither exists or they don't settle it. Give the address that shows the most of the link, and say in a comment above the group what it doesn't show. Wikipedia is fine here, unlike for seat counts: the links are this repository's own data, and the address is there to check them.
+- **Check them again** when a chamber is elected or renewed, and when a group appears: parliaments publish their members' parties later than their groups' seats (the French Senate's declarations come out each December).
 
 ## Checking locally
 

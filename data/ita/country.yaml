@@ -7,6 +7,11 @@ parties:
     color: "#00309F"
     partyfacts_id: 9082
 
+  - id: campobase
+    name: Campobase
+    abbreviation: Campobase
+    color: "#96BF0D"
+
   - id: ev
     name: Europa Verde
     abbreviation: EV

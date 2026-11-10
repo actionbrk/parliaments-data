@@ -13,6 +13,14 @@ parties:
     color: "#6495ED"
     partyfacts_id: 1661
 
+  # Basel-Stadt's liberal party, distinct from the PLR's section there.
+  # Wikidata gives it no colour (P465) and it makes up no group alone: it
+  # takes that of the Groupe libéral-radical, in which it sits.
+  - id: ldp
+    name: Liberal-Demokratische Partei
+    abbreviation: LDP
+    color: "#0E52A0"
+
   - id: mcg
     name: Mouvement Citoyens Genevois
     abbreviation: MCG

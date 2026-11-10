@@ -55,6 +55,8 @@ export interface Group {
   color: string;
   seats: number;
   parties: string[];
+  /** Where the link to `parties` can be checked; required when it lists any. */
+  parties_source?: string;
 }
 
 export interface Chamber {
@@ -212,9 +214,10 @@ function definitionOf(error: ErrorObject): Definition | undefined {
     : undefined;
 }
 
+/** How to report `error`, or undefined for one that adds nothing to the others. */
 function describeSchemaError(
   error: ErrorObject,
-): { path: Path; key: boolean; message: string } {
+): { path: Path; key: boolean; message: string } | undefined {
   const path = pointerToPath(error.instancePath);
   const where = path.length ? `${displayPath(path)}: ` : "";
 
@@ -228,6 +231,9 @@ function describeSchemaError(
   }
 
   switch (error.keyword) {
+    case "if":
+      // Only repeats that "then" failed, which its own error says better.
+      return undefined;
     case "required":
       return {
         path,
@@ -309,7 +315,9 @@ async function load<T>(
     // is neither a URI nor http(s)) gets its one explanation.
     const said = new Set<string>();
     for (const error of validate.errors ?? []) {
-      const { path, key, message } = describeSchemaError(error);
+      const described = describeSchemaError(error);
+      if (!described) continue;
+      const { path, key, message } = described;
       const problem = dataFile.problem(path, message, key);
       const text = JSON.stringify(problem);
       if (said.has(text)) continue;

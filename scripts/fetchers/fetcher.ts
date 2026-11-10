@@ -22,8 +22,8 @@ export interface Fetcher {
   /**
    * The id, in the chamber file, of the group each of the source's keys
    * stands for. Several keys may share an id. A key missing here stops the
-   * update: the group it stands for needs an id, a colour and parties, which
-   * only a person can give.
+   * update: the group it stands for needs details only a person can give
+   * (CONTRIBUTING.md, "Adding a chamber").
    */
   groups: Readonly<Record<string, string>>;
   /** The chamber's current seat counts, as the source reports them. */

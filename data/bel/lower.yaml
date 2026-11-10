@@ -11,6 +11,7 @@ groups:
     color: "#F9CE19"
     seats: 23
     parties: [n-va]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: vb
     name: Vlaams Belang
@@ -18,6 +19,7 @@ groups:
     color: "#FFE500"
     seats: 20
     parties: [vb]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: mr
     name: Mouvement Réformateur
@@ -25,6 +27,7 @@ groups:
     color: "#002EFF"
     seats: 18
     parties: [mr]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: ps
     name: Parti Socialiste
@@ -32,6 +35,7 @@ groups:
     color: "#FF0000"
     seats: 16
     parties: [ps]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: les-engages
     name: Les Engagés
@@ -39,6 +43,7 @@ groups:
     color: "#F4761A"
     seats: 15
     parties: [les-engages]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: pvda-ptb
     name: PVDA-PTB
@@ -46,6 +51,7 @@ groups:
     color: "#8B0000"
     seats: 15
     parties: [pvda-ptb]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: vooruit
     name: Vooruit
@@ -53,6 +59,7 @@ groups:
     color: "#FF2900"
     seats: 13
     parties: [vooruit]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: cd-v
     name: Christen-democratisch & vlaams
@@ -60,6 +67,7 @@ groups:
     color: "#FF6200"
     seats: 11
     parties: [cd-v]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: ecolo-groen
     name: Ecolo-Groen
@@ -67,6 +75,7 @@ groups:
     color: "#5AAD39"
     seats: 9
     parties: [ecolo, groen]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   - id: anders
     name: Anders.
@@ -74,6 +83,7 @@ groups:
     color: "#3D35FF"
     seats: 8
     parties: [anders]
+    parties_source: https://www.lachambre.be/site/wwwcfm/flwb/lastpdf.cfm?lang=F&dossierID=3
 
   # Members of no group: one DéFI and one independent.
   - id: ni

@@ -73,8 +73,17 @@
           "type": "array",
           "uniqueItems": true,
           "items": { "$ref": "definitions.schema.json#/definitions/id" }
+        },
+        "parties_source": {
+          "description": "Where the link to `parties` can be checked; required when it lists any party. CONTRIBUTING.md says which source to prefer.",
+          "allOf": [{ "$ref": "definitions.schema.json#/definitions/url" }]
         }
-      }
+      },
+      "if": {
+        "required": ["parties"],
+        "properties": { "parties": { "type": "array", "minItems": 1 } }
+      },
+      "then": { "required": ["parties_source"] }
     }
   }
 }

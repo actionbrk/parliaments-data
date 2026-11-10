@@ -49,6 +49,12 @@ parties:
     color: "#242B57"
     partyfacts_id: 9011
 
+  # A federation of provincial parties.
+  - id: opnl
+    name: Onafhankelijke Politiek Nederland
+    abbreviation: OPNL
+    color: "#CBBB9F"
+
   - id: pro
     name: Progressief Nederland
     abbreviation: PRO
