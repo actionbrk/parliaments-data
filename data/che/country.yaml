@@ -13,10 +13,9 @@ parties:
     color: "#6495ED"
     partyfacts_id: 1661
 
-  # Basel-Stadt's liberal party, distinct from the PLR's section there. It
-  # has one member of the National Council, in the Groupe libéral-radical.
+  # Basel-Stadt's liberal party, distinct from the PLR's section there.
   # Wikidata gives it no colour (P465) and it makes up no group alone: it
-  # takes that of the group it sits in.
+  # takes that of the Groupe libéral-radical, in which it sits.
   - id: ldp
     name: Liberal-Demokratische Partei
     abbreviation: LDP

@@ -49,7 +49,7 @@ parties:
     color: "#242B57"
     partyfacts_id: 9011
 
-  # A federation of provincial parties, which sits in the Senate only.
+  # A federation of provincial parties.
   - id: opnl
     name: Onafhankelijke Politiek Nederland
     abbreviation: OPNL

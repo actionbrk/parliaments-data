@@ -33,7 +33,7 @@ groups:
     parties: [lfi]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
 
-  # 61 of the 68 attach to the Parti socialiste. Place publique sits here
+  # Most attach to the Parti socialiste. Place publique sits here
   # through Aurélien Rousseau and Sacha Houlié, who attach to the PS and to
   # Régions et peuples solidaires for funding.
   - id: soc
@@ -52,8 +52,8 @@ groups:
     parties: [lr]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
 
-  # 33 of the 38 attach to Les Écologistes. The five who attach to the PCF
-  # for funding are L'Après's and François Ruffin, not communists.
+  # Most attach to Les Écologistes. Those who attach to the PCF for funding
+  # are L'Après's and François Ruffin, not communists.
   - id: ecos
     name: Écologiste et Social
     abbreviation: EcoS

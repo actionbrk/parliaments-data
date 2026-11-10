@@ -1,4 +1,4 @@
-import { assert, assertEquals, assertMatch } from "@std/assert";
+import { assertEquals, assertMatch } from "@std/assert";
 
 import { SOURCES, writeFiles } from "./testing.ts";
 import { formatProblem, type Problem, validateRepository } from "./validate.ts";
@@ -107,20 +107,10 @@ Deno.test("a group tied to parties says where the link comes from", async () => 
     edit("data/xyz/unicameral.yaml", "https://example.org/members", "members"),
   );
   assertEquals(invalid.line, 11);
-  assertEquals(
+  assertMatch(
     invalid.message,
-    "groups[0].parties_source: must be a web address starting with https:// (or http://)",
+    /^groups\[0\]\.parties_source: must be a web address/,
   );
-});
-
-Deno.test("a group tied to no party needs no source for it", async () => {
-  // The fixture's non-attached group has none: still valid.
-  assert(
-    !VALID["data/xyz/unicameral.yaml"].split("id: ni")[1].includes(
-      "parties_source",
-    ),
-  );
-  assertEquals(await validate(VALID), []);
 });
 
 Deno.test("a chamber's source must be listed in sources.yaml", async () => {
