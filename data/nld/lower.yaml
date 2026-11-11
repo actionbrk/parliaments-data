@@ -62,13 +62,18 @@ groups:
     parties: [fvd]
     parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
-  # Members who left the PVV: a group of its own, tied to no party.
+  # The seven members who left the PVV group in January 2026, all of whom sit
+  # for De Nederlandse Alliantie, the party Gidi Markuszower founded on
+  # 17 April 2026. The Tweede Kamer turned down renaming the group after it
+  # (June 2026), so its records show the group alone: the party's own page
+  # lists the seven as its members of the House.
   - id: markuszower
     name: Groep Markuszower
     abbreviation: Groep Markuszower
-    color: "#8D949A"
+    color: "#374051"
     seats: 7
-    parties: []
+    parties: [dna]
+    parties_source: https://www.denederlandsealliantie.nl/fractie
 
   - id: bbb
     name: BoerBurgerBeweging

@@ -44,6 +44,13 @@ parties:
     partyfacts_id: 5856
     wikipedia: https://en.wikipedia.org/wiki/Denk_(political_party)
 
+  # Founded on 17 April 2026 by Gidi Markuszower; not in Party Facts yet.
+  - id: dna
+    name: De Nederlandse Alliantie
+    abbreviation: DNA
+    color: "#374051"
+    wikipedia: https://en.wikipedia.org/wiki/De_Nederlandse_Alliantie
+
   - id: fvd
     name: Forum voor Democratie
     abbreviation: FVD
