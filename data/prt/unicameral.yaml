@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Assembly of the Republic
 name_local: Assembleia da República
+wikipedia: https://en.wikipedia.org/wiki/Assembly_of_the_Republic_(Portugal)
 seats: 230
 source: parlamento-pt-opendata
 updated: 2026-11-05

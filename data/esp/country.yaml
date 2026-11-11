@@ -1,49 +1,60 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: Spain
+parliament_wikipedia: https://en.wikipedia.org/wiki/Cortes_Generales
 parties:
   - id: eaj-pnv
     name: Euzko Alderdi Jeltzalea - Partido Nacionalista Vasco
     abbreviation: EAJ-PNV
     color: "#4AAE4A"
     partyfacts_id: 1637
+    wikipedia: https://en.wikipedia.org/wiki/Basque_Nationalist_Party
 
   - id: eh-bildu
     name: Euskal Herria Bildu
     abbreviation: EH Bildu
     color: "#00AC8E"
     partyfacts_id: 1671
+    wikipedia: https://en.wikipedia.org/wiki/EH_Bildu
 
   - id: erc
     name: Esquerra Republicana de Catalunya
     abbreviation: ERC
     color: "#FFB232"
     partyfacts_id: 848
+    wikipedia: https://en.wikipedia.org/wiki/Republican_Left_of_Catalonia
 
   - id: junts
     name: Junts per Catalunya
     abbreviation: Junts
     color: "#00C4B2"
     partyfacts_id: 4795
+    wikipedia: https://en.wikipedia.org/wiki/Together_for_Catalonia_(2020)
 
   - id: pp
     name: Partido Popular
     abbreviation: PP
     color: "#1D84CE"
     partyfacts_id: 441
+    wikipedia: https://en.wikipedia.org/wiki/People%27s_Party_(Spain)
 
   - id: psoe
     name: Partido Socialista Obrero Español
     abbreviation: PSOE
     color: "#EF1C27"
     partyfacts_id: 1338
+    wikipedia: https://en.wikipedia.org/wiki/Spanish_Socialist_Workers%27_Party
 
+  # The alliance's article, not that of Movimiento Sumar, the party founded
+  # within it.
   - id: sumar
     name: Sumar
     abbreviation: Sumar
     color: "#E61455"
+    wikipedia: https://en.wikipedia.org/wiki/Sumar_(electoral_alliance)
 
   - id: vox
     name: VOX
     abbreviation: VOX
     color: "#63BE21"
     partyfacts_id: 3218
+    wikipedia: https://en.wikipedia.org/wiki/Vox_(political_party)

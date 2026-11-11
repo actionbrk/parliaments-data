@@ -26,6 +26,7 @@ A chamber file, abridged:
 ```yaml
 name: National Assembly
 name_local: Assemblée nationale
+wikipedia: https://en.wikipedia.org/wiki/National_Assembly_(France)
 seats: 577
 source: datan # an id from data/sources.yaml
 updated: 2026-09-28 # when these seat counts last changed
@@ -37,6 +38,7 @@ groups:
     seats: 67
     parties: [ps, pp] # ids from data/fra/country.yaml
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice # where that can be checked
+    wikipedia: https://en.wikipedia.org/wiki/Socialists_(parliamentary_group)
   - id: liot
     name: Libertés, Indépendants, Outre-mer et Territoires
     abbreviation: LIOT
@@ -49,6 +51,7 @@ A few rules hold everywhere:
 
 - **Seats belong to parliamentary groups, not to parties.** A group lists the parties it is made of: several (the Swiss UDC group gathers four), one, or none (non-attached members). Parties are linked to other datasets through their [Party Facts](https://partyfacts.herokuapp.com/) id alone: Party Facts maps it to the ids of expert surveys, election datasets and the like.
 - **Every link between a group and its parties names its source**, in `parties_source`: see [Linking a group to its parties](CONTRIBUTING.md#linking-a-group-to-its-parties).
+- **Parties, groups, chambers and parliaments link their article on the English Wikipedia**, when they have one of their own: `wikipedia`, and `parliament_wikipedia` in `country.yaml` for the parliament a country's chambers make up. A group with no article of its own doesn't borrow its party's: see [Linking Wikipedia](CONTRIBUTING.md#linking-wikipedia).
 - **Groups and parties each have a colour.** A group's colour draws its seats; a party's, taken from [Wikidata](https://www.wikidata.org/wiki/Property:P465), shows the party on its own: on a chart of party positions, say, or within a group that gathers several.
 - **Ids never change once published.** A renamed group keeps its id; a new group gets a new one. Downstream users rely on them to follow a group over time.
 - **A chamber adds up.** Its groups' seats plus `vacant` equal `seats`.
@@ -113,7 +116,7 @@ Each data file starts with a `# yaml-language-server: $schema=…` comment: edit
 ## Licences
 
 - **Seat counts** stay under the terms of the source they come from, recorded with each source in `data/sources.yaml` (`license`, `license_url`). Reusing them means following those terms, including the credit a source prescribes (`name`).
-- **The rest of `data/`**, i.e. which parties each group is made of, the party list and its links to other datasets, colours and ids, is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): see [LICENSE-DATA.md](LICENSE-DATA.md).
+- **The rest of `data/`**, i.e. which parties each group is made of, the party list and its links to other datasets, the links to Wikipedia, colours and ids, is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): see [LICENSE-DATA.md](LICENSE-DATA.md).
 - **The code** (`scripts/`, `schema/`, `.github/`) is under the [MIT licence](LICENSE).
 
 ## Contributing

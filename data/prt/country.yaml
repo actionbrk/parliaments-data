@@ -6,56 +6,66 @@ parties:
     abbreviation: BE
     color: "#8B0000"
     partyfacts_id: 1310
+    wikipedia: https://en.wikipedia.org/wiki/Left_Bloc
 
   - id: cds-pp
     name: Centro Democrático e Social – Partido Popular
     abbreviation: CDS-PP
     color: "#0093DD"
     partyfacts_id: 1308
+    wikipedia: https://en.wikipedia.org/wiki/CDS_%E2%80%93_People%27s_Party
 
   - id: chega
     name: Chega
     abbreviation: CH
     color: "#222256"
     partyfacts_id: 8182
+    wikipedia: https://en.wikipedia.org/wiki/Chega
 
   - id: il
     name: Iniciativa Liberal
     abbreviation: IL
     color: "#00ADEF"
     partyfacts_id: 8640
+    wikipedia: https://en.wikipedia.org/wiki/Liberal_Initiative
 
   - id: jpp
     name: Juntos pelo Povo
     abbreviation: JPP
     color: "#00A28B"
+    wikipedia: https://en.wikipedia.org/wiki/Together_for_the_People
 
   - id: livre
     name: Livre
     abbreviation: L
     color: "#C2D216"
     partyfacts_id: 3225
+    wikipedia: https://en.wikipedia.org/wiki/LIVRE
 
   - id: pan
     name: Pessoas–Animais–Natureza
     abbreviation: PAN
     color: "#036A84"
     partyfacts_id: 97
+    wikipedia: https://en.wikipedia.org/wiki/People_Animals_Nature
 
   - id: pcp
     name: Partido Comunista Português
     abbreviation: PCP
     color: "#FF0000"
     partyfacts_id: 310
+    wikipedia: https://en.wikipedia.org/wiki/Portuguese_Communist_Party
 
   - id: ps
     name: Partido Socialista
     abbreviation: PS
     color: "#FF66FF"
     partyfacts_id: 655
+    wikipedia: https://en.wikipedia.org/wiki/Socialist_Party_(Portugal)
 
   - id: psd
     name: Partido Social Democrata
     abbreviation: PSD
     color: "#FF9900"
     partyfacts_id: 1359
+    wikipedia: https://en.wikipedia.org/wiki/Social_Democratic_Party_(Portugal)

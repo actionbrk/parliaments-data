@@ -1,32 +1,38 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: Austria
+parliament_wikipedia: https://en.wikipedia.org/wiki/Austrian_Parliament
 parties:
   - id: fpoe
     name: Freiheitliche Partei Österreichs
     abbreviation: FPÖ
     color: "#0056A2"
     partyfacts_id: 463
+    wikipedia: https://en.wikipedia.org/wiki/Freedom_Party_of_Austria
 
   - id: gruene
     name: Die Grünen – Die Grüne Alternative
     abbreviation: GRÜNE
     color: "#88B626"
     partyfacts_id: 1659
+    wikipedia: https://en.wikipedia.org/wiki/The_Greens_(Austria)
 
   - id: neos
     name: NEOS – Das Neue Österreich und Liberales Forum
     abbreviation: NEOS
     color: "#CB1667"
     partyfacts_id: 605
+    wikipedia: https://en.wikipedia.org/wiki/NEOS_(Austria)
 
   - id: oevp
     name: Österreichische Volkspartei
     abbreviation: ÖVP
     color: "#63C3D0"
     partyfacts_id: 1329
+    wikipedia: https://en.wikipedia.org/wiki/Austrian_People%27s_Party
 
   - id: spoe
     name: Sozialdemokratische Partei Österreichs
     abbreviation: SPÖ
     color: "#CE000C"
     partyfacts_id: 1384
+    wikipedia: https://en.wikipedia.org/wiki/Social_Democratic_Party_of_Austria

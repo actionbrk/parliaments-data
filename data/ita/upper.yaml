@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Senate of the Republic
 name_local: Senato della Repubblica
+wikipedia: https://en.wikipedia.org/wiki/Senate_of_the_Republic_(Italy)
 seats: 205 # 200 elected, and the 5 senators for life
 source: senato-opendata
 updated: 2026-11-05
@@ -54,6 +55,7 @@ groups:
     color: "#8D949A"
     seats: 11
     parties: []
+    wikipedia: https://en.wikipedia.org/wiki/Mixed_Group
 
   - id: iv
     name: Italia Viva - Casa Riformista
@@ -73,6 +75,7 @@ groups:
     seats: 7
     parties: [svp, campobase]
     parties_source: https://it.wikipedia.org/wiki/Per_le_Autonomie
+    wikipedia: https://en.wikipedia.org/wiki/For_the_Autonomies
 
   - id: nm
     name: Civici d'Italia-UDC-Noi Moderati (Noi con l'Italia, Coraggio Italia, Italia al Centro)-MAIE-Centro Popolare

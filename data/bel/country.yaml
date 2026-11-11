@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: Belgium
+parliament_wikipedia: https://en.wikipedia.org/wiki/Belgian_Federal_Parliament
 parties:
   # Formerly Open Vlaamse Liberalen en Democraten (Open Vld).
   - id: anders
@@ -7,24 +8,28 @@ parties:
     abbreviation: Anders.
     color: "#3D35FF"
     partyfacts_id: 49
+    wikipedia: https://en.wikipedia.org/wiki/Anders_(political_party)
 
   - id: cd-v
     name: Christen-Democratisch en Vlaams
     abbreviation: cd&v
     color: "#FF6200"
     partyfacts_id: 604
+    wikipedia: https://en.wikipedia.org/wiki/Christian_Democratic_and_Flemish
 
   - id: ecolo
     name: Écologistes Confédérés pour l'organisation de luttes originales
     abbreviation: Ecolo
     color: "#5AAD39"
     partyfacts_id: 1563
+    wikipedia: https://en.wikipedia.org/wiki/Ecolo
 
   - id: groen
     name: Groen
     abbreviation: Groen
     color: "#01796F"
     partyfacts_id: 528
+    wikipedia: https://en.wikipedia.org/wiki/Groen_(political_party)
 
   # Formerly Centre démocrate humaniste (cdH).
   - id: les-engages
@@ -32,39 +37,46 @@ parties:
     abbreviation: Les Engagés
     color: "#F4761A"
     partyfacts_id: 633
+    wikipedia: https://en.wikipedia.org/wiki/Les_Engag%C3%A9s
 
   - id: mr
     name: Mouvement Réformateur
     abbreviation: MR
     color: "#002EFF"
     partyfacts_id: 789
+    wikipedia: https://en.wikipedia.org/wiki/Reformist_Movement
 
   - id: n-va
     name: Nieuw-Vlaamse Alliantie
     abbreviation: N-VA
     color: "#F9CE19"
     partyfacts_id: 36
+    wikipedia: https://en.wikipedia.org/wiki/New_Flemish_Alliance
 
   - id: ps
     name: Parti Socialiste
     abbreviation: PS
     color: "#FF0000"
     partyfacts_id: 500
+    wikipedia: https://en.wikipedia.org/wiki/Socialist_Party_(Belgium)
 
   - id: pvda-ptb
     name: Partij van de Arbeid van België – Parti du Travail de Belgique
     abbreviation: PVDA-PTB
     color: "#8B0000"
     partyfacts_id: 1753
+    wikipedia: https://en.wikipedia.org/wiki/Workers%27_Party_of_Belgium
 
   - id: vb
     name: Vlaams Belang
     abbreviation: VB
     color: "#FFE500"
     partyfacts_id: 1968
+    wikipedia: https://en.wikipedia.org/wiki/Vlaams_Belang
 
   - id: vooruit
     name: Vooruit
     abbreviation: Vooruit
     color: "#FF2900"
     partyfacts_id: 1680
+    wikipedia: https://en.wikipedia.org/wiki/Vooruit_(political_party)

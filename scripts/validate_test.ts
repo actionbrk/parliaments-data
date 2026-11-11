@@ -147,6 +147,129 @@ Deno.test("a Party Facts id belongs to a single party", async () => {
   );
 });
 
+Deno.test("Wikipedia links are English Wikipedia articles", async () => {
+  const article = "https://en.wikipedia.org/wiki/Party_A_(Xyzland)";
+  const withArticle = edit(
+    "data/xyz/country.yaml",
+    "    partyfacts_id: 1\n",
+    `    partyfacts_id: 1\n    wikipedia: ${article}\n`,
+  );
+  assertEquals(await validate(withArticle), []);
+
+  for (
+    const link of [
+      "https://fr.wikipedia.org/wiki/Parti_A",
+      "https://en.m.wikipedia.org/wiki/Party_A",
+      "https://en.wikipedia.org/wiki/Xyzland#Parties",
+      "https://en.wikipedia.org/w/index.php?title=Party_A",
+    ]
+  ) {
+    const [problem, ...rest] = await validate({
+      ...withArticle,
+      "data/xyz/country.yaml": withArticle["data/xyz/country.yaml"].replace(
+        article,
+        link,
+      ),
+    });
+    assertEquals(rest, []);
+    assertEquals(problem.line, 8);
+    assertEquals(
+      problem.message,
+      'parties[0].wikipedia: must be an English Wikipedia article, https://en.wikipedia.org/wiki/<title>, with no "#section"',
+    );
+  }
+});
+
+Deno.test("a Wikipedia article describes a single party", async () => {
+  const problems = await validate({
+    ...VALID,
+    "data/xyz/country.yaml":
+      `${COUNTRY}    wikipedia: https://en.wikipedia.org/wiki/Party_A
+  - id: b
+    name: Party B
+    abbreviation: B
+    color: "#FFFFFF"
+    wikipedia: https://en.wikipedia.org/wiki/Party_A
+`,
+  });
+  assertEquals(problems.length, 1);
+  assertEquals(problems[0].line, 13);
+  assertMatch(problems[0].message, /already given to data\/xyz: a/);
+});
+
+Deno.test("a group links its own Wikipedia article, not its party's", async () => {
+  const files = {
+    ...VALID,
+    "data/xyz/country.yaml":
+      `${COUNTRY}    wikipedia: https://en.wikipedia.org/wiki/Party_A\n`,
+  };
+  const groupArticle = (link: string) => ({
+    ...files,
+    "data/xyz/unicameral.yaml": CHAMBER.replace(
+      "    parties_source: https://example.org/members\n",
+      `    parties_source: https://example.org/members\n    wikipedia: ${link}\n`,
+    ),
+  });
+
+  assertEquals(
+    await validate(groupArticle("https://en.wikipedia.org/wiki/Group_A")),
+    [],
+  );
+
+  const [problem, ...rest] = await validate(
+    groupArticle("https://en.wikipedia.org/wiki/Party_A"),
+  );
+  assertEquals(rest, []);
+  assertEquals(problem.line, 12);
+  assertMatch(problem.message, /the Wikipedia article of party "a"/);
+});
+
+Deno.test("two groups of a chamber don't share a Wikipedia article", async () => {
+  const article = "    wikipedia: https://en.wikipedia.org/wiki/Group_A\n";
+  const [problem, ...rest] = await validate({
+    ...VALID,
+    "data/xyz/unicameral.yaml": CHAMBER
+      .replace(
+        "    parties_source: https://example.org/members\n",
+        `    parties_source: https://example.org/members\n${article}`,
+      )
+      .replace("    parties: []\n", `    parties: []\n${article}`),
+  });
+  assertEquals(rest, []);
+  assertEquals(problem.line, 18);
+  assertMatch(problem.message, /already given to another group/);
+});
+
+Deno.test("a chamber links its own article, not the parliament's", async () => {
+  const parliament = "https://en.wikipedia.org/wiki/Parliament_of_Xyzland";
+  const files = {
+    ...VALID,
+    "data/xyz/country.yaml": COUNTRY.replace(
+      "name: Xyzland\n",
+      `name: Xyzland\nparliament_wikipedia: ${parliament}\n`,
+    ),
+  };
+  const chamberArticle = (link: string) => ({
+    ...files,
+    "data/xyz/unicameral.yaml": CHAMBER.replace(
+      "name: Assembly\n",
+      `name: Assembly\nwikipedia: ${link}\n`,
+    ),
+  });
+
+  assertEquals(
+    await validate(
+      chamberArticle("https://en.wikipedia.org/wiki/Assembly_of_Xyzland"),
+    ),
+    [],
+  );
+
+  const [problem, ...rest] = await validate(chamberArticle(parliament));
+  assertEquals(rest, []);
+  assertEquals(problem.line, 2);
+  assertMatch(problem.message, /this is the parliament's article/);
+});
+
 Deno.test("a party has a hex colour", async () => {
   const [missing, ...rest] = await validate(
     edit("data/xyz/country.yaml", '    color: "#000000"\n', ""),

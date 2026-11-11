@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Council of States
 name_local: Conseil des États
+wikipedia: https://en.wikipedia.org/wiki/Council_of_States_(Switzerland)
 seats: 46
 source: parlament-ch-odata
 updated: 2026-09-15
@@ -28,6 +29,7 @@ groups:
     seats: 7
     parties: [udc, mcg]
     parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'V'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
+    wikipedia: https://en.wikipedia.org/wiki/Swiss_People%27s_Party_group
 
   - id: ps
     name: Groupe socialiste (Conseil des États)
@@ -36,6 +38,7 @@ groups:
     seats: 7
     parties: [pss]
     parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%202%20and%20ParlGroupAbbreviation%20eq%20'S'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
+    wikipedia: https://en.wikipedia.org/wiki/Social_Democratic_group_(Switzerland)
 
   - id: verts
     name: Groupe des Vert-e-s (Conseil des États)

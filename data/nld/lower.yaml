@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: House of Representatives
 name_local: Tweede Kamer der Staten-Generaal
+wikipedia: https://en.wikipedia.org/wiki/House_of_Representatives_(Netherlands)
 seats: 150
 source: tweedekamer-opendata
 updated: 2026-11-05

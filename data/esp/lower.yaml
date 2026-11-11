@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Congress of Deputies
 name_local: Congreso de los Diputados
+wikipedia: https://en.wikipedia.org/wiki/Congress_of_Deputies
 seats: 350
 source: congreso-opendata
 updated: 2026-08-11

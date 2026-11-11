@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Federal Council
 name_local: Bundesrat
+wikipedia: https://en.wikipedia.org/wiki/Federal_Council_(Austria)
 seats: 60
 source: parlament-at-opendata
 updated: 2026-09-15

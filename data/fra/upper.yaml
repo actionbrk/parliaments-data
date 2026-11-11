@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Senate
 name_local: Sénat
+wikipedia: https://en.wikipedia.org/wiki/Senate_(France)
 seats: 348
 source: senat-api
 updated: 2026-11-04
@@ -12,6 +13,7 @@ groups:
     seats: 124
     parties: [lr]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Senate_Republicans_(France)
 
   # 36 attach to the UDI's funding vehicle (Union des démocrates européens,
   # centristes et indépendants), 10 to Horizons, 6 to Alliance centriste.
@@ -22,6 +24,7 @@ groups:
     seats: 63
     parties: [udi, hz, ac]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Centrist_Union_group
 
   - id: ser
     name: Groupe Socialiste, Écologiste et Républicain
@@ -30,6 +33,7 @@ groups:
     seats: 62
     parties: [ps]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Socialist_group_in_the_Senate
 
   - id: crce-k
     name: Groupe Communiste Républicain Citoyen et Écologiste - Kanaky
@@ -38,6 +42,7 @@ groups:
     seats: 18
     parties: [pcf]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Communist,_Republican,_Citizen_and_Ecologist_group
 
   # Its members attach to no radical party for funding (Alliance centriste
   # 10, Régions et peuples solidaires 3...). The source gives each one's
@@ -51,6 +56,7 @@ groups:
     seats: 18
     parties: [prg]
     parties_source: https://fr.wikipedia.org/wiki/Groupe_du_Rassemblement_d%C3%A9mocratique_et_social_europ%C3%A9en
+    wikipedia: https://en.wikipedia.org/wiki/European_Democratic_and_Social_Rally_group
 
   # Its members attach to Ensemble ! (majorité présidentielle), the
   # presidential majority's funding vehicle, or to overseas parties: the
@@ -62,6 +68,7 @@ groups:
     seats: 16
     parties: [re]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Rally_of_Democrats,_Progressive_and_Independent_group
 
   - id: gest
     name: Groupe Écologiste - Solidarité et Territoires
@@ -70,6 +77,7 @@ groups:
     seats: 15
     parties: [eelv]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/Ecologist_group_(Senate)
 
   # The 9 members on the list of declarations, which predates the
   # senators elected in 2026, all attach to Horizons.
@@ -80,6 +88,7 @@ groups:
     seats: 14
     parties: [hz]
     parties_source: https://www.senat.fr/vos-senateurs/declarations/declarations-de-rattachement.html
+    wikipedia: https://en.wikipedia.org/wiki/The_Independents_%E2%80%93_Republic_and_Territories_group
 
   # Formed after the 2026 elections, so after the declarations: 12 senators
   # of the Rassemblement National, 2 of the UDR and one apparentée to it.
@@ -90,6 +99,7 @@ groups:
     seats: 15
     parties: [rn, udr]
     parties_source: https://fr.wikipedia.org/wiki/Groupe_Union_nationale_pour_les_territoires
+    wikipedia: https://en.wikipedia.org/wiki/National_Union_for_Territories_Group
 
   - id: ni
     name: Réunion administrative des Sénateurs ne figurant sur la liste d'aucun groupe
@@ -97,3 +107,4 @@ groups:
     color: "#6B7280"
     seats: 3
     parties: []
+    wikipedia: https://en.wikipedia.org/wiki/Administrative_meeting_of_senators_not_appearing_on_the_list_of_any_group

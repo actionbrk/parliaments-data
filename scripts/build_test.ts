@@ -75,10 +75,38 @@ Deno.test("a group carries the source of its link to its parties", () => {
   assertEquals(group.parties_source, "https://example.org/members");
 });
 
+Deno.test("Wikipedia articles are published where the data gives them", () => {
+  const dataset = structuredClone(DATASET);
+  const [{ country, chambers: [{ chamber }] }] = dataset.countries;
+  country.parliament_wikipedia = "https://en.wikipedia.org/wiki/Parliament";
+  country.parties[0].wikipedia = "https://en.wikipedia.org/wiki/Party_A";
+  chamber.wikipedia = "https://en.wikipedia.org/wiki/Assembly";
+  chamber.groups[0].wikipedia = "https://en.wikipedia.org/wiki/Group_A";
+
+  const published = toPublicDataset(dataset, META).countries[0];
+  assertEquals(
+    published.parliament_wikipedia,
+    "https://en.wikipedia.org/wiki/Parliament",
+  );
+  assertEquals(
+    published.parties[0].wikipedia,
+    "https://en.wikipedia.org/wiki/Party_A",
+  );
+  assertEquals(
+    published.chambers[0].wikipedia,
+    "https://en.wikipedia.org/wiki/Assembly",
+  );
+  assertEquals(
+    published.chambers[0].groups[0].wikipedia,
+    "https://en.wikipedia.org/wiki/Group_A",
+  );
+});
+
 Deno.test("absent optional fields stay out of the JSON", () => {
   const json = JSON.stringify(toPublicDataset(DATASET, META));
   assert(!json.includes("name_local"));
   assert(!json.includes("citation"));
+  assert(!json.includes("wikipedia"));
 });
 
 Deno.test("the landing page links the JSON and escapes what it shows", () => {

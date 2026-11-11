@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Senate
 name_local: Sénat / Senaat
+wikipedia: https://en.wikipedia.org/wiki/Senate_(Belgium)
 seats: 60
 source: senate-be
 updated: 2026-11-05

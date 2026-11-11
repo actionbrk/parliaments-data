@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: National Assembly
 name_local: Assemblée nationale
+wikipedia: https://en.wikipedia.org/wiki/National_Assembly_(France)
 seats: 577
 vacant: 3
 source: datan
@@ -13,6 +14,7 @@ groups:
     seats: 121
     parties: [rn]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/National_Rally_group
 
   # Its members attach for public funding to Ensemble ! (majorité
   # présidentielle), which Renaissance shares with the MoDem and which does
@@ -24,6 +26,7 @@ groups:
     seats: 90
     parties: [re]
     parties_source: https://fr.wikipedia.org/wiki/Groupe_Ensemble_pour_la_R%C3%A9publique
+    wikipedia: https://en.wikipedia.org/wiki/Together_for_the_Republic_(parliamentary_group)
 
   - id: lfi-nfp
     name: La France insoumise - Nouveau Front Populaire
@@ -32,6 +35,7 @@ groups:
     seats: 70
     parties: [lfi]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/La_France_Insoumise_%E2%80%93_New_Popular_Front
 
   # Most attach to the Parti socialiste. Place publique sits here
   # through Aurélien Rousseau and Sacha Houlié, who attach to the PS and to
@@ -43,6 +47,7 @@ groups:
     seats: 68
     parties: [ps, pp]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/Socialists_(parliamentary_group)
 
   - id: dr
     name: Droite Républicaine
@@ -51,6 +56,7 @@ groups:
     seats: 47
     parties: [lr]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/Republican_Right
 
   # Most attach to Les Écologistes. Those who attach to the PCF for funding
   # are L'Après's and François Ruffin, not communists.
@@ -61,6 +67,7 @@ groups:
     seats: 38
     parties: [eelv]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/Ecological_and_Social
 
   # Its members attach to Ensemble ! (majorité présidentielle), as EPR's do:
   # the group is the MoDem's. None attaches to the UDI, whose deputies sit
@@ -72,6 +79,7 @@ groups:
     seats: 37
     parties: [modem]
     parties_source: https://fr.wikipedia.org/wiki/Groupe_Les_D%C3%A9mocrates
+    wikipedia: https://en.wikipedia.org/wiki/The_Democrats_(parliamentary_group)
 
   - id: hor
     name: Horizons & Indépendants
@@ -80,6 +88,7 @@ groups:
     seats: 35
     parties: [hz]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/Horizons_and_Independents
 
   # Independents, regionalists and centrists, who attach to a dozen parties
   # (Régions et peuples solidaires 11, the UDI's funding vehicle 6...): none
@@ -90,6 +99,7 @@ groups:
     color: "#FFD96F"
     seats: 23
     parties: []
+    wikipedia: https://en.wikipedia.org/wiki/Liberties,_Independents,_Overseas_and_Territories
 
   # 9 attach to the PCF, the Gauche républicaine et socialiste's leader
   # Emmanuel Maurel among them; the others to overseas parties.
@@ -100,6 +110,7 @@ groups:
     seats: 17
     parties: [pcf, grs]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/Democratic_and_Republican_Left
 
   - id: uddplr
     name: Union des droites pour la République
@@ -108,6 +119,7 @@ groups:
     seats: 17
     parties: [udr]
     parties_source: https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice
+    wikipedia: https://en.wikipedia.org/wiki/UDR_(parliamentary_group)
 
   - id: ni
     name: Non inscrit
@@ -115,3 +127,4 @@ groups:
     color: "#8D949A"
     seats: 11
     parties: []
+    wikipedia: https://en.wikipedia.org/wiki/Non-Attached_Members_(France)

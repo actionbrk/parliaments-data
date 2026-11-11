@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: National Council
 name_local: Conseil national
+wikipedia: https://en.wikipedia.org/wiki/National_Council_(Switzerland)
 seats: 200
 source: parlament-ch-odata
 updated: 2026-08-11
@@ -12,6 +13,7 @@ groups:
     seats: 67
     parties: [udc, udf, lega, mcg]
     parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%201%20and%20ParlGroupAbbreviation%20eq%20'V'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
+    wikipedia: https://en.wikipedia.org/wiki/Swiss_People%27s_Party_group
 
   - id: ps
     name: Groupe socialiste
@@ -20,6 +22,7 @@ groups:
     seats: 41
     parties: [pss]
     parties_source: https://ws.parlament.ch/odata.svc/MemberCouncil?$filter=Active%20eq%20true%20and%20Language%20eq%20'FR'%20and%20Council%20eq%201%20and%20ParlGroupAbbreviation%20eq%20'S'&$select=LastName,FirstName,ParlGroupAbbreviation,PartyAbbreviation,PartyName&$format=json
+    wikipedia: https://en.wikipedia.org/wiki/Social_Democratic_group_(Switzerland)
 
   - id: centre
     name: Groupe du Centre

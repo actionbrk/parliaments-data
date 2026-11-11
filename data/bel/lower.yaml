@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Chamber of Representatives
 name_local: Chambre des représentants / Kamer van Volksvertegenwoordigers
+wikipedia: https://en.wikipedia.org/wiki/Chamber_of_Representatives_(Belgium)
 seats: 150
 source: chambre-be
 updated: 2026-10-20

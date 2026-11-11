@@ -16,6 +16,10 @@
       "type": "string",
       "minLength": 1
     },
+    "wikipedia": {
+      "description": "The chamber's article on the English Wikipedia.",
+      "allOf": [{ "$ref": "definitions.schema.json#/definitions/wikipedia" }]
+    },
     "seats": {
       "description": "Total number of seats in the chamber, vacant ones included.",
       "type": "integer",
@@ -77,6 +81,12 @@
         "parties_source": {
           "description": "Where the link to `parties` can be checked; required when it lists any party. CONTRIBUTING.md says which source to prefer.",
           "allOf": [{ "$ref": "definitions.schema.json#/definitions/url" }]
+        },
+        "wikipedia": {
+          "description": "The group's own article on the English Wikipedia, when it has one. Never the article of a party it is made of: a group without an article of its own leaves this out.",
+          "allOf": [
+            { "$ref": "definitions.schema.json#/definitions/wikipedia" }
+          ]
         }
       },
       "if": {

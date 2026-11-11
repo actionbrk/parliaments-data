@@ -36,6 +36,7 @@ export interface PublicChamber {
   type: ChamberType;
   name: string;
   name_local?: string;
+  wikipedia?: string;
   seats: number;
   /** Always present in the JSON, 0 when the chamber file leaves it out. */
   vacant: number;
@@ -47,6 +48,7 @@ export interface PublicChamber {
 export interface PublicCountry {
   code: string;
   name: string;
+  parliament_wikipedia?: string;
   parties: Party[];
   chambers: PublicChamber[];
 }
@@ -84,17 +86,20 @@ export function toPublicDataset(
     countries: dataset.countries.map(({ code, country, chambers }) => ({
       code,
       name: country.name,
+      parliament_wikipedia: country.parliament_wikipedia,
       parties: country.parties.map((party) => ({
         id: party.id,
         name: party.name,
         abbreviation: party.abbreviation,
         color: party.color,
         partyfacts_id: party.partyfacts_id,
+        wikipedia: party.wikipedia,
       })),
       chambers: chambers.map(({ type, chamber }) => ({
         type,
         name: chamber.name,
         name_local: chamber.name_local,
+        wikipedia: chamber.wikipedia,
         seats: chamber.seats,
         vacant: chamber.vacant ?? 0,
         source: chamber.source,
@@ -107,6 +112,7 @@ export function toPublicDataset(
           seats: group.seats,
           parties: group.parties,
           parties_source: group.parties_source,
+          wikipedia: group.wikipedia,
         })),
       })),
     })),

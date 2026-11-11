@@ -12,6 +12,7 @@ CC BY 4.0 covers the rest of `data/`, to the extent it is ours to license:
 
 - which parties each parliamentary group is made of;
 - the list of parties and their links to Party Facts;
+- the links to English Wikipedia articles on parties, groups, chambers and parliaments;
 - the colours given to groups;
 - the identifiers of chambers, groups, parties and sources.
 

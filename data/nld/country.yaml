@@ -1,97 +1,114 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: Netherlands
+parliament_wikipedia: https://en.wikipedia.org/wiki/States_General_of_the_Netherlands
 parties:
   - id: 50plus
     name: 50PLUS
     abbreviation: 50PLUS
     color: "#92107D"
     partyfacts_id: 714
+    wikipedia: https://en.wikipedia.org/wiki/50Plus
 
   - id: bbb
     name: BoerBurgerBeweging
     abbreviation: BBB
     color: "#95C11F"
     partyfacts_id: 9010
+    wikipedia: https://en.wikipedia.org/wiki/Farmer%E2%80%93Citizen_Movement
 
   - id: cda
     name: Christen-Democratisch Appèl
     abbreviation: CDA
     color: "#1F9359"
     partyfacts_id: 1157
+    wikipedia: https://en.wikipedia.org/wiki/Christian_Democratic_Appeal
 
   - id: cu
     name: ChristenUnie
     abbreviation: CU
     color: "#00A7EB"
     partyfacts_id: 1459
+    wikipedia: https://en.wikipedia.org/wiki/Christian_Union_(Netherlands)
 
   - id: d66
     name: Democraten 66
     abbreviation: D66
     color: "#00AE41"
     partyfacts_id: 45
+    wikipedia: https://en.wikipedia.org/wiki/Democrats_66
 
   - id: denk
     name: DENK
     abbreviation: DENK
     color: "#00B7B2"
     partyfacts_id: 5856
+    wikipedia: https://en.wikipedia.org/wiki/Denk_(political_party)
 
   - id: fvd
     name: Forum voor Democratie
     abbreviation: FVD
     color: "#A71C20"
     partyfacts_id: 5855
+    wikipedia: https://en.wikipedia.org/wiki/Forum_for_Democracy
 
   - id: ja21
     name: JA21
     abbreviation: JA21
     color: "#242B57"
     partyfacts_id: 9011
+    wikipedia: https://en.wikipedia.org/wiki/JA21
 
   # A federation of provincial parties.
   - id: opnl
     name: Onafhankelijke Politiek Nederland
     abbreviation: OPNL
     color: "#CBBB9F"
+    wikipedia: https://en.wikipedia.org/wiki/Independent_Politics_Netherlands
 
   - id: pro
     name: Progressief Nederland
     abbreviation: PRO
     color: "#00AD00"
+    wikipedia: https://en.wikipedia.org/wiki/Progressief_Nederland
 
   - id: pvdd
     name: Partij voor de Dieren
     abbreviation: PvdD
     color: "#00743C"
     partyfacts_id: 1467
+    wikipedia: https://en.wikipedia.org/wiki/Party_for_the_Animals
 
   - id: pvv
     name: Partij voor de Vrijheid
     abbreviation: PVV
     color: "#244674"
     partyfacts_id: 298
+    wikipedia: https://en.wikipedia.org/wiki/Party_for_Freedom
 
   - id: sgp
     name: Staatkundig Gereformeerde Partij
     abbreviation: SGP
     color: "#EA5D06"
     partyfacts_id: 1178
+    wikipedia: https://en.wikipedia.org/wiki/Reformed_Political_Party
 
   - id: sp
     name: Socialistische Partij
     abbreviation: SP
     color: "#FF0000"
     partyfacts_id: 1363
+    wikipedia: https://en.wikipedia.org/wiki/Socialist_Party_(Netherlands)
 
   - id: volt
     name: Volt Nederland
     abbreviation: Volt
     color: "#582C83"
     partyfacts_id: 7355
+    wikipedia: https://en.wikipedia.org/wiki/Volt_Netherlands
 
   - id: vvd
     name: Volkspartij voor Vrijheid en Democratie
     abbreviation: VVD
     color: "#0328CB"
     partyfacts_id: 828
+    wikipedia: https://en.wikipedia.org/wiki/People%27s_Party_for_Freedom_and_Democracy

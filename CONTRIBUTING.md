@@ -31,23 +31,28 @@ Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their 
    ```yaml
    # yaml-language-server: $schema=../../schema/country.schema.json
    name: Spain
+   parliament_wikipedia: https://en.wikipedia.org/wiki/Cortes_Generales
    parties:
      - id: pp
        name: Partido Popular
        abbreviation: PP
        color: "#1D84CE"
        partyfacts_id: 441
+       wikipedia: https://en.wikipedia.org/wiki/People%27s_Party_(Spain)
    ```
 
+   - `parliament_wikipedia`: the English Wikipedia article on the parliament the country's chambers make up together. Leave it out for a unicameral parliament, whose chamber's article is the parliament's;
    - `id`: the abbreviation in lowercase ASCII, words joined by hyphens (`EH Bildu` → `eh-bildu`, `ÖVP` → `oevp`);
    - `color`: the party's colour, as `#RRGGBB`, taken from its [Wikidata](https://www.wikidata.org/) item's "sRGB colour hex triplet" ([P465](https://www.wikidata.org/wiki/Property:P465)), the preferred one when there are several. Wikidata is CC0, so its colours can be reused here. If it gives the party none, use the colour of the group the party alone makes up and say so in a comment above the party;
-   - `partyfacts_id`: look the party up on [Party Facts](https://partyfacts.herokuapp.com/). Leave it out if the party is not there. It is the party's only link to other datasets (expert surveys and the like): Party Facts maps it to their ids, so do not add those ids here.
+   - `partyfacts_id`: look the party up on [Party Facts](https://partyfacts.herokuapp.com/). Leave it out if the party is not there. It is the party's only link to other datasets (expert surveys and the like): Party Facts maps it to their ids, so do not add those ids here;
+   - `wikipedia`: the party's article on the English Wikipedia, if it has one. See [Linking Wikipedia](#linking-wikipedia).
 3. **The chamber.** Create `lower.yaml` and `upper.yaml`, or `unicameral.yaml` for a single-chamber parliament:
 
    ```yaml
    # yaml-language-server: $schema=../../schema/chamber.schema.json
    name: Congress of Deputies # in English
    name_local: Congreso de los Diputados
+   wikipedia: https://en.wikipedia.org/wiki/Congress_of_Deputies
    seats: 350 # all seats, vacant ones included
    source: congreso-opendata
    updated: 2026-08-11
@@ -64,7 +69,8 @@ Chambers with a fetcher (`scripts/fetchers/mod.ts`) get a pull request on their 
    - group `id`: built like party ids, from the group's abbreviation;
    - `color`: the colour the group is usually shown in, as `#RRGGBB`;
    - `parties`: the ids, from `country.yaml`, of the parties the group is made of. Use `[]` for a group tied to no party, such as non-attached members. See [Linking a group to its parties](#linking-a-group-to-its-parties);
-   - `parties_source`: where that link can be checked, required as soon as `parties` lists a party.
+   - `parties_source`: where that link can be checked, required as soon as `parties` lists a party;
+   - `wikipedia`, for the chamber and for each group: its article on the English Wikipedia. Most groups have none: see [Linking Wikipedia](#linking-wikipedia).
 4. **Its fetcher** (optional), when the source can be read by a program: a module in `scripts/fetchers/`, named after the source's id, that reads the seat counts and maps each of the source's group keys (a code, or the group's name) to the group's id, registered in `scripts/fetchers/mod.ts`. The tests check that it reaches every group of the chamber file. The daily fetch then keeps the chamber up to date.
 
 ## Linking a group to its parties
@@ -77,6 +83,14 @@ Seats are known per group only, so whoever uses the data counts a group's seats 
 - **No party.** Non-attached members, and groups whose members come from parties none of which makes up the group (France's LIOT, mixed groups), list `[]`. A comment can say whose members they are, so that nobody adds them back.
 - **The source.** `parties_source` is, by preference: a record of the members' parties kept by the parliament (its open data, the declarations of party attachment); the group's or the parties' own page; a secondary source such as Wikipedia, when neither exists or they don't settle it. Give the address that shows the most of the link, and say in a comment above the group what it doesn't show. Wikipedia is fine here, unlike for seat counts: the links are this repository's own data, and the address is there to check them.
 - **Check them again** when a chamber is elected or renewed, and when a group appears: parliaments publish their members' parties later than their groups' seats (the French Senate's declarations come out each December).
+
+## Linking Wikipedia
+
+Parties, groups, chambers and parliaments link their article on the English Wikipedia in `wikipedia` (`parliament_wikipedia` in `country.yaml`), for readers who want to know more about them. Wikipedia is fine here, unlike for seat counts: the links are this repository's own data.
+
+- **Its own article only.** The article is about that very party, group, chamber or parliament. A group with no article of its own leaves `wikipedia` out rather than borrowing its party's (CI rejects a party's article on a group), and a section of a broader article doesn't count. Most parliamentary groups have none in English; France's, and a few others, do.
+- **The article's own address.** Open the article and copy the address the browser shows: `https://en.wikipedia.org/wiki/<title>`, once any redirect is followed (the page says "Redirected from…" under its title when there was one), with no `#section`. The party's or group's [Wikidata](https://www.wikidata.org/) item gives the same title, under "Wikipedia" → "en".
+- **Check them again** when a party or group is renamed or merges: Wikipedia may move the article, or start a new one.
 
 ## Checking locally
 

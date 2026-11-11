@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Bundestag
 name_local: Deutscher Bundestag
+wikipedia: https://en.wikipedia.org/wiki/Bundestag
 seats: 630
 source: bundestag-opendata
 updated: 2026-11-05
@@ -12,6 +13,9 @@ groups:
     seats: 208
     parties: [cdu, csu]
     parties_source: https://www.bundestag.de/services/opendata
+    # The Union's article: the faction has none of its own in English, and
+    # the alliance of the two parties is what makes it one group.
+    wikipedia: https://en.wikipedia.org/wiki/CDU/CSU
 
   - id: afd
     name: Fraktion Alternative für Deutschland
@@ -36,6 +40,7 @@ groups:
     seats: 85
     parties: [gruene]
     parties_source: https://www.bundestag.de/services/opendata
+    wikipedia: https://en.wikipedia.org/wiki/Green_Party_faction_(Bundestag)
 
   - id: linke
     name: Fraktion Die Linke
@@ -44,6 +49,7 @@ groups:
     seats: 64
     parties: [linke]
     parties_source: https://www.bundestag.de/services/opendata
+    wikipedia: https://en.wikipedia.org/wiki/The_Left_faction_(Bundestag)
 
   - id: fraktionslos
     name: Fraktionslos

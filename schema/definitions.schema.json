@@ -18,6 +18,12 @@
       "type": "string",
       "format": "uri",
       "pattern": "^https?://"
+    },
+    "wikipedia": {
+      "description": "An article of the English Wikipedia, https://en.wikipedia.org/wiki/<title>, as its address bar shows it: the article's own title rather than a redirect to it, and no #section.",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://en\\.wikipedia\\.org/wiki/[^?#\\s]+$"
     }
   }
 }

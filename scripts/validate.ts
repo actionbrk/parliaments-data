@@ -41,10 +41,13 @@ export interface Party {
   abbreviation: string;
   color: string;
   partyfacts_id?: number;
+  wikipedia?: string;
 }
 
 export interface Country {
   name: string;
+  /** The parliament's article, for one whose chambers make up a parliament. */
+  parliament_wikipedia?: string;
   parties: Party[];
 }
 
@@ -57,11 +60,14 @@ export interface Group {
   parties: string[];
   /** Where the link to `parties` can be checked; required when it lists any. */
   parties_source?: string;
+  /** The group's own article, never a party's. */
+  wikipedia?: string;
 }
 
 export interface Chamber {
   name: string;
   name_local?: string;
+  wikipedia?: string;
   seats: number;
   vacant?: number;
   source: string;
@@ -120,6 +126,8 @@ const DEFINITION_MESSAGES: Record<Definition, string> = {
     'ids use lowercase ASCII letters, digits and single hyphens (e.g. "lfi-nfp")',
   color: 'must be a hex colour such as "#1D84CE"',
   url: "must be a web address starting with https:// (or http://)",
+  wikipedia:
+    'must be an English Wikipedia article, https://en.wikipedia.org/wiki/<title>, with no "#section"',
 };
 
 const ajv = new Ajv({ allErrors: true });
@@ -393,8 +401,10 @@ export async function validateRepository(
     dataset.sources = sourcesFile.value.sources;
   }
 
-  // A Party Facts id names one party, wherever it is listed.
+  // A Party Facts id names one party, wherever it is listed; so does a
+  // Wikipedia article.
   const partyfactsIds = new Map<number, string>();
+  const partyArticles = new Map<string, string>();
   const maxDate = latestDate(now);
 
   for (const entry of await listDir(root, "data")) {
@@ -469,10 +479,33 @@ export async function validateRepository(
           partyfactsIds.set(id, `${dir}: ${party.id}`);
         }
       });
+
+      parties.forEach((party, index) => {
+        const article = party.wikipedia;
+        if (article === undefined) return;
+        const previous = partyArticles.get(article);
+        if (previous) {
+          problems.push(
+            countryFile.problem(
+              ["parties", index, "wikipedia"],
+              `this Wikipedia article is already given to ${previous}`,
+            ),
+          );
+        } else {
+          partyArticles.set(article, `${dir}: ${party.id}`);
+        }
+      });
     }
     const partyIds = new Set(
       countryFile?.value.parties.map((party) => party.id),
     );
+    // Which party each article of this country describes, for the groups.
+    const articleParties = new Map(
+      countryFile?.value.parties.flatMap((party) =>
+        party.wikipedia ? [[party.wikipedia, party.id]] : []
+      ),
+    );
+    const parliamentArticle = countryFile?.value.parliament_wikipedia;
 
     // The chambers that pass their schema. They join the dataset with their
     // country, which only does if its country.yaml passes too.
@@ -496,7 +529,20 @@ export async function validateRepository(
         problems,
       );
 
+      if (
+        chamber.wikipedia !== undefined &&
+        chamber.wikipedia === parliamentArticle
+      ) {
+        problems.push(
+          chamberFile.problem(
+            ["wikipedia"],
+            `this is the parliament's article (parliament_wikipedia in ${dir}/${COUNTRY_FILE}): give the chamber's own, and leave parliament_wikipedia out for a unicameral parliament`,
+          ),
+        );
+      }
+
       const names = new Set<string>();
+      const groupArticles = new Set<string>();
       chamber.groups.forEach((group, index) => {
         if (names.has(group.name)) {
           problems.push(
@@ -507,6 +553,27 @@ export async function validateRepository(
           );
         }
         names.add(group.name);
+
+        const article = group.wikipedia;
+        if (article !== undefined) {
+          const party = articleParties.get(article);
+          if (party) {
+            problems.push(
+              chamberFile.problem(
+                ["groups", index, "wikipedia"],
+                `this is the Wikipedia article of party "${party}": link the group's own article, or leave it out if it has none`,
+              ),
+            );
+          } else if (groupArticles.has(article)) {
+            problems.push(
+              chamberFile.problem(
+                ["groups", index, "wikipedia"],
+                "this Wikipedia article is already given to another group of the chamber",
+              ),
+            );
+          }
+          groupArticles.add(article);
+        }
 
         // Without a valid country.yaml there is nothing to check against;
         // its own problems are already reported.

@@ -1,17 +1,20 @@
 # yaml-language-server: $schema=../../schema/country.schema.json
 name: Switzerland
+parliament_wikipedia: https://en.wikipedia.org/wiki/Federal_Assembly_(Switzerland)
 parties:
   - id: centre
     name: Le Centre
     abbreviation: Centre
     color: "#F1A039"
     partyfacts_id: 1808
+    wikipedia: https://en.wikipedia.org/wiki/The_Centre_(political_party)
 
   - id: lega
     name: Lega dei Ticinesi
     abbreviation: Lega
     color: "#6495ED"
     partyfacts_id: 1661
+    wikipedia: https://en.wikipedia.org/wiki/Ticino_League
 
   # Basel-Stadt's liberal party, distinct from the PLR's section there.
   # Wikidata gives it no colour (P465) and it makes up no group alone: it
@@ -26,24 +29,28 @@ parties:
     abbreviation: MCG
     color: "#FEE801"
     partyfacts_id: 8176
+    wikipedia: https://en.wikipedia.org/wiki/Geneva_Citizens%27_Movement
 
   - id: pev
     name: Parti évangélique suisse
     abbreviation: PEV
     color: "#EFDA18"
     partyfacts_id: 1123
+    wikipedia: https://en.wikipedia.org/wiki/Evangelical_People%27s_Party_of_Switzerland
 
   - id: plr
     name: PLR.Les Libéraux-Radicaux
     abbreviation: PLR
     color: "#0E52A0"
     partyfacts_id: 1231
+    wikipedia: https://en.wikipedia.org/wiki/The_Liberals_(Switzerland)
 
   - id: pss
     name: Parti socialiste suisse
     abbreviation: PSS
     color: "#E53136"
     partyfacts_id: 29
+    wikipedia: https://en.wikipedia.org/wiki/Social_Democratic_Party_of_Switzerland
 
   # Wikidata gives the party no colour (P465): it takes that of the Groupe
   # vert'libéral, which it alone makes up.
@@ -52,21 +59,25 @@ parties:
     abbreviation: PVL
     color: "#97D040"
     partyfacts_id: 1759
+    wikipedia: https://en.wikipedia.org/wiki/Green_Liberal_Party_of_Switzerland
 
   - id: udc
     name: Union Démocratique du Centre
     abbreviation: UDC
     color: "#009F4F"
     partyfacts_id: 308
+    wikipedia: https://en.wikipedia.org/wiki/Swiss_People%27s_Party
 
   - id: udf
     name: Union Démocratique Fédérale
     abbreviation: UDF
     color: "#C71585"
     partyfacts_id: 631
+    wikipedia: https://en.wikipedia.org/wiki/Federal_Democratic_Union_of_Switzerland
 
   - id: verts
     name: Les VERT-E-S suisses
     abbreviation: Verts
     color: "#84B414"
     partyfacts_id: 1006
+    wikipedia: https://en.wikipedia.org/wiki/Green_Party_of_Switzerland

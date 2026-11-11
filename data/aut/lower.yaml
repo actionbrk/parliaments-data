@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: National Council
 name_local: Nationalrat
+wikipedia: https://en.wikipedia.org/wiki/National_Council_(Austria)
 seats: 183
 vacant: 1
 source: parlament-at-opendata

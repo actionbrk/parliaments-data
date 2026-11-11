@@ -11,6 +11,10 @@
       "type": "string",
       "minLength": 1
     },
+    "parliament_wikipedia": {
+      "description": "The English Wikipedia article on the parliament the country's chambers make up together (French Parliament, Cortes Generales). Left out for a unicameral parliament, whose chamber's article is the parliament's, and where the chambers form no parliament of their own.",
+      "allOf": [{ "$ref": "definitions.schema.json#/definitions/wikipedia" }]
+    },
     "parties": {
       "type": "array",
       "items": { "$ref": "#/definitions/party" }
@@ -43,6 +47,12 @@
           "description": "The party's id in Party Facts (https://partyfacts.herokuapp.com/), when it has one. It is the only link this repository keeps to other datasets: Party Facts maps it to their own ids (expert surveys, election datasets...).",
           "type": "integer",
           "minimum": 1
+        },
+        "wikipedia": {
+          "description": "The party's article on the English Wikipedia, when it has one.",
+          "allOf": [
+            { "$ref": "definitions.schema.json#/definitions/wikipedia" }
+          ]
         }
       }
     }

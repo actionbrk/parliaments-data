@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=../../schema/chamber.schema.json
 name: Chamber of Deputies
 name_local: Camera dei deputati
+wikipedia: https://en.wikipedia.org/wiki/Chamber_of_Deputies_(Italy)
 seats: 400
 vacant: 2
 source: camera-opendata
@@ -52,6 +53,7 @@ groups:
     color: "#8D949A"
     seats: 25
     parties: []
+    wikipedia: https://en.wikipedia.org/wiki/Mixed_Group
 
   - id: avs
     name: Alleanza Verdi e Sinistra
