@@ -2,8 +2,9 @@
 name: House of Representatives
 name_local: Tweede Kamer der Staten-Generaal
 seats: 150
+vacant: 1
 source: tweedekamer-opendata
-updated: 2026-11-05
+updated: 2026-11-24
 groups:
   - id: d66
     name: Democraten 66
@@ -57,7 +58,7 @@ groups:
     name: Forum voor Democratie
     abbreviation: FVD
     color: "#A71C20"
-    seats: 7
+    seats: 6
     parties: [fvd]
     parties_source: https://www.tweedekamer.nl/kamerleden_en_commissies/fracties
 
