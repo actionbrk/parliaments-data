@@ -3,7 +3,7 @@ name: Senate of the Republic
 name_local: Senato della Repubblica
 seats: 205 # 200 elected, and the 5 senators for life
 source: senato-opendata
-updated: 2026-11-05
+updated: 2026-11-25
 groups:
   - id: fdi
     name: Fratelli d'Italia
@@ -28,7 +28,7 @@ groups:
     name: Lega Salvini Premier - Partito Sardo d'Azione
     abbreviation: LSP-PSd'Az
     color: "#00A651"
-    seats: 29
+    seats: 30
     parties: [lega]
     parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000033.htm
 
@@ -44,7 +44,7 @@ groups:
     name: Forza Italia - Berlusconi Presidente - PPE
     abbreviation: FI-BP-PPE
     color: "#00A2E8"
-    seats: 20
+    seats: 18
     parties: [fi]
     parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000056.htm
 
@@ -78,6 +78,6 @@ groups:
     name: Civici d'Italia-UDC-Noi Moderati (Noi con l'Italia, Coraggio Italia, Italia al Centro)-MAIE-Centro Popolare
     abbreviation: Cd'I-UDC-NM (NcI, CI, IaC)-MAIE-CP
     color: "#2149A7"
-    seats: 7
+    seats: 8
     parties: [nm, udc, maie]
     parties_source: https://www.senato.it/leg/19/BGT/Schede/Gruppi/00000092.htm
