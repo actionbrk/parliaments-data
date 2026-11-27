@@ -4,13 +4,13 @@ name_local: Camera dei deputati
 seats: 400
 vacant: 2
 source: camera-opendata
-updated: 2026-11-08
+updated: 2026-11-27
 groups:
   - id: fdi
     name: Fratelli d'Italia
     abbreviation: FdI
     color: "#003366"
-    seats: 117
+    seats: 116
     parties: [fdi]
     parties_source: https://www.camera.it/leg19/46
 
@@ -34,7 +34,7 @@ groups:
     name: Forza Italia - Berlusconi Presidente - PPE
     abbreviation: FI-PPE
     color: "#00A2E8"
-    seats: 52
+    seats: 50
     parties: [fi]
     parties_source: https://www.camera.it/leg19/46
 
@@ -50,7 +50,7 @@ groups:
     name: Misto
     abbreviation: MISTO
     color: "#8D949A"
-    seats: 25
+    seats: 28
     parties: []
 
   - id: avs
