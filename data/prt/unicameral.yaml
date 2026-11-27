@@ -2,14 +2,15 @@
 name: Assembly of the Republic
 name_local: Assembleia da República
 seats: 230
+vacant: 1
 source: parlamento-pt-opendata
-updated: 2026-11-05
+updated: 2026-11-27
 groups:
   - id: psd
     name: Partido Social Democrata
     abbreviation: PSD
     color: "#FF9900"
-    seats: 89
+    seats: 88
     parties: [psd]
     parties_source: https://www.parlamento.pt/DeputadoGP/Paginas/GruposParlamentaresI.aspx
 
